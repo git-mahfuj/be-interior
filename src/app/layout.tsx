@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montagu_Slab, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/home/Header/Navbar";
+import Navbar from "@/components/Header/Navbar";
+import Footer from "@/components/Footer/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,13 +21,14 @@ const poppins = Poppins({
 
 const montaguSlab = Montagu_Slab({
   subsets: ["latin"],
-  variable: "--font-montagu", 
-  weight: ["100", "300", "400", "500", "600", "700"], 
+  variable: "--font-montagu",
+  weight: ["100", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: "beinterior",
-  description: "Transform your space with BE INTERIOR. We design modern, minimalistic, and 100% customized home and premium office interiors in Dhaka. Consult now!",
+  description:
+    "Transform your space with BE INTERIOR. We design modern, minimalistic, and 100% customized home and premium office interiors in Dhaka. Consult now!",
 };
 
 export default function RootLayout({
@@ -42,6 +44,7 @@ export default function RootLayout({
     >
       <Navbar />
       <body className="min-h-full flex flex-col">{children}</body>
+      <Footer/>
     </html>
   );
 }

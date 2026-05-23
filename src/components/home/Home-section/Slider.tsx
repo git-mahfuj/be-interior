@@ -12,7 +12,7 @@ import slideThree from "@/logo/HomePage/slidethree.jpg";
 
 export default function SliderComponent() {
   return (
-    // 💡 h-210 বা h-screen যাই হোক, কন্টেন্ট পজিশনিং যাতে ভেঙে না যায় সেজন্য relative এবং overflow-hidden রাখা হয়েছে
+    
     <div className="w-full h-screen mx-auto relative overflow-hidden">
       <Swiper
         slidesPerView={1}
@@ -39,7 +39,7 @@ export default function SliderComponent() {
           />
           <div className="absolute inset-0 bg-black/30 z-10" />
 
-          {/* 📱 রেসপনসিভ কন্টেন্ট হোল্ডার */}
+
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 sm:px-12 md:pl-20 lg:pl-32 xl:pl-40 pt-16 md:pt-24">
             <div className="max-w-2xl flex flex-col items-center md:items-start">
               <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-tight font-montagu text-white">

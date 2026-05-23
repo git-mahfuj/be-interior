@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-99999 backdrop-blur-md border-b border-white/10 text-white">
+      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-99999 backdrop-blur-sm border-b bg-primary/10 border-white/10 text-white">
         <NavLogo />
 
         <div className="hidden lg:flex items-center gap-4">
@@ -30,7 +30,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* 📱 মোবাইল সাইড মেনু ড্রয়ার */}
       <div
         className={`fixed top-0 right-0 h-screen w-full sm:w-[60%] backdrop-blur-lg z-40 p-8 pt-32 flex flex-col gap-8 border-l border-white/10 text-xl transition-transform duration-300 ease-in-out md:hidden
           ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
@@ -70,7 +69,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* 🖤 মোবাইল মেনু ওপেন থাকলে পেছনের ডার্ক ওভারলে */}
       {mobileMenuOpen && (
         <div
           onClick={() => setMobileMenuOpen(false)}

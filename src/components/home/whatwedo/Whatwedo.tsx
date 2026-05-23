@@ -5,9 +5,9 @@ import whatwetwo from "@/logo/HomePage/office-interior.jpg";
 
 const Whatwedo = () => {
   return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4">
-      {/* 👑 হেডিং সেকশন */}
-      <h2 className="text-2xl md:text-3xl font-montagu text-secondary tracking-wide">
+    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10">
+
+      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide">
         What Interiors <span className="font-bold">We Do</span>
       </h2>
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montagu_Slab, Poppins } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import Navbar from "@/components/Header/Navbar";
 import Footer from "@/components/Footer/Footer";
 const geistSans = Geist({
@@ -26,7 +26,7 @@ const montaguSlab = Montagu_Slab({
 });
 
 export const metadata: Metadata = {
-  title: "beinterior.com.bd",
+  title: "Home Interior Service - Be Interior",
   description:
     "Transform your space with BE INTERIOR. We design modern, minimalistic, and 100% customized home and premium office interiors in Dhaka. Consult now!",
 };
@@ -42,9 +42,9 @@ export default function RootLayout({
       suppressHydrationWarning={true}
       className={`${geistSans.variable} ${geistMono.variable} ${montaguSlab.variable} ${poppins.variable} h-full antialiased`}
     >
-      <Navbar />
+
       <body className="min-h-full flex flex-col">{children}</body>
-      <Footer/>
+
     </html>
   );
 }

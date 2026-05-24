@@ -1,9 +1,7 @@
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
 
-* {
-  @apply scrollbar-hide;
-}
+
 @theme {
   --font-montagu: "Montagu Slab", serif;
   --font-poppins: "Poppins", sans-serif;

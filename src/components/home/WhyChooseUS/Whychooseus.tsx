@@ -5,7 +5,7 @@ const Whychooseus = () => {
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 ">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-primary tracking-wide font-bold">
-        Why <span className="font-medium text-secondary">Choose us</span>
+        Excellence <span className="font-medium text-secondary">by Design</span> 
       </h2>
 
       <div className="flex flex-col  md:flex-row items-center justify-center gap-8 mt-8 w-full max-w-7xl">

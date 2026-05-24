@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-99999 backdrop-blur-sm border-b bg-primary/10 border-white/10 text-white">
+      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-99999 backdrop-blur-sm border-b  border-white/10 bg-secondary/50 opacity-85">
         <div className="xl:translate-x-10">
           {" "}
           <NavLogo />

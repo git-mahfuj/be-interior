@@ -57,8 +57,8 @@ const HomeOurPackage = () => {
       
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-black tracking-wide text-zinc-800 uppercase font-montagu">
-          Our <span className="text-primary bg-gradient-to-r from-zinc-800 to-zinc-900 bg-clip-text">Package</span>
-        </h2>
+          Curated <span className="text-primary bg-gradient-to-r from-zinc-800 to-zinc-900 bg-clip-text">Design Solutions</span>
+        </h2> 
         <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full" />
       </div>
 

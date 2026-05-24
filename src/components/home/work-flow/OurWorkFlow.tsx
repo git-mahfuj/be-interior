@@ -11,7 +11,7 @@ const OurWorkFlow = () => {
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 bg-ivory py-16">
       
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide">
-        Our <span className="font-bold text-primary">Work Flow</span>
+        From Concept <span className="font-bold text-primary">to Creation</span> 
       </h2>
 
 

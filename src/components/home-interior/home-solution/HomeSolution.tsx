@@ -9,7 +9,7 @@ const HomeSolution = () => {
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 bg-ivory/50 py-16">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide">
-        One-Stop Solution For <span className="font-bold text-primary">All Home Interior</span>
+        The Complete <span className="font-bold text-primary">Interior Journey</span> 
       </h2>
 
       <div className="w-full max-w-6xl mt-10 h-80 rounded-lg">

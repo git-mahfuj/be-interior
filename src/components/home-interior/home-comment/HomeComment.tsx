@@ -93,10 +93,10 @@ const HomeCommentForm = () => {
         <div className="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-center font-poppins">
           <div className="mb-8">
             <h2 className="text-2xl sm:text-3xl font-black text-white tracking-wide font-montagu">
-              Let Us Know Your Dream
+              Start Your Design Journey
             </h2>
             <p className="text-xs sm:text-sm text-zinc-300/90 mt-2 font-light leading-relaxed">
-              Get your dream home interior budget today. Let our experts help you.
+              Let our design experts map out the perfect plan for your home.
             </p>
           </div>
 

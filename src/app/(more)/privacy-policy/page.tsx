@@ -1,9 +1,123 @@
-import React from 'react'
+"use client";
+import React from "react";
 
-const page = () => {
+export default function PrivacyPolicy() {
+  const legalBasisItems = [
+    "Fulfill a contract or legal duty,",
+    "Safeguard your vital interests, or",
+    "Pursue our legitimate business interests, provided your rights are not adversely impacted.",
+  ];
+
+  const userRights = [
+    "Access, correct, or request deletion of your data,",
+    "Object to or restrict data processing,",
+    "Transfer your data, and",
+    "Withdraw consent at any time.",
+  ];
+
   return (
-    <div>page</div>
-  )
-}
+    <section className="bg-ivory mt-23 py-16 px-6 md:px-16 lg:px-24 font-sans text-[#23352e]">
+      <div className="max-w-5xl mx-auto space-y-8">
+        
+        <div className="border-b border-[#23352e]/10 pb-4">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-wide">
+            Privacy Policy
+          </h2>
+        </div>
 
-export default page
+        <div className="space-y-6 max-w-4xl text-xs md:text-sm text-gray-600 leading-relaxed font-normal">
+          
+          <div className="space-y-1">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Who we are</h3>
+            <p>
+              Suggested text: Our website address is:{" "}
+              <a href="http://beinteriorltd.com" target="_blank" rel="noopener noreferrer" className="text-[#7a8d75] underline font-medium">
+                http://beinterior.com.bd
+              </a>.
+            </p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Purpose of this Notice</h3>
+            <p>
+              Be Interior values the security and privacy of your data. This policy outlines how we collect, use, and protect your information as part of our commitment to transparency in compliance with the General Data Protection Regulation (GDPR).
+            </p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Data Collection and Usage</h3>
+            <p>
+              <span className="font-bold text-gray-800">Data Controller:</span> Be Interior, located in Dhaka, Bangladesh, is the Controller of the personal data you provide. We collect only essential personal data, including your name, address, email, phone number, payment information, and other relevant information. This data enables us to provide our services, process orders, and share our products or promotions with you.
+            </p>
+          </div>
+
+          <div className="space-y-2 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Purpose and Legal Basis of Processing</h3>
+            <p>We collect your data to provide services, fulfill contracts, and communicate with you about our offerings. We only use personal data with your consent or when required to:</p>
+            <ul className="list-none pl-0 space-y-1 text-gray-600">
+              {legalBasisItems.map((item, idx) => (
+                <li key={idx} className="flex items-start before:content-[''] before:w-1.5 before:h-1.5 before:bg-[#7a8d75] before:rounded-sm before:mr-2.5 before:mt-1.5 shrink-0">
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="pt-1">You may object to this processing, though doing so may affect our ability to provide certain services to you.</p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Data Storage and Security</h3>
+            <p>
+              Be Interior stores data primarily in Bangladesh and Singapore. We may work with external organizations to provide certain services, which may involve data transfers outside Asia. In such cases, we ensure appropriate safeguards are in place to protect your data.
+            </p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Data Retention</h3>
+            <p>We only retain data for as long as necessary; typically no longer than six years. We continually review stored data and remove anything that is no longer required. Payment card information is never stored.</p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Sharing Your Personal Data</h3>
+            <p>We may share data with trusted third parties to fulfill contractual obligations or where required by law; a court, or regulatory body. Your information will not be transferred outside our organization without notifying you and explaining the security protections in place.</p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Marketing Communication</h3>
+            <p>With your permission, we may use your name and email to inform you about future offers and products. You can opt out at any time via phone, email, or our website.</p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Cookies</h3>
+            <p>Our website uses cookies to enhance your browsing experience. Cookies help us analyze traffic and tailor website content to your preferences. You can choose to accept or decline cookies via browser settings.</p>
+          </div>
+
+          <div className="space-y-2 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Your Rights</h3>
+            <p>Under GDPR, you have the right to:</p>
+            <ul className="list-none pl-0 space-y-1 text-gray-600">
+              {userRights.map((right, idx) => (
+                <li key={idx} className="flex items-start before:content-[''] before:w-1.5 before:h-1.5 before:bg-[#7a8d75] before:rounded-sm before:mr-2.5 before:mt-1.5 shrink-0">
+                  {right}
+                </li>
+              ))}
+            </ul>
+            <p className="pt-1">
+              For any data-related inquiries, contact us at House-05, Road:21/A, Nikunja-02, Dhaka, Bangladesh.
+            </p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">External Links</h3>
+            <p>Our website may contain links to other sites. We are not responsible for the content or privacy practices of these external sites.</p>
+          </div>
+
+          <div className="space-y-1 pt-2">
+            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Policy Updates</h3>
+            <p>We may update this policy, and any changes will be posted on our website or communicated to you via email.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

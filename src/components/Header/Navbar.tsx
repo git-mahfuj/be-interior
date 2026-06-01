@@ -4,14 +4,36 @@ import NavLogo from "./NavLogo";
 import NavLinks from "./NavLinks";
 import Navbtn from "./Navbtn";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const links = [
+    {
+      name: "Home Interior",
+      href: "/services/home-interior",
+    },
+    {
+      name: "Office Interior",
+      href: "/services/office-interior",
+    },
+    {
+      name: "About Us",
+      href: "/about",
+    },
+    {
+      name: "Contact Us",
+      href: "/contact",
+    },
+    {
+      name: "Hire An Architect",
+      href: "/hire-architect",
+    },
+  ];
   return (
     <div>
       <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-99999 backdrop-blur-sm border-b  border-white/10 bg-secondary/50 opacity-85">
-        <div className="xl:translate-x-10">
+        <div className="xl:translate-x-10" >
           {" "}
           <NavLogo />
         </div>
@@ -53,21 +75,19 @@ const Navbar = () => {
           </form>
 
           <ul className="flex flex-col justify-center items-center gap-6 text-white mt-4">
-            <li className="font-medium hover:text-primary cursor-pointer transition-colors duration-300">
-              Home Interior
-            </li>
-            <li className="font-medium hover:text-primary cursor-pointer transition-colors duration-300">
-              Office Interior
-            </li>
-            <li className="font-medium hover:text-primary cursor-pointer transition-colors duration-300">
-              About Us
-            </li>
-            <li className="font-medium hover:text-primary cursor-pointer transition-colors duration-300">
-              Contact Us
-            </li>
-            <li className="font-medium hover:text-primary cursor-pointer transition-colors duration-300">
-              Hire an Architect
-            </li>
+            {links.map((link, index) => {
+              return (
+                <Link
+                  href={link.href}
+                  key={index}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <li className="font-medium hover:text-primary cursor-pointer transition-colors duration-300">
+                    {link.name}
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
         </div>
       </div>

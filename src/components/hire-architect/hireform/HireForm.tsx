@@ -1,5 +1,7 @@
 "use client";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
+
+import { useState } from "react";
 
 interface FormType {
   name: string;
@@ -10,7 +12,7 @@ interface FormType {
 
 type FormError = Partial<FormType>;
 
-const ContactForm = () => {
+const HireForm = () => {
   const [formData, setFormData] = useState<FormType>({
     name: "",
     email: "",
@@ -74,26 +76,28 @@ const ContactForm = () => {
       (setIsSubmitted(false), 5000);
     });
   };
-
   return (
-    <section className="bg-[#eef2ed] py-20 px-6">
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Illustration */}
-        <div className="flex justify-center">
-          <div className="w-full h-80 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500">
-            Illustration Placeholder
+    <section className="bg-ivory py-16 px-6 md:px-20 lg:px-32">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* Left Side: Content & Illustration */}
+        <div className="space-y-8">
+          <h2 className="text-4xl md:text-5xl font-serif text-[#283b33] leading-tight">
+            Leave Us A <span className="font-bold">Message</span> for your{" "}
+            <br />
+            Dream Interior
+          </h2>
+
+          {/* Illustration Area: Replace this div with your actual illustration image */}
+          <div className="w-full h-80 flex items-center justify-center">
+            {/* image_0b9aff.png এ থাকা ইলাস্ট্রেশনটি এখানে বসান */}
+            <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
+              [Illustration Placeholder]
+            </div>
           </div>
         </div>
 
         {/* Right Side: Form */}
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-          <h2 className="text-2xl font-bold text-[#283b33] mb-2">
-            Leave Us A Message For Your Project
-          </h2>
-          <p className="text-gray-500 mb-6">
-            Our Expert Team Will Contact With You
-          </p>
-
+        <div className="bg-white p-8 rounded-lg shadow-sm w-full max-w-md mx-auto">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {/* Input fields */}
             {[
@@ -150,10 +154,21 @@ const ContactForm = () => {
               Get Free Quote
             </button>
           </form>
+
+          <p className="text-[10px] text-gray-500 mt-4 leading-tight">
+            By submitting this form, you agree to the <br />
+            <a href="#" className="text-red-700 underline">
+              Privacy policy
+            </a>
+            ,
+            <a href="#" className="text-red-700 underline ml-1">
+              terms and conditions
+            </a>
+          </p>
         </div>
       </div>
     </section>
   );
 };
 
-export default ContactForm;
+export default HireForm;

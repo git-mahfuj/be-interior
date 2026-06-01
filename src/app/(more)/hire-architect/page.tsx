@@ -1,9 +1,15 @@
-import React from 'react'
+import ArchitectInterior from "@/components/hire-architect/architect-interior/ArchitectInterior";
+import CustomizedService from "@/components/hire-architect/customizedservice/CustomizedService";
+import HireForm from "@/components/hire-architect/hireform/HireForm";
+import React from "react";
 
-const page = () => {
+const HireArchitect = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div className="mt-24">
+      <HireForm />
+      <ArchitectInterior />
+    </div>
+  );
+};
 
-export default page
+export default HireArchitect;

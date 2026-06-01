@@ -3,19 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "@/logo/BEI-Logo-web-bg-remove.png";
 
-const NavLogo = ({className} : {
-  className?:string
-}) => {
+const NavLogo = ({ className }: { className?: string }) => {
   return (
     <div className="flex items-center">
       <Link href="/">
-        
         <div className={`w-35 md:w-45 h-auto , ${className}`}>
-          <Image 
-            src={logo} 
-            alt="logo" 
-            width={180} 
-            height={40} 
+          <Image
+            src={logo}
+            alt="logo"
+            width={180}
+            height={40}
             priority
             className="w-full h-auto object-contain"
           />

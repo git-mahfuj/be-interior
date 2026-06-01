@@ -17,7 +17,7 @@ import { HiMapPin } from "react-icons/hi2";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-secondary text-white mt-20 pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
+    <footer className="w-full bg-secondary text-white pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pb-12 border-b border-white/10 w-full max-w-7xl mx-auto">
         {/* লোগো হোল্ডার */}
         <div className="flex items-center justify-center lg:justify-start">

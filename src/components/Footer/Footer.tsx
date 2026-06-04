@@ -14,8 +14,40 @@ import {
 } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 import { HiMapPin } from "react-icons/hi2";
+import { footerContactApi } from "@/axios/axios";
+import { useQuery } from "@tanstack/react-query";
+
+
+interface FooterContactType {
+  ms: number;
+  query: string;
+  result: {
+    footercontactnumber1: string;
+    footercontactnumber2: string;
+    footercontactemail: string;
+    footerlocation: string;
+  }[];
+  syncTags: string[];
+}
+
+const fetchFooterContact = async () => {
+  try {
+    const res = await footerContactApi();
+    if (res.status !== 200) throw new Error("Error fetching");
+    return res.data;
+  } catch (error: any) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("WhatsApp Fetch Error:", error.message);
+    }
+    return null;
+  }
+};
+
 
 const Footer = () => {
+
+
+
   return (
     <footer className="w-full bg-secondary text-white pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pb-12 border-b border-white/10 w-full max-w-7xl mx-auto">

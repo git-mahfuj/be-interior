@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Montagu_Slab, Poppins } from "next/font/google";
 import "@/app/globals.css";
 import Navbar from "@/components/Header/Navbar";
 import Footer from "@/components/Footer/Footer";
+import ClientGlobalWrapper from "@/globalwrapper/ClientGlobalWrapper";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,9 +43,11 @@ export default function RootLayout({
       suppressHydrationWarning={true}
       className={`${geistSans.variable} ${geistMono.variable} ${montaguSlab.variable} ${poppins.variable} h-full antialiased`}
     >
-
-      <body className="min-h-full flex flex-col">{children}</body>
-
+      <Navbar />
+      <body className="min-h-full flex flex-col">
+        <ClientGlobalWrapper>{children}</ClientGlobalWrapper>
+      </body>
+      <Footer />
     </html>
   );
 }

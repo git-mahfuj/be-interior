@@ -8,8 +8,45 @@ import Image from "next/image";
 import slideOne from "@/logo/HomePage/Gemini_Generated_Image_interior1.png";
 import slideTwo from "@/logo/HomePage/Gemini_Generated_Image_interior2.png";
 import { FaWhatsapp } from "react-icons/fa";
+import { whatsAppApi } from "@/axios/axios";
+import { useSuspenseQuery } from "@tanstack/react-query";
+
+interface WhatsAppApiType {
+  ms: number;
+  query: string;
+  result: {
+    _id: string;
+    WhatsAppNumber: string;
+  }[];
+  syncTags: string[];
+}
+
+const fetchWhatsAppNumber = async () => {
+  try {
+    const res = await whatsAppApi();
+    if (res.status !== 200) throw new Error("Error fetching");
+    return res.data;
+  } catch (error: any) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("WhatsApp Fetch Error:", error.message);
+    }
+    return null;
+  }
+};
+
 const HomeInteriorSlider = () => {
-  const phoneNumber = "8801570264255";
+  const WhatsAppQuery = useSuspenseQuery<WhatsAppApiType>({
+    queryKey: ["wp-number"],
+    queryFn: fetchWhatsAppNumber,
+  });
+
+  if (process.env.NODE_ENV === "development") {
+    console.log(WhatsAppQuery.data);
+  }
+
+  const { result } = WhatsAppQuery.data;
+
+  const phoneNumber = `88${result.map((i) => i.WhatsAppNumber as string)}`;
 
   const defaultMessage =
     "Hi BE INTERIOR, I want to consult about my space interior design.";

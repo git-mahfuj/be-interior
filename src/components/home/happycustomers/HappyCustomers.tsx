@@ -30,18 +30,22 @@ const fetchHappyClientReview = async () => {
     }
     return res.data;
   } catch (error: any) {
-    console.log(error.message);
-    return;
+    if (process.env.NODE_ENV === "development") {
+      console.error("Happy Customers Review Fetch Error", error.message);
+    }
+    throw error;
   }
 };
 
 const HappyCustomers = () => {
-  const HappyClientQuery = useSuspenseQuery<ClientReviewType>({
+  const { data } = useSuspenseQuery<ClientReviewType>({
     queryKey: ["happy clients"],
     queryFn: fetchHappyClientReview,
   });
-  console.log("client review", HappyClientQuery.data);
-  const { result } = HappyClientQuery.data;
+  const result = data?.result || [];
+  if (process.env.NODE_ENV === "development") {
+    console.log("client review", result);
+  }
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-primary tracking-wide font-bold ">
@@ -65,7 +69,6 @@ const HappyCustomers = () => {
                   key={data._id}
                   className="relative flex flex-col items-center justify-center h-full bg-secondary rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 p-6 gap-4"
                 >
-
                   <div className="relative w-24 h-24 overflow-hidden rounded-full border-4 border-white/20 flex items-center justify-center">
                     <Image
                       src={data.clientimage}
@@ -74,7 +77,6 @@ const HappyCustomers = () => {
                       className="object-cover"
                     />
                   </div>
-
 
                   <div className="text-center mt-8">
                     <h3 className="text-white font-bold text-xl">

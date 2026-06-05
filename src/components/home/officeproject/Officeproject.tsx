@@ -31,17 +31,22 @@ const fetchOfficeProjects = async () => {
 
     return res.data;
   } catch (error: any) {
-    console.log("Error while Feching Products", error.message);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Office Project Fetch Error:", error.message);
+    }
+    throw error;
   }
 };
 
 const Officeproject = () => {
-  const officeInteriorQuery = useSuspenseQuery<OfficeProject>({
+  const { data } = useSuspenseQuery<OfficeProject>({
     queryKey: ["office-interior"],
     queryFn: fetchOfficeProjects,
   });
-  console.log("Office-interior", officeInteriorQuery.data.result);
-  const result = officeInteriorQuery.data.result;
+  const result = data?.result || [];
+  if (process.env.NODE_ENV === "development") {
+    console.log("Office-interior", result);
+  }
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide font-bold">

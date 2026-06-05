@@ -16,15 +16,27 @@ const HomeInterior = () => {
     <div className="">
       <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
         <Suspense fallback={<p>Loading...</p>}>
-          <HomeInteriorSlider/>
+          <HomeInteriorSlider />
         </Suspense>
       </ErrorBoundary>
       <HomeSolution />
       <HomeOurPackage />
-      <HomeDream />
+      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
+        <Suspense fallback={<p>Loading...</p>}>
+          <HomeDream />
+        </Suspense>
+      </ErrorBoundary>
       <HomePromise />
-      <HomeInteriorProjects />
-      <HomeCustomerReview />
+      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
+        <Suspense fallback={<p>Loading...</p>}>
+          <HomeInteriorProjects />
+        </Suspense>
+      </ErrorBoundary>
+       <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
+        <Suspense fallback={<p>Loading...</p>}>
+          <HomeCustomerReview />
+        </Suspense>
+      </ErrorBoundary>         
       <HomeComment />
     </div>
   );

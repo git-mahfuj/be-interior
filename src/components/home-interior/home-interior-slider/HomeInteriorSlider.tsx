@@ -30,21 +30,20 @@ const fetchWhatsAppNumber = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("WhatsApp Fetch Error:", error.message);
     }
-    return null;
+    throw error
   }
 };
 
 const HomeInteriorSlider = () => {
-  const WhatsAppQuery = useSuspenseQuery<WhatsAppApiType>({
+  const {data} = useSuspenseQuery<WhatsAppApiType>({
     queryKey: ["wp-number"],
     queryFn: fetchWhatsAppNumber,
   });
 
+  const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
-    console.log(WhatsAppQuery.data);
+    console.log("slider-wp" , result);
   }
-
-  const { result } = WhatsAppQuery.data;
 
   const phoneNumber = `88${result.map((i) => i.WhatsAppNumber as string)}`;
 

@@ -32,18 +32,24 @@ const homeInteriorProjects = async () => {
 
     return res.data;
   } catch (error: any) {
-    console.log("Error while Feching Products", error.message);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Home Interior Projects Fetch Error", error.message);
+    }
+    throw error;
   }
 };
 
 const BeinteriorProject = () => {
-  const homeInteriorQuery = useSuspenseQuery<HomeProject>({
+  const { data } = useSuspenseQuery<HomeProject>({
     queryKey: ["home-interior"],
     queryFn: homeInteriorProjects,
   });
 
-  const { result } = homeInteriorQuery.data;
-  console.log(result);
+  const result = data?.result || [];
+
+  if (process.env.NODE_ENV === "development") {
+    console.log("home-interior-projects", result);
+  }
 
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory">

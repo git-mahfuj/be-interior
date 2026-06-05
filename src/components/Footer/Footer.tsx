@@ -17,7 +17,6 @@ import { HiMapPin } from "react-icons/hi2";
 import { footerContactApi } from "@/axios/axios";
 import { useQuery } from "@tanstack/react-query";
 
-
 interface FooterContactType {
   ms: number;
   query: string;
@@ -39,15 +38,11 @@ const fetchFooterContact = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("WhatsApp Fetch Error:", error.message);
     }
-    return null;
+    throw error
   }
 };
 
-
 const Footer = () => {
-
-
-
   return (
     <footer className="w-full bg-secondary text-white pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pb-12 border-b border-white/10 w-full max-w-7xl mx-auto">
@@ -109,27 +104,39 @@ const Footer = () => {
             Resources
           </h3>
           <ul className="flex flex-col gap-3 text-sm text-zinc-400">
-            <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-              Home
-            </li>
+            <Link href={"/"}>
+              <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
+                Home
+              </li>
+            </Link>
             <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
               Interior Calculator
             </li>
-            <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-              About Us
-            </li>
-            <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-              Contact Us
-            </li>
-            <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-              Cancellation & Refund Policy
-            </li>
-            <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-              Privacy Policy
-            </li>
-            <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-              Terms & Conditions
-            </li>
+            <Link href={"/about"}>
+              <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
+                About Us
+              </li>
+            </Link>
+            <Link href={"/contact"}>
+              <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
+                Contact Us
+              </li>
+            </Link>
+            <Link href={"refund-policy"}>
+              <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
+                Cancellation & Refund Policy
+              </li>
+            </Link>
+            <Link href={"/privacy-policy"}>
+              <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
+                Privacy Policy
+              </li>
+            </Link>
+            <Link href={"terms"}>
+              <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
+                Terms & Conditions
+              </li>
+            </Link>
           </ul>
         </div>
 

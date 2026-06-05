@@ -30,7 +30,7 @@ const fetchWhatsAppNumber = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("WhatsApp Fetch Error:", error.message);
     }
-    return null;
+    return;
   }
 };
 
@@ -40,11 +40,10 @@ const HomeInteriorSlider = () => {
     queryFn: fetchWhatsAppNumber,
   });
 
-  if (process.env.NODE_ENV === "development") {
-    console.log(WhatsAppQuery.data);
-  }
-
   const { result } = WhatsAppQuery.data;
+  if (process.env.NODE_ENV === "development") {
+    console.log("slider-wp" , result);
+  }
 
   const phoneNumber = `88${result.map((i) => i.WhatsAppNumber as string)}`;
 

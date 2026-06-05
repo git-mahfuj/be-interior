@@ -33,16 +33,16 @@ const fetchHappyClientReview = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("Happy Customers Review Fetch Error", error.message);
     }
-    return;
+    throw error;
   }
 };
 
 const HappyCustomers = () => {
-  const HappyClientQuery = useSuspenseQuery<ClientReviewType>({
+  const { data } = useSuspenseQuery<ClientReviewType>({
     queryKey: ["happy clients"],
     queryFn: fetchHappyClientReview,
   });
-  const { result } = HappyClientQuery.data;
+  const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
     console.log("client review", result);
   }

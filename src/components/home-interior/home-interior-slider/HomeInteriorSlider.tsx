@@ -30,17 +30,17 @@ const fetchWhatsAppNumber = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("WhatsApp Fetch Error:", error.message);
     }
-    return;
+    throw error
   }
 };
 
 const HomeInteriorSlider = () => {
-  const WhatsAppQuery = useSuspenseQuery<WhatsAppApiType>({
+  const {data} = useSuspenseQuery<WhatsAppApiType>({
     queryKey: ["wp-number"],
     queryFn: fetchWhatsAppNumber,
   });
 
-  const { result } = WhatsAppQuery.data;
+  const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
     console.log("slider-wp" , result);
   }

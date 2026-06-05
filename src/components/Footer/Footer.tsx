@@ -38,7 +38,7 @@ const fetchFooterContact = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("WhatsApp Fetch Error:", error.message);
     }
-    return null;
+    throw error
   }
 };
 

@@ -34,19 +34,19 @@ const homeInteriorProjects = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("Home Interior Projects Fetch Error", error.message);
     }
-    return null;
+    throw error
   }
 };
 
 
 
 const HomeInteriorProjects = () => {
-   const homeInteriorQuery = useSuspenseQuery<HomeProject>({
+   const {data} = useSuspenseQuery<HomeProject>({
     queryKey: ["home-interior"],
     queryFn: homeInteriorProjects,
   });
 
-  const { result } = homeInteriorQuery.data;
+  const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
     console.log("homeinteriropage-home-interior-projects", result);
   }

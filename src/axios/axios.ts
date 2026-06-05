@@ -1,5 +1,5 @@
 import axios from "axios"
-import { footerContactItems, homePageClientReview, homeProjectQuery, officeProjectQuery, whatsAppNumber } from "./query"
+import { footerContactItems, homeInteriorPageClientReview, homePageClientReview, homeProjectQuery, officeProjectQuery, whatsAppNumber } from "./query"
 
 const api  = axios.create({})
 
@@ -24,4 +24,8 @@ export const whatsAppApi = () => {
 
 export const footerContactApi = () => {
     return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${footerContactItems}`)
+}
+
+export const homeInteriorPageClientReviewApi = () =>{
+  return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homeInteriorPageClientReview}`)
 }

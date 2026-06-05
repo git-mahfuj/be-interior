@@ -31,7 +31,10 @@ const fetchOfficeProjects = async () => {
 
     return res.data;
   } catch (error: any) {
-    console.log("Error while Feching Products", error.message);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Office Project Fetch Error:", error.message);
+    }
+    return null;
   }
 };
 
@@ -40,7 +43,9 @@ const Officeproject = () => {
     queryKey: ["office-interior"],
     queryFn: fetchOfficeProjects,
   });
-  console.log("Office-interior", officeInteriorQuery.data.result);
+  if (process.env.NODE_ENV === "development") {
+    console.log("Office-interior", officeInteriorQuery.data.result);
+  }
   const result = officeInteriorQuery.data.result;
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory">

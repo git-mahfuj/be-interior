@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { whatsAppApi } from "@/axios/axios";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
@@ -31,13 +31,11 @@ const JustClick = () => {
     queryFn: fetchWhatsAppNumber,
   });
 
-  if (process.env.NODE_ENV === "development") {
-    console.log(WhatsAppQuery.data);
-  }
-
   const { result } = WhatsAppQuery.data;
-
-  const phoneNumber = `88${result.map((i) => i.WhatsAppNumber as string)}`;
+  if (process.env.NODE_ENV === "development") {
+    console.log("wp", result);
+  }
+  const phoneNumber = `88${result[0].WhatsAppNumber as string}`;
 
   const defaultMessage =
     "Hi BE INTERIOR, I want to consult about my space interior design.";

@@ -17,7 +17,6 @@ export const ClientType = defineType({
       name : "designation",
       title : "Client Designation",
       type : "string",
-      validation : (Rule) => Rule.required()
     }),
     defineField({
       name: "reviewCategory",
@@ -53,4 +52,19 @@ export const ClientType = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+   preview: {
+    select: {
+      title: 'name',         
+      subtitle: 'designation', 
+      media: 'clientimage',   
+    },
+    prepare(selection) {
+      const { title, subtitle, media } = selection;
+      return {
+        title: title,
+        subtitle: subtitle,
+        media: media,
+      };
+    },
+  },
 });

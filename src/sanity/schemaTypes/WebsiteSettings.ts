@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import {WrenchIcon} from '@sanity/icons'
 
 export const WebsiteSettingsType = defineType({
   name: "website-settings",
   title: "Website Settings",
   type: "document",
+  icon : WrenchIcon,
   fields: [
     defineField({
       name: "WebSiteSettings",

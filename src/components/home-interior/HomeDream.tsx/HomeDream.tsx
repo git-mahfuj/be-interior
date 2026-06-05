@@ -37,11 +37,8 @@ const HomeDream = () => {
   if (process.env.NODE_ENV === "development") {
     console.log("wp", result);
   }
-  
-const phoneNumber = (Array.isArray(result) && result.length > 0)
-  ? `88${result[0].WhatsAppNumber}`
-  : "8801618995918";
-  
+
+  const phoneNumber = `88${result.map((i) => i.WhatsAppNumber as string)}`;
 
   const defaultMessage =
     "Hi BE INTERIOR, I want to consult about my space interior design.";

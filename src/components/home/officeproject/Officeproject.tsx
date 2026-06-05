@@ -34,7 +34,7 @@ const fetchOfficeProjects = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("Office Project Fetch Error:", error.message);
     }
-    return null;
+    return;
   }
 };
 

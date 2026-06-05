@@ -35,7 +35,7 @@ const homeInteriorProjects = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("Home Interior Projects Fetch Error", error.message);
     }
-    return null;
+    return;
   }
 };
 

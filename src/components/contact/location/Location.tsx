@@ -1,8 +1,84 @@
 "use client";
 import React from "react";
-import { MapPin } from "lucide-react";
+import { MapPin, Loader2, AlertCircle } from "lucide-react";
+import { contactLocationApi } from "@/axios/axios";
+import { useQuery } from "@tanstack/react-query"; // 👈 useQuery ইমপোর্ট করা হলো
+
+interface ContactLocationType {
+  ms: number;
+  query: string;
+  result: {
+    footerlocation: string;
+  }[];
+  syncTags: string[];
+}
+
+const fetchContactItems = async () => {
+  try {
+    const res = await contactLocationApi();
+    if (res.status !== 200) {
+      throw new Error(`Error while Fetching`);
+    }
+
+    return res.data;
+  } catch (error: any) {
+    if (process.env.NODE_ENV === "development") {
+      console.error(`Contact Location fetch error`, error.message);
+    }
+    throw error;
+  }
+};
 
 const LocationSection = () => {
+
+  const { data, isLoading, isError, error, refetch } = useQuery<ContactLocationType>({
+    queryKey: ["contact-location"],
+    queryFn: fetchContactItems,
+  });
+
+
+  if (isLoading) {
+    return (
+      <section className="w-full flex flex-col md:flex-row h-auto md:h-96 bg-[#8a9d85]/10 animate-pulse">
+        <div className="w-full md:w-1/3 bg-[#8a9d85] p-8 md:p-16 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-2 text-white">
+            <Loader2 className="w-8 h-8 animate-spin" />
+            <p className="text-xs opacity-80 tracking-wide">Loading Address...</p>
+          </div>
+        </div>
+        <div className="w-full md:w-2/3 h-64 md:h-full bg-zinc-100 flex items-center justify-center text-zinc-400 font-medium text-sm">
+          Loading Live Map...
+        </div>
+      </section>
+    );
+  }
+
+
+  if (isError) {
+    return (
+      <section className="w-full flex flex-col md:flex-row h-auto md:h-96 border border-rose-100 rounded-xl overflow-hidden">
+        <div className="w-full md:w-1/3 bg-rose-50 p-8 md:p-16 flex flex-col items-center justify-center text-center text-rose-800 gap-2">
+          <AlertCircle className="w-8 h-8 text-rose-500" />
+          <p className="font-semibold text-sm">Failed to load location</p>
+        </div>
+        <div className="w-full md:w-2/3 h-64 md:h-full bg-zinc-50 flex flex-col items-center justify-center p-6 text-center gap-3">
+          <p className="text-xs text-zinc-500 max-w-xs leading-relaxed">
+            {error instanceof Error ? error.message : "Something went wrong"}
+          </p>
+          <button
+            onClick={() => refetch()}
+            className="px-5 py-2 bg-[#8a9d85] hover:bg-[#768a71] text-white text-xs font-semibold rounded-full shadow-md transition-all duration-200 active:scale-95"
+          >
+            Try Again
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+
+  const contact = data?.result?.[0];
+
   return (
     <section className="w-full flex flex-col md:flex-row h-auto md:h-96">
       {/* Left Side: Address Details */}
@@ -19,7 +95,7 @@ const LocationSection = () => {
               Location:
             </h3>
             <p className="text-lg font-medium leading-relaxed max-w-50">
-              House: 5, Road: 21/A, Nikunja-2, Dhaka
+              {contact?.footerlocation || "Address not specified"}
             </p>
           </div>
         </div>

@@ -46,7 +46,7 @@ const HomeCustomerReview = () => {
     console.log("homeinteriorClientReview", result);
   }
   return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-zinc-50">
+    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-zinc-50 h-180 mb-30">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-primary tracking-wide font-bold ">
         Check Some Review
       </h2>
@@ -63,6 +63,13 @@ const HomeCustomerReview = () => {
               1024: { slidesPerView: 3, spaceBetween: 25 },
               1280: { slidesPerView: 3, spaceBetween: 30 },
             }}
+            loop={true}
+            modules={[Autoplay]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
             className="bg-transparent h-full p-4 rounded-xl"
           >
             {result.length > 0 ? (
@@ -76,6 +83,7 @@ const HomeCustomerReview = () => {
                       src={data.clientimage}
                       alt={data.name}
                       fill
+                      sizes=""
                       className="object-cover"
                     />
                   </div>
@@ -92,9 +100,23 @@ const HomeCustomerReview = () => {
                 </SwiperSlide>
               ))
             ) : (
-              <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6">
-                <h3 className="font-bold text-lg">No reviews available</h3>
-              </SwiperSlide>
+              <>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Review will be uploaded.
+                  </h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Review will be uploaded.
+                  </h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Review will be uploaded.
+                  </h3>
+                </SwiperSlide>
+              </>
             )}
           </Swiper>
         </div>

@@ -1,5 +1,7 @@
 "use client";
+import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import logo from "@/logo/HomePage/ContactImage.jpg"
 
 interface FormType {
   name: string;
@@ -77,15 +79,7 @@ const ContactForm = () => {
 
   return (
     <section className="bg-[#eef2ed] py-20 px-6">
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Illustration */}
-        <div className="flex justify-center">
-          <div className="w-full h-80 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500">
-            Illustration Placeholder
-          </div>
-        </div>
-
-        {/* Right Side: Form */}
+      <div className="max-w-5xl mx-auto grid justify-center gap-12 items-center">
         <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
           <h2 className="text-2xl font-bold text-[#283b33] mb-2">
             Leave Us A Message For Your Project

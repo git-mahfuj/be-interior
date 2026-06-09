@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { motion } from "framer-motion";
 
 interface HomeProject {
   ms: number;
@@ -18,6 +19,9 @@ interface HomeProject {
     name: string;
     slug: string;
     coverImage: string;
+    galleryImage:string[],
+    size:string,
+    location:string
   }[];
   syncTags: string[];
 }
@@ -43,6 +47,7 @@ const BeinteriorProject = () => {
   const { data } = useSuspenseQuery<HomeProject>({
     queryKey: ["home-interior"],
     queryFn: homeInteriorProjects,
+    staleTime: 1000 * 60 * 10
   });
 
   const result = data?.result || [];
@@ -60,7 +65,7 @@ const BeinteriorProject = () => {
         </span>
       </h2>
 
-      <div className="flex flex-col  md:flex-row items-center justify-center gap-8 mt-8 w-full max-w-7xl">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-8 w-full max-w-7xl">
         <div className="w-full max-w-8xl mt-10 h-100 rounded-lg">
           <Swiper
             breakpoints={{
@@ -79,14 +84,15 @@ const BeinteriorProject = () => {
           >
             {/* ================= Slide 1 ================= */}
             {result.length > 0 ? (
-              <div>
+              <>
                 {result.map((data) => (
                   <SwiperSlide
                     key={data._id}
                     className="relative flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 overflow-hidden"
+                    
                   >
                     <Link
-                      href={`/projects/${data.slug}`}
+                      href={`/interior-projects/${data.slug}?type=home`}
                       className="w-full h-full block relative"
                     >
                       <Image
@@ -103,11 +109,19 @@ const BeinteriorProject = () => {
                     </Link>
                   </SwiperSlide>
                 ))}
-              </div>
+              </>
             ) : (
-              <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6">
-                <h3 className="font-bold text-lg">No reviews available</h3>
-              </SwiperSlide>
+              <>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">Oops! Projects will be uploaded.</h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">Oops! Projects will be uploaded.</h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">Oops! Projects will be uploaded.</h3>
+                </SwiperSlide>
+              </>
             )}
           </Swiper>
         </div>

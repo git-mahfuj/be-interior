@@ -12,7 +12,13 @@ import OurWorkFlow from "@/components/home/work-flow/OurWorkFlow";
 import { ErrorBoundary } from "react-error-boundary";
 import Image from "next/image";
 import { Suspense } from "react";
-import ProjectSkeleton from "@/components/skeleton/ProjectsSkeleton";
+import HomeProjectSuspense from "@/components/skeleton/HomeProjectSuspense";
+import OfficeProjectSuspense from "@/components/skeleton/OfficeProjectSuspense";
+import HappyCustomersSuspense from "@/components/skeleton/HappyCustomersSuspense";
+import BeInteriorError from "@/components/home/beinteriorproj/BeInteriorError";
+import OfficeProjectErr from "@/components/home/officeproject/OfficeProjectError";
+import HappyCustomererr from "@/components/home/happycustomers/HappyCustomererr";
+import JustClickSuspense from "@/components/skeleton/JustClickSuspense";
 
 export default function Home() {
   return (
@@ -21,25 +27,25 @@ export default function Home() {
       <Whatwedo />
       <OurWorkFlow />
       <Whychooseus />
-      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <ErrorBoundary fallback={<BeInteriorError/>}>
+        <Suspense fallback={<HomeProjectSuspense/>}>
           <BeinteriorProject />
         </Suspense>
       </ErrorBoundary>
       <Calculator />
-      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <ErrorBoundary fallback={<OfficeProjectErr/>}>
+        <Suspense fallback={<OfficeProjectSuspense/>}>
           <Officeproject />
         </Suspense>
       </ErrorBoundary>
       <Competition />
-      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <ErrorBoundary fallback={<HappyCustomererr/>}>
+        <Suspense fallback={<HappyCustomersSuspense/>}>
           <HappyCustomers />
         </Suspense>
       </ErrorBoundary>
       <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<JustClickSuspense/>}>
           <JustClick />
         </Suspense>
       </ErrorBoundary>

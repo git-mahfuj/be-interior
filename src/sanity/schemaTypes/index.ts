@@ -1,9 +1,16 @@
-import { type SchemaTypeDefinition } from 'sanity'
-import { HomeProjectType } from './HomeProjectType'
-import { OfficeProjectType } from './OfficeProjecttype'
-import { ClientType } from './ClientTypes'
-import { WebsiteSettingsType } from './WebsiteSettings'
+import { type SchemaTypeDefinition } from "sanity";
+import { HomeProjectType } from "./HomeProjectType";
+import { OfficeProjectType } from "./OfficeProjecttype";
+import { ClientType } from "./ClientTypes";
+import { WebsiteSettingsType } from "./WebsiteSettings";
+import { InteriorTeamType } from "./interiorTeamType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [HomeProjectType , OfficeProjectType , ClientType , WebsiteSettingsType],
-}
+  types: [
+    HomeProjectType,
+    OfficeProjectType,
+    ClientType,
+    WebsiteSettingsType,
+    InteriorTeamType,
+  ],
+};

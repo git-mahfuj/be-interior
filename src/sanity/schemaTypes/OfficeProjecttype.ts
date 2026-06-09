@@ -35,5 +35,17 @@ export const OfficeProjectType = defineType({
       options: { layout: 'grid' } ,
       validation: (Rule) => Rule.required(),
     }),
+     defineField({
+      name: "size",
+      title: "Project Size",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+     defineField({
+      name: "location",
+      title: "Project Location",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 });

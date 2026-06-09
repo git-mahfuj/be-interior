@@ -1,6 +1,7 @@
 "use client";
 import { officeProjectApi } from "@/axios/axios";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { error } from "console";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -38,10 +39,14 @@ const fetchOfficeProjects = async () => {
   }
 };
 
+
+
 const Officeproject = () => {
+
   const { data } = useSuspenseQuery<OfficeProject>({
     queryKey: ["office-interior"],
     queryFn: fetchOfficeProjects,
+    staleTime: 1000 * 60 * 10
   });
   const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
@@ -75,14 +80,14 @@ const Officeproject = () => {
           >
             {/* ================= Slide 1 ================= */}
             {result.length > 0 ? (
-              <div>
+              <>
                 {result.map((data) => (
                   <SwiperSlide
                     key={data._id}
                     className="relative flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 overflow-hidden"
                   >
                     <Link
-                      href={`/projects/${data.slug}`}
+                      href={`/interior-projects/${data.slug}?type=office`}
                       className="w-full h-full block relative"
                     >
                       <Image
@@ -99,11 +104,19 @@ const Officeproject = () => {
                     </Link>
                   </SwiperSlide>
                 ))}
-              </div>
+              </>
             ) : (
-              <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6">
-                <h3 className="font-bold text-lg">No reviews available</h3>
-              </SwiperSlide>
+              <>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">Oops! Projects will be uploaded.</h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">Oops! Projects will be uploaded.</h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">Oops! Projects will be uploaded.</h3>
+                </SwiperSlide>
+              </>
             )}
           </Swiper>
         </div>

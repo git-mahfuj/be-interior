@@ -1,5 +1,5 @@
 import axios from "axios"
-import { footerContactItems, homeInteriorPageClientReview, homePageClientReview, homeProjectQuery, officeProjectQuery, whatsAppNumber } from "./query"
+import { allinteriorItem, contactItems, contactLocation, footerContactItems, homeInteriorPageClientReview, homePageClientReview, homeProjectQuery, interiorTeam, officeInteriorPageClientReview, officeProjectQuery, whatsAppNumber } from "./query"
 
 const api  = axios.create({})
 
@@ -28,4 +28,24 @@ export const footerContactApi = () => {
 
 export const homeInteriorPageClientReviewApi = () =>{
   return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homeInteriorPageClientReview}`)
+}
+
+export const officeInteriorPageClientReviewApi = () => {
+    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${officeInteriorPageClientReview}`)
+}
+
+export const interiorTeamApi = () => {
+    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${interiorTeam}`)
+}
+
+export const contactItemApi = () => {
+     return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${contactItems}`)
+}
+
+export const contactLocationApi = () => {
+     return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${contactLocation}`)
+}
+
+export const allInteriorApi = () => {
+    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allinteriorItem}`)
 }

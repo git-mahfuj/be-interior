@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import {  HomeIcon } from "@sanity/icons";
+import { HomeIcon } from "@sanity/icons";
 
 export const HomeProjectType = defineType({
   name: "home-projects",
@@ -20,7 +20,7 @@ export const HomeProjectType = defineType({
       options: { source: "name" },
       validation: (Rule) => Rule.required(),
     }),
-      defineField({
+    defineField({
       name: "coverimage",
       title: "Project Cover Image",
       type: "image",
@@ -28,12 +28,39 @@ export const HomeProjectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'gallery',
-      title: 'Project Gallery',
-      type: 'array',
-      of: [{ type: 'image' }], 
-      options: { layout: 'grid' } ,
+      name: "gallery",
+      title: "Project Gallery",
+      type: "array",
+      of: [{ type: "image" }],
+      options: { layout: "grid" },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "size",
+      title: "Project Size",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "location",
+      title: "Project Location",
+      type: "string",
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "size",
+      media: "coverimage",
+    },
+    prepare(selection) {
+      const { media, subtitle, title } = selection;
+      return {
+        title: title,
+        subtitle: subtitle,
+        media: media,
+      };
+    },
+  },
 });

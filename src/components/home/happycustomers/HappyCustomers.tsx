@@ -41,6 +41,7 @@ const HappyCustomers = () => {
   const { data } = useSuspenseQuery<ClientReviewType>({
     queryKey: ["happy clients"],
     queryFn: fetchHappyClientReview,
+    staleTime: 1000 * 60 * 10
   });
   const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
@@ -60,6 +61,13 @@ const HappyCustomers = () => {
               640: { slidesPerView: 2, spaceBetween: 20 },
               1024: { slidesPerView: 3, spaceBetween: 25 },
               1280: { slidesPerView: 3, spaceBetween: 30 },
+            }}
+            loop={true}
+            modules={[Autoplay]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             }}
             className="bg-transparent h-full p-4 rounded-xl"
           >
@@ -93,9 +101,23 @@ const HappyCustomers = () => {
                 </SwiperSlide>
               ))
             ) : (
-              <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6">
-                <h3 className="font-bold text-lg">No reviews available</h3>
-              </SwiperSlide>
+              <>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Review will be uploaded.
+                  </h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Review will be uploaded.
+                  </h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Review will be uploaded.
+                  </h3>
+                </SwiperSlide>
+              </>
             )}
           </Swiper>
         </div>

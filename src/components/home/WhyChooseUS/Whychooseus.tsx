@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Whychooseus = () => {
@@ -36,7 +37,7 @@ const Whychooseus = () => {
           </p>
         </div>
       </div>
-      <button className="mt-10 translate-y-10 bg-primary font-medium text-white p-4 text-2xl rounded-xl">Book Free Consultation</button>
+      <Link href={'/hire-architect'}><button className="mt-10 cursor-pointer translate-y-10 bg-primary font-medium text-white p-4 text-2xl rounded-xl">Book Free Consultation</button></Link>
     </div>
   );
 };

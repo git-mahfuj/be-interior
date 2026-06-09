@@ -5,9 +5,14 @@ import HomeSliderSkeleton from "@/components/home-interior/home-interior-slider/
 import WhatsappErrorFallback from "@/components/home-interior/home-interior-slider/WhastappErrorFallback";
 import HomeOurPackage from "@/components/home-interior/home-package/HomePackage";
 import HomePromise from "@/components/home-interior/home-promise/HomePromise";
+import HomeCustomersSuspense from "@/components/home-interior/home-review/HomeCustomerSuspense";
 import HomeCustomerReview from "@/components/home-interior/home-review/HomeReviewCustomer";
 import HomeSolution from "@/components/home-interior/home-solution/HomeSolution";
 import HomeDream from "@/components/home-interior/HomeDream.tsx/HomeDream";
+import HomeDreamSuspense from "@/components/home-interior/HomeDream.tsx/HomeDreamSuspense";
+import BeInteriorError from "@/components/home/beinteriorproj/BeInteriorError";
+import HappyCustomererr from "@/components/home/happycustomers/HappyCustomererr";
+import HomeProjectSuspense from "@/components/skeleton/HomeProjectSuspense";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -15,28 +20,27 @@ const HomeInterior = () => {
   return (
     <div className="">
       <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
-          <HomeInteriorSlider />
-        </Suspense>
+        <HomeInteriorSlider />
       </ErrorBoundary>
       <HomeSolution />
       <HomeOurPackage />
-      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <ErrorBoundary fallback={''}>
+        <Suspense fallback={<HomeDreamSuspense />}>
           <HomeDream />
         </Suspense>
       </ErrorBoundary>
-      <HomePromise />
-      <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <ErrorBoundary fallback={<BeInteriorError/>}>
+        <Suspense fallback={<HomeProjectSuspense />}>
           <HomeInteriorProjects />
         </Suspense>
       </ErrorBoundary>
-       <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <HomePromise />
+
+      <ErrorBoundary fallback={<HappyCustomererr/>}>
+        <Suspense fallback={<HomeCustomersSuspense />}>
           <HomeCustomerReview />
         </Suspense>
-      </ErrorBoundary>         
+      </ErrorBoundary>
       <HomeComment />
     </div>
   );

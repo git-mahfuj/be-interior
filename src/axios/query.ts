@@ -1,16 +1,23 @@
-export const homeProjectQuery = encodeURIComponent(`*[_type == "home-projects"]{
+export const homeProjectQuery =
+  encodeURIComponent(` *[_type == "home-projects"]{
   _id,
   name,
   "slug": slug.current,
-  "coverImage": coverimage.asset->url
+  "coverImage": coverimage.asset->url,
+   "galleryImage" : gallery[].asset->url,
+   size,
+   location
 }`);
 
 export const officeProjectQuery =
-  encodeURIComponent(`*[_type == "office-projects"]{
+  encodeURIComponent(` *[_type == "office-projects"]{
   _id,
   name,
   "slug": slug.current,
-  "coverImage": coverimage.asset->url
+  "coverImage": coverimage.asset->url,
+   "galleryImage" : gallery[].asset->url,
+   size,
+   location
 }`);
 
 export const homePageClientReview = encodeURIComponent(`*[_type == "clients"]{
@@ -21,7 +28,8 @@ export const homePageClientReview = encodeURIComponent(`*[_type == "clients"]{
   "clientimage" : clientimage.asset->url
 }`);
 
-export const whatsAppNumber = encodeURIComponent(`*[_type == "website-settings"]{
+export const whatsAppNumber =
+  encodeURIComponent(`*[_type == "website-settings"]{
   _id,
   WhatsAppNumber,
 }`);
@@ -40,4 +48,43 @@ export const homeInteriorPageClientReview = encodeURIComponent(`
   name,
   review,
   "clientimage" : clientimage.asset->url
-}`)
+}`);
+
+export const officeInteriorPageClientReview = encodeURIComponent(`
+  *[_type == "clients" && reviewCategory == "office"]{
+  _id,
+  name,
+  designation,
+  review,
+  "clientimage" : clientimage.asset->url
+}`);
+
+export const interiorTeam = encodeURIComponent(`
+  *[_type == "interior-team"]{
+  name,
+  designation,
+  "memberImage" : memberimage.asset->url
+}`);
+
+export const contactItems = encodeURIComponent(`
+  *[_type == "website-settings"]{
+  WhatsAppNumber,
+  footercontactemail,
+  footercontactnumber1
+}`);
+
+export const contactLocation = encodeURIComponent(`
+  *[_type == "website-settings"]{
+
+  footerlocation
+}`);
+
+export const allinteriorItem = encodeURIComponent(`
+ *[_type in ["home-projects", "office-projects"]] | order(_createdAt desc) {
+  _id,
+  _type,
+  name,
+  "slug": slug.current,
+  "coverImage" : coverimage.asset->url,
+  "galleryImages": gallery[].asset->url
+} `);

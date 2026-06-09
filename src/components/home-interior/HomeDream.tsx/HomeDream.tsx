@@ -27,6 +27,7 @@ const fetchWhatsAppNumber = async () => {
   }
 };
 
+
 const HomeDream = () => {
   const { data } = useSuspenseQuery<WhatsAppApiType>({
     queryKey: ["wp-number"],

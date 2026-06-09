@@ -34,14 +34,12 @@ const homeInteriorProjects = async () => {
     if (process.env.NODE_ENV === "development") {
       console.error("Home Interior Projects Fetch Error", error.message);
     }
-    throw error
+    throw error;
   }
 };
 
-
-
 const HomeInteriorProjects = () => {
-   const {data} = useSuspenseQuery<HomeProject>({
+  const { data } = useSuspenseQuery<HomeProject>({
     queryKey: ["home-interior"],
     queryFn: homeInteriorProjects,
   });
@@ -85,7 +83,7 @@ const HomeInteriorProjects = () => {
                     className="relative flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 overflow-hidden"
                   >
                     <Link
-                      href={`/projects/${data.slug}`}
+                      href={`/interior-projects/${data.slug}`}
                       className="w-full h-full block relative"
                     >
                       <Image
@@ -104,9 +102,24 @@ const HomeInteriorProjects = () => {
                 ))}
               </div>
             ) : (
-              <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6">
-                <h3 className="font-bold text-lg">No reviews available</h3>
-              </SwiperSlide>
+              <>
+                {" "}
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Projects will be uploaded.
+                  </h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Projects will be uploaded.
+                  </h3>
+                </SwiperSlide>
+                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
+                  <h3 className="font-bold text-lg absolute text-center">
+                    Oops! Projects will be uploaded.
+                  </h3>
+                </SwiperSlide>
+              </>
             )}
           </Swiper>
         </div>

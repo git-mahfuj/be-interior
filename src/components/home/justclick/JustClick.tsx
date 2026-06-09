@@ -29,6 +29,7 @@ const JustClick = () => {
   const { data } = useSuspenseQuery<WhatsAppApiType>({
     queryKey: ["wp-number"],
     queryFn: fetchWhatsAppNumber,
+    staleTime: 1000 * 60 * 10
   });
 
   const result = data?.result || [];

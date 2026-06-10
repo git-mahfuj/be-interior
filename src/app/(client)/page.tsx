@@ -27,25 +27,19 @@ export default function Home() {
       <Whatwedo />
       <OurWorkFlow />
       <Whychooseus />
-      <ErrorBoundary fallback={<BeInteriorError/>}>
-        <Suspense fallback={<HomeProjectSuspense/>}>
-          <BeinteriorProject />
-        </Suspense>
+      <ErrorBoundary fallback={<BeInteriorError />}>
+        <BeinteriorProject />
       </ErrorBoundary>
       <Calculator />
-      <ErrorBoundary fallback={<OfficeProjectErr/>}>
-        <Suspense fallback={<OfficeProjectSuspense/>}>
+      <ErrorBoundary fallback={<OfficeProjectErr />}>
           <Officeproject />
-        </Suspense>
       </ErrorBoundary>
       <Competition />
-      <ErrorBoundary fallback={<HappyCustomererr/>}>
-        <Suspense fallback={<HappyCustomersSuspense/>}>
+      <ErrorBoundary fallback={<HappyCustomererr />}>
           <HappyCustomers />
-        </Suspense>
       </ErrorBoundary>
       <ErrorBoundary fallback={<div>প্রজেক্ট লোড করতে সমস্যা হয়েছে।</div>}>
-        <Suspense fallback={<JustClickSuspense/>}>
+        <Suspense fallback={<JustClickSuspense />}>
           <JustClick />
         </Suspense>
       </ErrorBoundary>

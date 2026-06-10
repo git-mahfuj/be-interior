@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/logo/BEI-Logo-web-bg-remove.png";
+import logo from "@/logo/BEI-Logo.png";
 
 const NavLogo = ({ className }: { className?: string }) => {
   return (

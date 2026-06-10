@@ -11,6 +11,7 @@ interface AllInteriorProjectstype {
   result: {
     _id: string;
     name: string;
+    _type : string
     slug: string;
     coverImage: string;
     galleryImages: string[];
@@ -47,6 +48,8 @@ const InteriorProjects = () => {
   if(process.env.NODE_ENV === 'development') {
     console.log("All-Interior-Item" , interiorProjects)
   }
+  const interiorItems = interiorProjects.map((i) => i._type)
+  console.log(interiorItems)
   return (
     <div className="mb-20 flex flex-col w-full items-center justify-center mt-28 px-4">
       <section className="w-full bg-white py-16 px-4 sm:px-6 lg:px-8">
@@ -85,7 +88,7 @@ const InteriorProjects = () => {
 
                   <div>
                     <Link
-                      href={`/interior-projects/${project.slug}`}
+                      href={`/interior-projects/${project.slug}?type=${project._type}`}
                       className="inline-block text-xs sm:text-sm text-black hover:text-primary transition-colors duration-200 font-medium underline underline-offset-4"
                     >
                       Read More

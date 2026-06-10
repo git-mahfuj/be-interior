@@ -1,5 +1,5 @@
 import axios from "axios"
-import { allinteriorItem, contactItems, contactLocation, footerContactItems, homeInteriorPageClientReview, homePageClientReview, homeProjectQuery, interiorTeam, officeInteriorPageClientReview, officeProjectQuery, whatsAppNumber } from "./query"
+import { allinteriorItem, allModalinteriorItem, contactItems, contactLocation, footerContactItems, homeInteriorPageClientReview, homePageClientReview, homeProjectQuery, interiorTeam, officeInteriorPageClientReview, officeProjectQuery, whatsAppNumber } from "./query"
 
 const api  = axios.create({})
 
@@ -48,4 +48,7 @@ export const contactLocationApi = () => {
 
 export const allInteriorApi = () => {
     return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allinteriorItem}`)
+}
+export const allModalInteriorApi = () => {
+    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allModalinteriorItem}`)
 }

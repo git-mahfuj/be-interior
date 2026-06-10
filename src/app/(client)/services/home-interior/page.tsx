@@ -25,9 +25,7 @@ const HomeInterior = () => {
       <HomeSolution />
       <HomeOurPackage />
       <ErrorBoundary fallback={''}>
-        <Suspense fallback={<HomeDreamSuspense />}>
           <HomeDream />
-        </Suspense>
       </ErrorBoundary>
       <ErrorBoundary fallback={<BeInteriorError/>}>
         <Suspense fallback={<HomeProjectSuspense />}>
@@ -37,9 +35,9 @@ const HomeInterior = () => {
       <HomePromise />
 
       <ErrorBoundary fallback={<HappyCustomererr/>}>
-        <Suspense fallback={<HomeCustomersSuspense />}>
+
           <HomeCustomerReview />
-        </Suspense>
+
       </ErrorBoundary>
       <HomeComment />
     </div>

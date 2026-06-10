@@ -1,6 +1,6 @@
 "use client";
 import { HomePageClientReviewApi } from "@/axios/axios";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -38,10 +38,10 @@ const fetchHappyClientReview = async () => {
 };
 
 const HappyCustomers = () => {
-  const { data } = useSuspenseQuery<ClientReviewType>({
+  const { data, isLoading, isError } = useQuery<ClientReviewType>({
     queryKey: ["happy clients"],
     queryFn: fetchHappyClientReview,
-    staleTime: 1000 * 60 * 10
+    staleTime: 1000 * 60 * 10,
   });
   const result = data?.result || [];
   if (process.env.NODE_ENV === "development") {
@@ -55,24 +55,46 @@ const HappyCustomers = () => {
 
       <div className="flex flex-col  md:flex-row items-center justify-center gap-8 mt-8 w-full max-w-7xl">
         <div className="w-full max-w-8xl mt-10 h-110 rounded-lg">
-          <Swiper
-            breakpoints={{
-              320: { slidesPerView: 1, spaceBetween: 15 },
-              640: { slidesPerView: 2, spaceBetween: 20 },
-              1024: { slidesPerView: 3, spaceBetween: 25 },
-              1280: { slidesPerView: 3, spaceBetween: 30 },
-            }}
-            loop={true}
-            modules={[Autoplay]}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            className="bg-transparent h-full p-4 rounded-xl"
-          >
-            {result.length > 0 ? (
-              result.map((data) => (
+          {isLoading ? (
+            <div className="w-full max-w-7xl ">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.75 md:gap-5 lg:gap-7.5 h-100 w-full">
+                <div className="relative flex flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
+                  <div className="w-9 h-9 border-4 border-zinc-300/50 border-t-primary rounded-full animate-spin"></div>
+                </div>
+
+                <div className="relative flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden hidden md:flex">
+                  <div className="w-9 h-9 border-4 border-zinc-300/50 border-t-primary rounded-full animate-spin"></div>
+                </div>
+
+                <div className="relative flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden hidden lg:flex">
+                  <div className="w-9 h-9 border-4 border-zinc-300/50 border-t-primary rounded-full animate-spin"></div>
+                </div>
+              </div>
+            </div>
+          ) : isError ? (
+            <div className="flex flex-col items-center justify-center text-rose-500 h-100 w-full bg-white rounded-xl p-6 border border-rose-100 shadow-md">
+              <h3 className="font-bold text-lg text-center">
+                Failed to load projects. Please try again!
+              </h3>
+            </div>
+          ) : result && result.length > 0 ? (
+            <Swiper
+              breakpoints={{
+                320: { slidesPerView: 1, spaceBetween: 15 },
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 25 },
+                1280: { slidesPerView: 3, spaceBetween: 30 },
+              }}
+              loop={true}
+              modules={[Autoplay]}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              className="bg-transparent h-full p-4 rounded-xl"
+            >
+              {result.map((data) => (
                 <SwiperSlide
                   key={data._id}
                   className="relative flex flex-col items-center justify-center h-full bg-secondary rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 p-6 gap-4"
@@ -99,27 +121,25 @@ const HappyCustomers = () => {
                     "{data.review}"
                   </p>
                 </SwiperSlide>
-              ))
-            ) : (
-              <>
-                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
-                  <h3 className="font-bold text-lg absolute text-center">
-                    Oops! Review will be uploaded.
-                  </h3>
-                </SwiperSlide>
-                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
-                  <h3 className="font-bold text-lg absolute text-center">
-                    Oops! Review will be uploaded.
-                  </h3>
-                </SwiperSlide>
-                <SwiperSlide className="flex flex-col items-center justify-center text-zinc-800 h-full bg-white rounded-xl p-6 relative">
-                  <h3 className="font-bold text-lg absolute text-center">
-                    Oops! Review will be uploaded.
-                  </h3>
-                </SwiperSlide>
-              </>
-            )}
-          </Swiper>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="w-full max-w-7xl mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.75 md:gap-[20px] lg:gap-7.5 mt-10 h-100 w-full">
+                <div className=" flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
+                  Oops ! Project Will be Uploaded
+                </div>
+
+                <div className="hidden md:flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
+                  Oops ! Project Will be Uploaded
+                </div>
+
+                <div className="hidden lg:flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
+                  Oops ! Project Will be Uploaded
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

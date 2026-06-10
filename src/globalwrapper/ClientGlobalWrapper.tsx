@@ -1,6 +1,8 @@
-"use client"
+"use client";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Navbar from "@/components/Header/Navbar";
+import Footer from "@/components/Footer/Footer";
 const ClientGlobalWrapper = ({
   children,
 }: Readonly<{
@@ -8,9 +10,13 @@ const ClientGlobalWrapper = ({
 }>) => {
   const queryClient = new QueryClient();
   return (
-    <div>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </div>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Navbar />
+        {children}
+        <Footer />
+      </QueryClientProvider>
+    </>
   );
 };
 

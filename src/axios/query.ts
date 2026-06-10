@@ -2,6 +2,7 @@ export const homeProjectQuery =
   encodeURIComponent(` *[_type == "home-projects"]{
   _id,
   name,
+  _type,
   "slug": slug.current,
   "coverImage": coverimage.asset->url,
    "galleryImage" : gallery[].asset->url,
@@ -13,6 +14,7 @@ export const officeProjectQuery =
   encodeURIComponent(` *[_type == "office-projects"]{
   _id,
   name,
+  _type,
   "slug": slug.current,
   "coverImage": coverimage.asset->url,
    "galleryImage" : gallery[].asset->url,
@@ -86,5 +88,15 @@ export const allinteriorItem = encodeURIComponent(`
   name,
   "slug": slug.current,
   "coverImage" : coverimage.asset->url,
-  "galleryImages": gallery[].asset->url
+  "galleryImages": gallery[].asset->url,
+  size,
+  location
+} `);
+
+export const allModalinteriorItem = encodeURIComponent(`
+ *[_type in ["home-projects", "office-projects"]] | order(_createdAt desc) {
+  _id,
+  name,
+  _type,
+  "slug": slug.current,
 } `);

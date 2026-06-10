@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
             <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">Who we are</h3>
             <p>
               Suggested text: Our website address is:{" "}
-              <a href="http://beinteriorltd.com" target="_blank" rel="noopener noreferrer" className="text-[#7a8d75] underline font-medium">
+              <a href="http://beinterior.com.bd" target="_blank" rel="noopener noreferrer" className="text-[#7a8d75] underline font-medium">
                 http://beinterior.com.bd
               </a>.
             </p>

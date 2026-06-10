@@ -1,7 +1,7 @@
 "use client";
 import { whatsAppApi } from "@/axios/axios";
 import Navbtn from "@/components/Header/Navbtn";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 
 interface WhatsAppApiType {
@@ -29,7 +29,7 @@ const fetchWhatsAppNumber = async () => {
 
 
 const HomeDream = () => {
-  const { data } = useSuspenseQuery<WhatsAppApiType>({
+  const { data , isLoading , isError } = useQuery<WhatsAppApiType>({
     queryKey: ["wp-number"],
     queryFn: fetchWhatsAppNumber,
   });
@@ -60,6 +60,7 @@ const HomeDream = () => {
       <button
         onClick={handleWhatsAppRedirect}
         className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-extrabold text-lg md:text-xl tracking-wider hover:bg-[#c35e00] hover:scale-105 active:scale-95 transition-all duration-300 rounded-xl mt-8 cursor-pointer shadow-lg shadow-primary/20"
+        disabled={isLoading}
       >
         Message Us Now
       </button>

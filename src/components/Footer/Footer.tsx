@@ -37,7 +37,7 @@ const Footer = () => {
   const footerLocation = "Dhaka, Bangladesh";
 
   return (
-    <footer className="w-full bg-secondary text-white pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
+    <footer className="w-full bg-secondary/80 text-white pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
       {/* top grid logo/social links */}
       <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pb-12 border-b border-white/10 w-full max-w-7xl mx-auto">
         <div className="flex items-center justify-center lg:justify-start">

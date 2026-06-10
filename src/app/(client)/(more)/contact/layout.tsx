@@ -36,15 +36,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      suppressHydrationWarning={true}
-      className={`${geistSans.variable} ${geistMono.variable} ${montaguSlab.variable} ${poppins.variable} h-full antialiased`}
-    >
-
-      <body className="min-h-full flex flex-col">{children}</body>
-
-    </html>
-  );
+  return <>{children}</>;
 }

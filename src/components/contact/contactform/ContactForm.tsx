@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import logo from "@/logo/HomePage/ContactImage.jpg"
+import { createLeadApi } from "@/axios/axios";
 
 interface FormType {
   name: string;
@@ -60,22 +61,24 @@ const ContactForm = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      console.log("Form Submitted SuccessFully", formData);
-      setIsSubmitted(true);
-    }
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      projectInfo: "",
-    });
-    setTimeout(() => {
-      (setIsSubmitted(false), 5000);
-    });
-  };
+  const handleSubmit = async (e: FormEvent) => {
+      e.preventDefault();
+  
+      try {
+        if (validateForm()) {
+          console.log("Form Submitted Successfully:", formData);
+          await createLeadApi(formData);
+          setIsSubmitted(true);
+  
+          setFormData({ name: "", email: "", phone: "", projectInfo: "" });
+          setTimeout(() => setIsSubmitted(false), 5000);
+        }
+      } catch (error: any) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Form Submission Error");
+        }
+      }
+    };
 
   return (
     <section className="bg-[#eef2ed] py-20 px-6">
@@ -87,6 +90,11 @@ const ContactForm = () => {
           <p className="text-gray-500 mb-6">
             Our Expert Team Will Contact With You
           </p>
+          {isSubmitted && (
+            <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm rounded-xl font-medium animate-fade-in">
+              Thank you! Your request has been received. Our team will contact you soon.
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {/* Input fields */}

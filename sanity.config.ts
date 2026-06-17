@@ -13,6 +13,7 @@ import { structureTool } from "sanity/structure";
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
 import { schema } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
+import { customStatsWidgetPlugin } from "@/sanity/widgets/CustomStatsWidget";
 
 export default defineConfig({
   basePath: "/beinterior/studio",
@@ -25,6 +26,8 @@ export default defineConfig({
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
-    dashboardTool({ widgets: [] }),
+    dashboardTool({ widgets: [
+      customStatsWidgetPlugin()
+    ] }),
   ],
 });

@@ -97,29 +97,56 @@ const HappyCustomers = () => {
               {result.map((data) => (
                 <SwiperSlide
                   key={data._id}
-                  className="relative flex flex-col items-center justify-center h-full bg-secondary rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 p-6 gap-4"
+                  className="pt-16 pb-8 px-4 h-auto" 
                 >
-                  <div className="relative w-24 h-24 overflow-hidden rounded-full border-4 border-white/20 flex items-center justify-center">
-                    <Image
-                      src={data.clientimage}
-                      alt={data.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  
+                  <div className="relative bg-white rounded-[2rem] p-8 sm:px-12 sm:pb-12 text-center shadow-sm hover:shadow-md transition-shadow duration-300 max-w-lg mx-auto h-full flex flex-col">
+                    {/* Top Centered Floating Avatar */}
+                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-[4px] border-white overflow-hidden bg-gray-200 shadow-sm shrink-0">
+                      <Image
+                        src={data.clientimage}
+                        alt={data.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
 
-                  <div className="text-center mt-8">
-                    <h3 className="text-white font-bold text-xl">
-                      {data.name}
-                    </h3>
-                    <p className="text-primary-light text-sm italic font-medium">
-                      {data.designation}
+                    {/* Name and Designation */}
+                    <div className="mt-8 shrink-0">
+                      <h3 className="text-2xl text-[#4A3F35] font-serif tracking-wide">
+                        {data.name}
+                      </h3>
+                      {data.designation && (
+                        <p className="text-[#8C7A6B] text-sm mt-1 uppercase tracking-widest font-medium">
+                          {data.designation}
+                        </p>
+                      )}
+                    </div>
+
+                    
+                    <p className="mt-5 text-[#5C544D] text-lg leading-relaxed font-light flex-grow">
+                      "{data.review}"
                     </p>
-                  </div>
 
-                  <p className="text-zinc-200 text-center text-sm font-poppins leading-relaxed italic">
-                    "{data.review}"
-                  </p>
+                    
+                    <div className="mt-auto pt-6 flex justify-center gap-1.5 text-primary shrink-0">
+                      {[...Array(5)].map((_, index) => (
+                        <svg
+                          key={index}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="w-7 h-7"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>

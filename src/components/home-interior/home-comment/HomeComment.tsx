@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import formImg from "@/logo/HomePage/Gemini_Generated_Image_interior3.png";
+import { createLeadApi } from "@/axios/axios";
 
 interface FormType {
   name: string;
@@ -10,7 +11,6 @@ interface FormType {
   projectInfo: string;
 }
 
-// FormErrors টাইপটি FormType এর ওপর ভিত্তি করে তৈরি, সব কি (key) অপশনাল
 type FormErrors = Partial<FormType>;
 
 const HomeCommentForm = () => {
@@ -23,8 +23,11 @@ const HomeCommentForm = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.currentTarget;
 
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -35,7 +38,7 @@ const HomeCommentForm = () => {
   };
 
   const validateForm = (): boolean => {
-    let tempErrors: FormErrors = {}; 
+    let tempErrors: FormErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
@@ -51,6 +54,8 @@ const HomeCommentForm = () => {
       tempErrors.phone = "Phone number is required";
     } else if (!phoneRegex.test(formData.phone.replace(/[-\s]/g, ""))) {
       tempErrors.phone = "Valid BD phone number required (e.g. 017xxxxxxxx)";
+    } else if (formData.phone.length > 11) {
+      tempErrors.phone = "Phone number can't be over 11 charecters";
     }
 
     if (!formData.projectInfo.trim()) {
@@ -61,15 +66,22 @@ const HomeCommentForm = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      console.log("Form Submitted Successfully:", formData);
-      setIsSubmitted(true);
+    try {
+      if (validateForm()) {
+        console.log("Form Submitted Successfully:", formData);
+        await createLeadApi(formData);
+        setIsSubmitted(true);
 
-      setFormData({ name: "", email: "", phone: "", projectInfo: "" });
-      setTimeout(() => setIsSubmitted(false), 5000);
+        setFormData({ name: "", email: "", phone: "", projectInfo: "" });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }
+    } catch (error: any) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Form Submission Error");
+      }
     }
   };
 
@@ -102,7 +114,8 @@ const HomeCommentForm = () => {
 
           {isSubmitted && (
             <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm rounded-xl font-medium animate-fade-in">
-              Thank you! Your request has been received. Our team will contact you soon.
+              Thank you! Your request has been received. Our team will contact
+              you soon.
             </div>
           )}
 

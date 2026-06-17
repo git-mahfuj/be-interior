@@ -39,7 +39,7 @@ const fetchOfficeProjects = async () => {
   }
 };
 
-const Officeproject = () => {
+const homeOfficeproject = () => {
   const { data , isLoading , isError } = useQuery<OfficeProject>({
     queryKey: ["office-interior"],
     queryFn: fetchOfficeProjects,
@@ -113,6 +113,7 @@ const Officeproject = () => {
                       fill
                       priority
                       quality={100}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center"
                     />
                     <h3 className="font-bold font-montagu text-lg absolute z-10 bottom-3 w-full text-white text-center bg-black/40 py-2">
@@ -145,4 +146,4 @@ const Officeproject = () => {
   );
 };
 
-export default Officeproject;
+export default homeOfficeproject;

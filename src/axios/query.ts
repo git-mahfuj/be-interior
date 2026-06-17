@@ -100,3 +100,17 @@ export const allModalinteriorItem = encodeURIComponent(`
   _type,
   "slug": slug.current,
 } `);
+
+export const topFiveOfficeProjects = encodeURIComponent(`
+ *[_type == "office-projects" && projectCategory == "top"][0...4]{
+  _id,
+  name,
+  _type,
+  "slug": slug.current,
+  "coverImage": coverimage.asset->url,
+  "galleryImage" : gallery[].asset->url,
+  size,
+  location,
+  projectCategory
+}
+  `);

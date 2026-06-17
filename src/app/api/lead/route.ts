@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "next-sanity";
 
 const writeClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
   apiVersion: "2026-06-12",
   useCdn: false,
-  token: process.env.SANITY_WRITE_TOKEN,
+  token: process.env.SANITY_WRITE_TOKEN as string,
 });
 
 export async function POST(req: NextRequest) {
@@ -16,17 +16,17 @@ export async function POST(req: NextRequest) {
     const { name, email, phone, projectInfo } = body;
 
     const newLead = await writeClient.create({
-        _type : "leads",
-        name,
-        email,
-        phone,
-        projectInfo,
-    })
+      _type: "leads",
+      name,
+      email,
+      phone,
+      projectInfo,
+    });
 
     return NextResponse.json(
       {
         success: true,
-        data: newLead
+        data: newLead,
       },
       {
         status: 200,

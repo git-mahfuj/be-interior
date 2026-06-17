@@ -21,6 +21,25 @@ export const OfficeProjectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "projectCategory",
+      title: "Project Category",
+      type: "string",
+      options: {
+        list: [
+          {
+            title: "Top Office Interior",
+            value: "top",
+          },
+          {
+            title: "Normal Office Interior",
+            value: "normal",
+          },
+        ],
+        layout: "dropdown",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "coverimage",
       title: "Project Cover Image",
       type: "image",

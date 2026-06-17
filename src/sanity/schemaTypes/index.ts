@@ -4,6 +4,7 @@ import { OfficeProjectType } from "./OfficeProjecttype";
 import { ClientType } from "./ClientTypes";
 import { WebsiteSettingsType } from "./WebsiteSettings";
 import { InteriorTeamType } from "./interiorTeamType";
+import { LeadType } from "./LeadType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -12,5 +13,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     ClientType,
     WebsiteSettingsType,
     InteriorTeamType,
+    LeadType
   ],
 };

@@ -11,6 +11,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import React, { Suspense } from "react";
 import HomeCustomersSuspense from "@/components/home-interior/home-review/HomeCustomerSuspense";
 import HappyCustomererr from "@/components/home/happycustomers/HappyCustomererr";
+import OfficeProjectErr from "@/components/home/officeproject/OfficeProjectError";
 
 const OfficePage = () => {
   return (
@@ -20,12 +21,13 @@ const OfficePage = () => {
       <OfficeChoose />
       <OfficePackage />
       <OfficeWork />
-      <OfficeProjects />
+      <ErrorBoundary fallback={<OfficeProjectErr/>}>
+        <OfficeProjects />
+      </ErrorBoundary>
       <OfficeClients />
       <ErrorBoundary fallback={<HappyCustomererr />}>
           <OfficeReview />
       </ErrorBoundary>
-
       <Officeform />
     </div>
   );

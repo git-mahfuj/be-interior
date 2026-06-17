@@ -57,12 +57,15 @@ export default function SearchModal({
   console.log(data?.result);
 
   const result = data?.result || [];
-  const filteredResults = result.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      item._type.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      item.slug.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  
+  let filteredResults = result.filter((item) => {
+    const query = searchQuery.toLowerCase().trim().replace(/['"‘“”]/g, "'");
+    const name = item.name?.toLowerCase().replace(/['"‘“”]/g, "'") || "";
+    const type = item._type?.toLowerCase().replace(/['"‘“”]/g, "'") || "";
+    const slug = item.slug?.toLowerCase().replace(/['"‘“”]/g, "'") || "";
+
+    return name.includes(query) || type.includes(query) || slug.includes(query);
+  });
 
   if (!searchModal) return null;
 

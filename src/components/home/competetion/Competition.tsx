@@ -73,9 +73,9 @@ export default function Competiton() {
           </p>
 
           <div className="pt-2 flex justify-center lg:justify-start">
-            <button className="px-8 py-3.5 bg-primary hover:bg-secondary text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5">
+            <a href={`tel:01829-686850`} className="px-8 py-3.5 bg-primary hover:bg-secondary text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5">
               Talk To Our Designers
-            </button>
+            </a>
           </div>
         </div>
 

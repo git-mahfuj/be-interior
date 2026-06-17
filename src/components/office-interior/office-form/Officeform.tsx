@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import formImg from "@/logo/HomePage/Gemini_Generated_Image_interior3.png";
+import { createLeadApi } from "@/axios/axios";
 
 interface FormType {
   name: string;
@@ -61,21 +62,28 @@ const OfficeForm = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      console.log("Form Submitted Successfully:", formData);
-      setIsSubmitted(true);
-
-      setFormData({ name: "", email: "", phone: "", projectInfo: "" });
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }
-  };
+  const handleSubmit = async (e: FormEvent) => {
+      e.preventDefault();
+  
+      try {
+        if (validateForm()) {
+          console.log("Form Submitted Successfully:", formData);
+          await createLeadApi(formData);
+          setIsSubmitted(true);
+  
+          setFormData({ name: "", email: "", phone: "", projectInfo: "" });
+          setTimeout(() => setIsSubmitted(false), 5000);
+        }
+      } catch (error: any) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Form Submission Error");
+        }
+      }
+    };
 
   return (
     <div className="w-full max-w-6xl mx-auto my-16 px-4 sm:px-6">
-      <div className="flex flex-col lg:flex-row w-full bg-primary rounded-3xl overflow-hidden shadow-2xl min-h-[550px]">
+      <div className="flex flex-col lg:flex-row w-full bg-secondary rounded-3xl overflow-hidden shadow-2xl min-h-[550px]">
         {/* Image Section */}
         <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-full bg-zinc-800">
           <Image

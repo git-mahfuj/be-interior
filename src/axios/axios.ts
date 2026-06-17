@@ -1,54 +1,106 @@
-import axios from "axios"
-import { allinteriorItem, allModalinteriorItem, contactItems, contactLocation, footerContactItems, homeInteriorPageClientReview, homePageClientReview, homeProjectQuery, interiorTeam, officeInteriorPageClientReview, officeProjectQuery, whatsAppNumber } from "./query"
+import axios from "axios";
+import {
+  allinteriorItem,
+  allModalinteriorItem,
+  contactItems,
+  contactLocation,
+  footerContactItems,
+  homeInteriorPageClientReview,
+  homePageClientReview,
+  homeProjectQuery,
+  interiorTeam,
+  officeInteriorPageClientReview,
+  officeProjectQuery,
+  topFiveOfficeProjects,
+  whatsAppNumber,
+} from "./query";
 
-const api  = axios.create({})
+const api = axios.create({});
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string
-
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string;
 
 export const homeProjectApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homeProjectQuery}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homeProjectQuery}`,
+  );
+};
 
 export const officeProjectApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${officeProjectQuery}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${officeProjectQuery}`,
+  );
+};
 
 export const HomePageClientReviewApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homePageClientReview}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homePageClientReview}`,
+  );
+};
 
 export const whatsAppApi = () => {
-  return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${whatsAppNumber}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${whatsAppNumber}`,
+  );
+};
 
 export const footerContactApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${footerContactItems}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${footerContactItems}`,
+  );
+};
 
-export const homeInteriorPageClientReviewApi = () =>{
-  return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homeInteriorPageClientReview}`)
-}
+export const homeInteriorPageClientReviewApi = () => {
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${homeInteriorPageClientReview}`,
+  );
+};
 
 export const officeInteriorPageClientReviewApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${officeInteriorPageClientReview}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${officeInteriorPageClientReview}`,
+  );
+};
 
 export const interiorTeamApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${interiorTeam}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${interiorTeam}`,
+  );
+};
 
 export const contactItemApi = () => {
-     return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${contactItems}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${contactItems}`,
+  );
+};
 
 export const contactLocationApi = () => {
-     return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${contactLocation}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${contactLocation}`,
+  );
+};
 
 export const allInteriorApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allinteriorItem}`)
-}
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allinteriorItem}`,
+  );
+};
 export const allModalInteriorApi = () => {
-    return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allModalinteriorItem}`)
+  return api.get(
+    `https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allModalinteriorItem}`,
+  );
+};
+
+interface FormDataType {
+  name: string;
+  email: string;
+  phone: string;
+  projectInfo: string;
+}
+
+export const createLeadApi = (formData: FormDataType ) => {
+  return api.post("/api/lead", formData);
+};
+
+export const fetchtopFiveOfficeProjects = () => {
+  return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${topFiveOfficeProjects}`,)
 }

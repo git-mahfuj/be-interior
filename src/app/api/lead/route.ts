@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "next-sanity";
 
 const writeClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   apiVersion: "2026-06-12",
   useCdn: false,
-  token: process.env.SANITY_WRITE_TOKEN as string,
+  token: process.env.SANITY_WRITE_TOKEN ,
 });
 
 export async function POST(req: NextRequest) {

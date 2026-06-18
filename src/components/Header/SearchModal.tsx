@@ -148,7 +148,6 @@ export default function SearchModal({
           ) : filteredResults.length > 0 ? (
             <div className="w-full flex flex-col">
               {filteredResults.map((item) => (
-                <>
                   <Link
                     key={item._id}
                     href={`/interior-projects/${item.slug}?type=${item._type}`}
@@ -184,7 +183,6 @@ export default function SearchModal({
                       </svg>
                     </div>
                   </Link>
-                </>
               ))}
               <Link
                 href={"/interior-projects"}

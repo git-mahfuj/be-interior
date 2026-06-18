@@ -25,6 +25,12 @@ const NavLinks = () => {
         >
           Home
         </Link>
+        <Link
+          href="/blogs"
+          className="cursor-pointer hover:text-primary transition-colors py-1"
+        >
+          Blogs
+        </Link>
 
         {/* 1. Our Services Container */}
         <div

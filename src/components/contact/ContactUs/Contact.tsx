@@ -127,7 +127,7 @@ interface ContactInfoProps {
 function ContactInfo({ icon, label, value }: ContactInfoProps) {
   return (
     <div className="flex items-center gap-6">
-      <div className="p-4 bg-[#3a4f46] rounded-lg flex items-center justify-center shrink-0">
+      <div className="p-4 bg-secondary/20 rounded-lg flex items-center justify-center shrink-0">
         {icon}
       </div>
       <div>

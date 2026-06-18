@@ -57,15 +57,23 @@ export default function SearchModal({
   console.log(data?.result);
 
   const result = data?.result || [];
-  
+
   let filteredResults = result.filter((item) => {
-    const query = searchQuery.toLowerCase().trim().replace(/['"‘“”]/g, "'");
+    const query = searchQuery
+      .toLowerCase()
+      .trim()
+      .replace(/['"‘“”]/g, "'");
     const name = item.name?.toLowerCase().replace(/['"‘“”]/g, "'") || "";
     const type = item._type?.toLowerCase().replace(/['"‘“”]/g, "'") || "";
     const slug = item.slug?.toLowerCase().replace(/['"‘“”]/g, "'") || "";
 
     return name.includes(query) || type.includes(query) || slug.includes(query);
   });
+
+  const handleLink = () => {
+    setSearchQuery("");
+    setSearchModal(false)
+  };
 
   if (!searchModal) return null;
 
@@ -138,43 +146,54 @@ export default function SearchModal({
               Search by project name, space size, or style...
             </div>
           ) : filteredResults.length > 0 ? (
-            filteredResults.map((item) => (
-              <Link
-                key={item._id}
-                href={`/interior-projects/${item.slug}?type=${item._type}`}
-              >
-                <div
-                  onClick={() => {
-                    setSearchModal(false);
-                  }}
-                  className="w-full text-left px-4 py-3 rounded-xl hover:bg-white/10 flex items-center justify-between transition-all duration-500 cursor-pointer group"
-                >
-                  <div className="space-y-0.5">
-                    <p className="text-black font-medium group-hover:text-primary transition-colors">
-                      {item.name}
-                    </p>
-                    <span className="text-xs text-black/40 bg-white/5 px-2 py-0.5 rounded-full capitalize">
-                      {item._type}
-                    </span>
-                  </div>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-white/30 group-hover:text-white transform group-hover:translate-x-1 transition-all"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+            <div className="w-full flex flex-col">
+              {filteredResults.map((item) => (
+                <>
+                  <Link
+                    key={item._id}
+                    href={`/interior-projects/${item.slug}?type=${item._type}`}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
+                    <div
+                      onClick={() => {
+                        setSearchModal(false);
+                      }}
+                      className="w-full text-left px-4 py-3 rounded-xl hover:bg-white/10 flex items-center justify-between transition-all duration-500 cursor-pointer group"
+                    >
+                      <div className="space-y-0.5">
+                        <p className="text-black font-medium group-hover:text-primary transition-colors">
+                          {item.name}
+                        </p>
+                        <span className="text-xs text-black/40 bg-white/5 px-2 py-0.5 rounded-full capitalize">
+                          {item._type}
+                        </span>
+                      </div>
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 text-white/30 group-hover:text-white transform group-hover:translate-x-1 transition-all"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </Link>
+                </>
+              ))}
+              <Link
+                href={"/interior-projects"}
+                onClick={handleLink}
+                className="w-full text-center py-3 text-sm font-bold text-primary bg-zinc-50 hover:bg-zinc-100 border-t border-zinc-200 transition-colors"
+              >
+                Show All Projects
               </Link>
-            ))
+            </div>
           ) : (
             <div className="text-center py-10 text-red-500 text-sm">
               No projects found for "{searchQuery}"

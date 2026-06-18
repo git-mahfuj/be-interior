@@ -40,6 +40,7 @@ const Navbar = () => {
   const links = [
     { name: "Home Interior", href: "/services/home-interior" },
     { name: "Office Interior", href: "/services/office-interior" },
+    { name: "Blogs", href: "/blogs" },
     { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "/contact" },
     { name: "Hire An Architect", href: "/hire-architect" },
@@ -80,7 +81,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-20 backdrop-blur-sm border-b border-white/10 bg-secondary/50 opacity-85">
+      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-100 backdrop-blur-sm border-b border-white/10 bg-secondary/50 opacity-85">
         <div className="xl:translate-x-10">
           <NavLogo />
         </div>
@@ -103,7 +104,7 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[60%] backdrop-blur-lg z-40 p-8 pt-32 flex flex-col gap-8 border-l border-white/10 text-xl transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[60%] md:w-full backdrop-blur-lg z-40 p-8 pt-32 flex flex-col gap-8 border-l border-white/10 text-xl transition-transform duration-300 ease-in-out lg:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

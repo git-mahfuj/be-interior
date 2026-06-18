@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  allBlogQuery,
   allinteriorItem,
   allModalinteriorItem,
   contactItems,
@@ -103,4 +104,8 @@ export const createLeadApi = (formData: FormDataType ) => {
 
 export const fetchtopFiveOfficeProjects = () => {
   return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${topFiveOfficeProjects}`,)
+}
+
+export const allBlogApi = () => {
+  return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allBlogQuery}`)
 }

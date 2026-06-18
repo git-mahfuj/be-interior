@@ -114,3 +114,13 @@ export const topFiveOfficeProjects = encodeURIComponent(`
   projectCategory
 }
   `);
+
+export const allBlogQuery = encodeURIComponent(`*[_type == "blogs"]{
+  blogname,
+  "slug" : slug.current,
+  blogcategory,
+  authorname,
+  "blogcover" : blogcover.asset -> url,
+  "authorimage" : authorimage.asset -> url,
+  publishedDate
+}`);

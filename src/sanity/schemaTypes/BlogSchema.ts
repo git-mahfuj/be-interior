@@ -31,30 +31,7 @@ export const BlogSchemtype = defineType({
       },
       validation: (R) => R.required(),
     }),
-    defineField({
-      name: "bloggallery",
-      title: "Blog Gallery",
-      type: "array",
-      of: [{ type: "image" }],
-      options: { layout: "grid" },
-      //   validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "authorname",
-      title: "Author name",
-      type: "string",
-      validation: (R) => R.required(),
-    }),
 
-    defineField({
-      name: "authorimage",
-      title: "Author Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      validation: (R) => R.required(),
-    }),
     defineField({
       name: "blogcategory",
       title: "Blog Category",
@@ -85,6 +62,51 @@ export const BlogSchemtype = defineType({
       },
       validation: (r) => r.required(),
     }),
+    defineField({
+      name: "authorname",
+      title: "Author name",
+      type: "string",
+      validation: (R) => R.required(),
+    }),
+
+    defineField({
+      name: "authorimage",
+      title: "Author Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "authorrole",
+      title: "Author Role",
+      type: "string",
+      validation: (R) => R.required(),
+    }),
+    {
+      name: "content",
+      title: "Content",
+      type: "array",
+      of: [
+        { type: "block" }, 
+        {
+          type: "image", 
+          options: { hotspot: true },
+        },
+      ],
+    },
+    {
+      name: "readTime",
+      title: "Read Time (e.g., 5 min read)",
+      type: "string",
+    },
+    {
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "string" }],
+    },
     {
       name: "publishedDate",
       title: "Published Date",

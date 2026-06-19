@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FiArrowRight, FiAlertCircle } from "react-icons/fi";
 import { allBlogApi } from "@/axios/axios";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 
 interface BlogTypes {
   ms: number;
@@ -12,7 +13,7 @@ interface BlogTypes {
     authorimage: string;
     authorname: string;
     blogcategory: string;
-    blogcover: string;
+    coverImage: string;
     blogname: string;
     publishedDate: string;
     slug: string;
@@ -106,6 +107,9 @@ const BlogSection = () => {
   });
 
   const blogs = data?.result || [];
+  if(process.env.NODE_ENV === 'development') {
+    console.log("Blogs" , blogs)
+  }
 
   const totalPages = Math.ceil(blogs.length / itemsPerPage);
   const startIndex = (currentPage - 1) * totalPages;
@@ -184,8 +188,10 @@ const BlogSection = () => {
               <article className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 cursor-pointer">
                 {/* Image Container */}
                 <div className="relative h-60 w-full overflow-hidden bg-zinc-100">
-                  <img
-                    src={blog.blogcover || "/placeholder-image.jpg"}
+                  <Image
+                    src={blog.coverImage || "/placeholder-image.jpg"}
+                    fill
+                    quality={100}
                     alt={blog.blogname}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                   />

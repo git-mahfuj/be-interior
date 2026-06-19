@@ -8,7 +8,6 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react"; // এটি ইমপোর্ট করতে হবে
 import { urlFor } from "@/sanity/lib/image";
 
-// আপনার টাইপ ডিক্লারেশনগুলো (আগের মতোই থাকবে)
 interface SanityImageReference {
   _ref: string;
   _type: "reference";
@@ -20,7 +19,7 @@ interface TextBlock {
   style: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote" | string;
   children: {
     _key: string;
-    _type: "span"; // type এর বদলে _type হবে
+    _type: "span"; 
     text: string;
     marks: string[];
   }[];

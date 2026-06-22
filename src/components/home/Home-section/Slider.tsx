@@ -107,9 +107,9 @@ export default function SliderComponent() {
               <p className="text-xs sm:text-sm md:text-base font-normal max-w-md mt-4 text-zinc-200 font-poppins">
                 That your employees will love to work in
               </p>
-              <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer">
+              <Link href={"/services/budget-calculator"}><button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer">
                 Calculate Now
-              </button>
+              </button></Link>
             </div>
           </div>
         </SwiperSlide>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import NavLogo from "./NavLogo";
 import NavLinks from "./NavLinks";
 import Navbtn from "./Navbtn";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react"; // X আইকন ইমপোর্ট করা আছে
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { allModalInteriorApi } from "@/axios/axios";
@@ -66,10 +66,9 @@ const Navbar = () => {
     return name.includes(query) || type.includes(query) || slug.includes(query);
   });
 
-  
   const handleLink = () => {
-    setMobileMenuOpen(false); 
-    setSearchQuery(""); 
+    setMobileMenuOpen(false);
+    setSearchQuery("");
   };
 
   if (isLoading) {
@@ -81,7 +80,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-100 backdrop-blur-sm border-b border-white/10 bg-secondary/50 opacity-85">
+      <div className="fixed top-0 left-0 flex w-full justify-between items-center h-24 z-20 backdrop-blur-sm border-b border-white/10 bg-secondary/50 opacity-85">
         <div className="xl:translate-x-10">
           <NavLogo />
         </div>
@@ -104,11 +103,20 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[60%] md:w-full backdrop-blur-lg z-40 p-8 pt-32 flex flex-col gap-8 border-l border-white/10 text-xl transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[60%] md:w-full backdrop-blur-lg z-40 p-8 pt-24 flex flex-col gap-8 border-l border-white/10 text-xl transition-transform duration-300 ease-in-out lg:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="relative flex flex-col justify-center items-center gap-5">
+        
+        <button
+          onClick={() => setMobileMenuOpen(false)}
+          className="absolute top-8 right-6 text-white/80 hover:text-primary transition-colors z-50 cursor-pointer"
+          aria-label="Close Mobile Menu"
+        >
+          <X size={32} />
+        </button>
+
+        <div className="relative flex flex-col justify-center items-center gap-5 mt-4">
           <div className="flex items-center gap-3 w-full max-w-xs relative">
             <input
               type="text"
@@ -193,7 +201,7 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div
           onClick={() => setMobileMenuOpen(false)}
-          className="fixed inset-0 bg-black/60 z-30 md:hidden animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/60 z-20 md:hidden animate-in fade-in duration-200"
         />
       )}
     </>

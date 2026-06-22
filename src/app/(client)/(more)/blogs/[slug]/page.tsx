@@ -19,7 +19,7 @@ interface TextBlock {
   style: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote" | string;
   children: {
     _key: string;
-    _type: "span"; 
+    _type: "span";
     text: string;
     marks: string[];
   }[];
@@ -73,7 +73,12 @@ const portableTextComponents = {
     image: ({ value }: any) => {
       return (
         <figure className="my-14 relative w-full h-[350px] lg:h-[500px] overflow-hidden rounded-[2rem] shadow-lg bg-zinc-100">
-          <Image src={urlFor(value).url()} alt="Blog Image" fill className="object-cover" />
+          <Image
+            src={urlFor(value).url()}
+            alt="Blog Image"
+            fill
+            className="object-cover"
+          />
         </figure>
       );
     },

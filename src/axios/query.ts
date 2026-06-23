@@ -41,7 +41,8 @@ export const footerContactItems = encodeURIComponent(`
   footercontactnumber1,
   footercontactnumber2,
   footercontactemail,
-  footerlocation
+  footerlocation,
+  links
 }`);
 
 export const homeInteriorPageClientReview = encodeURIComponent(`

@@ -16,6 +16,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { HiMapPin } from "react-icons/hi2";
 import { footerContactApi } from "@/axios/axios";
 import { Loader2, AlertCircle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 interface FooterContactType {
   ms: number;
@@ -25,16 +26,46 @@ interface FooterContactType {
     footercontactnumber2: string;
     footercontactemail: string;
     footerlocation: string;
+    links: {
+      _key: string;
+      _type: string;
+      platformName: string;
+      url: string;
+    }[];
   }[];
   syncTags: string[];
 }
 
-const Footer = () => {
+const fetchFooterLinks = async () => {
+  try {
+    const res = await footerContactApi();
+    if (res.status !== 200) {
+      throw new Error("Error While Fetching");
+    }
+    return res.data;
+  } catch (error: any) {
+    if (process.env.NODE_ENV === "development") {
+      console.log("Footer Err", error.message);
+    }
+    return;
+  }
+};
 
-  const footerNumberOne = "01618995918";
-  const footerNumberTwo = "01818383239";
-  const footerEmail = "info@beinterior.com";
-  const footerLocation = "Dhaka, Bangladesh";
+const Footer = () => {
+  const { data, isLoading, isError } = useQuery<FooterContactType>({
+    queryKey: ["query-key"],
+    queryFn: fetchFooterLinks,
+  });
+
+  const footerItems = data?.result || [];
+
+  console.log("FooterItems : ", footerItems);
+
+  const footerNumberOne = footerItems[0]?.footercontactnumber1 || "01818383239";
+  const footerNumberTwo = footerItems[0]?.footercontactnumber2 || "01818383239";
+  const footerEmail =
+    footerItems[0]?.footercontactemail || "info@beinterior.com";
+  const footerLocation = footerItems[0]?.footerlocation || "Dhaka BD";
 
   return (
     <footer className="w-full bg-secondary/80 text-white pt-16 pb-8 px-6 sm:px-12 xl:px-40 border-t border-white/5">
@@ -119,38 +150,43 @@ const Footer = () => {
             Contact
           </h3>
 
-          <ul className="flex flex-col gap-4 text-sm text-zinc-400">
-            <li className="flex items-start gap-3 group">
-              <FaPhoneAlt className="text-base text-primary mt-0.5 group-hover:scale-110 transition-transform" />
-              <div className="flex flex-col gap-1">
+          {/* isLoading এর জন্য লেআউট যেন ভেঙে না যায়, তাই সরাসরি <ul> ব্যবহার করা হলো */}
+          <div>
+            <ul className="flex flex-col gap-4 text-sm text-zinc-400">
+              <li className="flex items-start gap-3 group">
+                <FaPhoneAlt className="text-base text-primary mt-0.5 group-hover:scale-110 transition-transform" />
+                <div className="flex flex-col gap-1">
+                  <a
+                    href={`tel:${footerNumberOne}`}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {isLoading ? "Loading..." : `+88${footerNumberOne}`}
+                  </a>
+                  <a
+                    href={`tel:${footerNumberTwo}`}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {isLoading ? "Loading..." : `+88${footerNumberTwo}`}
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-center gap-3 group">
+                <FaEnvelope className="text-base text-primary group-hover:scale-110 transition-transform" />
                 <a
-                  href={`tel:${footerNumberOne}`}
+                  href={`mailto:${footerEmail}`}
                   className="hover:text-primary transition-colors"
                 >
-                  +88{footerNumberOne}
+                  {isLoading ? "Loading..." : `${footerEmail}`}
                 </a>
-                <a
-                  href={`tel:${footerNumberTwo}`}
-                  className="hover:text-primary transition-colors"
-                >
-                  +88{footerNumberTwo}
-                </a>
-              </div>
-            </li>
-            <li className="flex items-center gap-3 group">
-              <FaEnvelope className="text-base text-primary group-hover:scale-110 transition-transform" />
-              <a
-                href={`mailto:${footerEmail}`}
-                className="hover:text-primary transition-colors"
-              >
-                {footerEmail}
-              </a>
-            </li>
-            <li className="flex items-center gap-3 group">
-              <HiMapPin className="text-lg text-primary -mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
-              <p className="leading-relaxed">{footerLocation}</p>
-            </li>
-          </ul>
+              </li>
+              <li className="flex items-center gap-3 group">
+                <HiMapPin className="text-lg text-primary -mt-0.5 shrink-0 group-hover:scale-110 transition-transform" />
+                <p className="leading-relaxed">
+                  {isLoading ? "Loading..." : `${footerLocation}`}
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

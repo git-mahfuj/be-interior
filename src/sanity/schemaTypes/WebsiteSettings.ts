@@ -1,11 +1,11 @@
-import { defineField, defineType } from "sanity";
-import {WrenchIcon} from '@sanity/icons'
+import { defineField, defineType, defineArrayMember } from "sanity";
+import { WrenchIcon } from "@sanity/icons";
 
 export const WebsiteSettingsType = defineType({
   name: "website-settings",
   title: "Website Settings",
   type: "document",
-  icon : WrenchIcon,
+  icon: WrenchIcon,
   fields: [
     defineField({
       name: "WebSiteSettings",
@@ -16,7 +16,7 @@ export const WebsiteSettingsType = defineType({
       name: "WhatsAppNumber",
       title: "Contact WhatsApp",
       type: "string",
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "footercontactnumber1",
@@ -40,6 +40,30 @@ export const WebsiteSettingsType = defineType({
       name: "footerlocation",
       title: "Footer location",
       type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "links",
+      title: "Social Links",
+      type: "array",
+      of: [
+        defineArrayMember({
+          name: "socialLink",
+          type: "object",
+          fields: [
+            {
+              name: "platformName",
+              title: "Platform Name (e.g Facebook)",
+              type: "string",
+            },
+            {
+              name: "url",
+              title: "URL link",
+              type: "url",
+            },
+          ],
+        }),
+      ],
       validation: (Rule) => Rule.required(),
     }),
   ],

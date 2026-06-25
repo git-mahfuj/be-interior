@@ -12,9 +12,7 @@ import OurWorkFlow from "@/components/home/work-flow/OurWorkFlow";
 import { ErrorBoundary } from "react-error-boundary";
 import Image from "next/image";
 import { Suspense } from "react";
-import HomeProjectSuspense from "@/components/skeleton/HomeProjectSuspense";
-import OfficeProjectSuspense from "@/components/skeleton/OfficeProjectSuspense";
-import HappyCustomersSuspense from "@/components/skeleton/HappyCustomersSuspense";
+
 import BeInteriorError from "@/components/home/beinteriorproj/BeInteriorError";
 import OfficeProjectErr from "@/components/home/officeproject/OfficeProjectError";
 import HappyCustomererr from "@/components/home/happycustomers/HappyCustomererr";

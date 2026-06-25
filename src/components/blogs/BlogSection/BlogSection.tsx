@@ -29,7 +29,9 @@ const fetchAllBlogs = async () => {
     }
     return res.data;
   } catch (error: any) {
-    console.error("FetchBlog Failed", error.message);
+    if(process.env.NODE_ENV === "development") {
+      console.error("FetchBlog Failed", error.message);
+    }
     throw error;
   }
 };

@@ -34,9 +34,9 @@ const OfficeService = () => {
 
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black text-zinc-800 tracking-wide font-montagu uppercase">
-            Service <span className="text-secondary">We Offer</span>
+            Service <span className="text-primary">We Offer</span>
           </h2>
-          <div className="w-20 h-1 bg-secondary mx-auto mt-4 rounded-full" />
+          <div className="w-20 h-1 bg-primary mx-auto mt-4 rounded-full" />
         </div>
 
 

@@ -54,26 +54,27 @@ export default function TermsAndConditions() {
   ];
 
   return (
-    <section className="bg-ivory mt-23 py-16 px-6 md:px-16 lg:px-24 font-sans text-[#23352e]">
-      <div className="max-w-5xl mx-auto space-y-10">
+    <section className="bg-[#FAF5E9] py-16 px-6 md:px-12 lg:px-24 font-sans text-zinc-800 mt-20">
+      <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-[#111111]/5">
         
-        {/* Main Section Header */}
-        <div className="border-b border-[#23352e]/10 pb-4">
-          <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-wide">
+        {/* Page Header */}
+        <div className="border-b border-[#111111]/10 pb-6 mb-10">
+          <h2 className="text-3xl md:text-4xl font-montagu font-bold text-[#111111] tracking-wide">
             Terms and Conditions
           </h2>
+          <p className="text-sm text-zinc-500 mt-2">
+            Please read our project rules and regulations carefully
+          </p>
         </div>
 
         {/* Content List Block */}
-        <div className="space-y-6 max-w-4xl">
+        <div className="space-y-8 text-sm md:text-base text-zinc-600 leading-relaxed font-normal">
           {terms.map((item, index) => (
-            <div key={index} className="space-y-1.5 group">
-              {/* Term Title */}
-              <h3 className="text-sm md:text-base font-bold tracking-wide text-gray-900 group-hover:text-[#7a8d75] transition-colors duration-200">
-                {item.title}
+            <div key={index} className="space-y-2">
+              <h3 className="font-bold text-[#111111] tracking-wide text-lg">
+                {index + 1}. {item.title}
               </h3>
-              {/* Term Paragraph Text */}
-              <p className="text-xs md:text-sm text-gray-600 leading-relaxed font-normal">
+              <p className="pl-5 border-l-2 border-[#c35e00]/20 text-zinc-600">
                 {item.text}
               </p>
             </div>

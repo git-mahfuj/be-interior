@@ -69,16 +69,16 @@ const BeinteriorProject = () => {
         <div className="w-full max-w-8xl mt-10 h-100 rounded-lg">
           {isLoading ? (
             <div className="w-full max-w-7xl">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.75 md:gap-[20px] lg:gap-7.5  h-100 w-full">
-                <div className="relative flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.75 md:gap-5 lg:gap-7.5  h-100 w-full">
+                <div className="relative flex flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
                   <div className="w-9 h-9 border-4 border-zinc-300/50 border-t-primary rounded-full animate-spin"></div>
                 </div>
 
-                <div className="relative flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden hidden md:flex">
+                <div className="relative flex flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden md:flex">
                   <div className="w-9 h-9 border-4 border-zinc-300/50 border-t-primary rounded-full animate-spin"></div>
                 </div>
 
-                <div className="relative flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden hidden lg:flex">
+                <div className="relative flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border border-zinc-200 shadow-sm overflow-hidden hidden lg:flex">
                   <div className="w-9 h-9 border-4 border-zinc-300/50 border-t-primary rounded-full animate-spin"></div>
                 </div>
               </div>
@@ -94,8 +94,7 @@ const BeinteriorProject = () => {
               breakpoints={{
                 320: { slidesPerView: 1, spaceBetween: 15 },
                 640: { slidesPerView: 2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 25 },
-                1280: { slidesPerView: 3, spaceBetween: 30 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
               }}
               loop={true}
               modules={[Autoplay]}
@@ -103,44 +102,60 @@ const BeinteriorProject = () => {
                 delay: 3000,
                 disableOnInteraction: false,
               }}
-              className="bg-transparent h-full p-4 rounded-xl"
+              className="h-112.5 p-4" 
             >
               {result.map((data) => (
-                <SwiperSlide
-                  key={data._id}
-                  className="relative flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 overflow-hidden"
-                >
+                <SwiperSlide key={data._id}>
                   <Link
                     href={`/interior-projects/${data.slug}?type=${data._type}`}
-                    className="w-full h-full block relative"
+                    className="group relative flex flex-col h-100 bg-white rounded-3xl overflow-hidden shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border border-zinc-100"
                   >
-                    <Image
-                      src={data.coverImage}
-                      alt={data.name}
-                      fill
-                      priority
-                      quality={100}
-                      className="object-cover object-center"
-                    />
-                    <h3 className="font-bold font-montagu text-lg absolute z-10 bottom-3 w-full text-white text-center bg-black/40 py-2">
-                      {data.name}
-                    </h3>
+                    {/* Image Container with Overlay */}
+                    <div className="relative w-full h-full overflow-hidden">
+                      <Image
+                        src={data.coverImage}
+                        alt={data.name}
+                        fill
+                        quality={90}
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      />
+                      {/* Gradient Overlay for Text Readability */}
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
+                    </div>
+
+                    {/* Content Box */}
+                    <div className="absolute bottom-0 left-0 w-full p-6 text-white transform transition-transform duration-300">
+                      <span className="text-white font-bold text-xs uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                        {data._type}
+                      </span>
+                      <h3 className="font-montagu text-2xl font-bold mt-3 leading-tight group-hover:text-primary transition-colors">
+                        {data.name}
+                      </h3>
+
+                      {/* Subtle Hover Reveal Arrow */}
+                      <div className="flex items-center gap-2 mt-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                        <span className="text-sm font-medium">
+                         View Projects
+                        </span>
+                        
+                      </div>
+                    </div>
                   </Link>
                 </SwiperSlide>
               ))}
             </Swiper>
           ) : (
             <div className="w-full max-w-7xl mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.75 md:gap-[20px] lg:gap-7.5 mt-10 h-100 w-full">
-                <div className=" flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.75 md:gap-5 lg:gap-7.5 mt-10 h-100 w-full">
+                <div className=" flex flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
                   Oops ! Project Will be Uploaded
                 </div>
 
-                <div className="hidden md:flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
+                <div className="hidden md:flex flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
                   Oops ! Project Will be Uploaded
                 </div>
 
-                <div className="hidden lg:flex flex-col items-center justify-center h-full min-h-[350px] bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
+                <div className="hidden lg:flex flex-col items-center justify-center h-full min-h-87.5 bg-zinc-200/80 rounded-xl border text-primary font-medium text-xl border-zinc-200 shadow-sm overflow-hidden">
                   Oops ! Project Will be Uploaded
                 </div>
               </div>

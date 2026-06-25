@@ -24,7 +24,7 @@ const OfficePage = () => {
       <ErrorBoundary fallback={<OfficeProjectErr/>}>
         <OfficeProjects />
       </ErrorBoundary>
-      <OfficeClients />
+
       <ErrorBoundary fallback={<HappyCustomererr />}>
           <OfficeReview />
       </ErrorBoundary>

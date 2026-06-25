@@ -47,7 +47,7 @@ const HomeCustomerReview = () => {
   }
   return (
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-zinc-50 h-180 mb-30">
-      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-primary tracking-wide font-bold ">
+      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide font-bold ">
         Check Some Review
       </h2>
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-primary tracking-wide font-bold ">

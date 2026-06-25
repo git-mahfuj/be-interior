@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { FaCheckCircle, FaRegStar, FaCrown } from "react-icons/fa";
 import { LuGem } from "react-icons/lu";
@@ -69,7 +70,7 @@ const HomeOurPackage = () => {
             className={`w-full bg-white rounded-3xl border border-zinc-100/80 overflow-hidden transition-all duration-500 ease-out flex flex-col cursor-pointer
               ${
                 pkg.isPopular
-                  ? "shadow-2xl md:-translate-y-4 z-10 md:scale-105 border-primary/20 min-h-[580px]"
+                  ? "shadow-2xl md:-translate-y-4 z-10 md:scale-105 border-primary/20 min-h-145"
                   : "shadow-xl hover:shadow-2xl hover:-translate-y-4 md:translate-y-0 z-0 min-h-[530px]"
               }
             `}
@@ -106,9 +107,9 @@ const HomeOurPackage = () => {
       </div>
 
       <div className="mt-16 w-full flex justify-center">
-        <button className="px-10 py-4 bg-primary hover:bg-secondary text-white font-extrabold text-lg sm:text-xl tracking-wide rounded-lg shadow-lg  hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer uppercase">
+        <Link href={'/services/budget-calculator'}><button className="px-10 py-4 bg-primary hover:bg-secondary text-white font-extrabold text-lg sm:text-xl tracking-wide rounded-lg shadow-lg  hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer uppercase">
           Calculate Your Budget
-        </button>
+        </button></Link>
       </div>
 
     </div>

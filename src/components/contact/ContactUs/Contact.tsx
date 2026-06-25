@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { Mail, Phone, MessageCircle, Loader2, AlertCircle } from "lucide-react";
+import { Mail, Phone, MessageCircle, Loader2, AlertCircle, ArrowUpRight } from "lucide-react";
 import { contactItemApi } from "@/axios/axios";
 import { useQuery } from "@tanstack/react-query";
-import logo from "@/logo/HomePage/Gemini_Generated_Image_home1.png"
+import logo from "@/logo/HomePage/Gemini_Generated_Image_home1.png";
 import Image from "next/image";
 
 interface ContactItemsType {
@@ -23,7 +23,6 @@ const fetchContactItems = async () => {
     if (res.status !== 200) {
       throw new Error(`Error while Fetching`);
     }
-
     return res.data;
   } catch (error: any) {
     if (process.env.NODE_ENV === "development") {
@@ -34,7 +33,6 @@ const fetchContactItems = async () => {
 };
 
 export default function ExperienceCenter() {
-
   const { data, isLoading, isError, error, refetch } = useQuery<ContactItemsType>({
     queryKey: ["contact-item"],
     queryFn: fetchContactItems,
@@ -42,10 +40,10 @@ export default function ExperienceCenter() {
 
   if (isLoading) {
     return (
-      <section className="bg-[#283b33] text-white py-16 px-6 lg:px-20 min-h-[400px] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-gray-300" />
-          <p className="text-sm text-gray-300 font-medium tracking-wide">Loading experience center details...</p>
+      <section className="bg-[#FAF5E9] text-[#111111] py-20 px-6 lg:px-20 min-h-[500px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-12 h-12 animate-spin text-primary" />
+          <p className="text-sm text-zinc-500 font-medium tracking-widest uppercase">Loading experience center...</p>
         </div>
       </section>
     );
@@ -53,14 +51,14 @@ export default function ExperienceCenter() {
 
   if (isError) {
     return (
-      <section className="bg-[#283b33] text-white py-16 px-6 lg:px-20 min-h-[400px] flex items-center justify-center">
-        <div className="flex flex-col items-center max-w-md text-center p-6 bg-[#3a4f46]/30 border border-[#3a4f46] rounded-2xl shadow-xl">
-          <AlertCircle className="w-12 h-12 text-rose-400 mb-3" />
-          <h3 className="text-lg font-semibold mb-1">Failed to load contact information</h3>
-          <p className="text-sm text-gray-300 mb-4">{error instanceof Error ? error.message : "Something went wrong"}</p>
+      <section className="bg-[#FAF5E9] text-[#111111] py-20 px-6 lg:px-20 min-h-[500px] flex items-center justify-center">
+        <div className="flex flex-col items-center max-w-md text-center p-8 bg-white border border-black/5 rounded-3xl shadow-xl">
+          <AlertCircle className="w-14 h-14 text-red-500 mb-4" />
+          <h3 className="text-xl font-bold mb-2">Failed to load information</h3>
+          <p className="text-sm text-zinc-500 mb-6">{error instanceof Error ? error.message : "Something went wrong"}</p>
           <button 
             onClick={() => refetch()} 
-            className="px-5 py-2 bg-[#3a4f46] hover:bg-[#4a6358] text-xs font-semibold rounded-full transition-all duration-200"
+            className="px-8 py-3 bg-[#111111] hover:bg-primary text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-primary/30"
           >
             Try Again
           </button>
@@ -72,68 +70,110 @@ export default function ExperienceCenter() {
   const contact = data?.result?.[0];
 
   return (
-    <section className="bg-[#283b33] text-white py-16 px-6 lg:px-20">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-16 text-left">
-          Welcome To Our Experience Center
-        </h2>
+    <section className="bg-[#FAF5E9] text-[#111111] py-24 px-6 lg:px-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* Left Content Area */}
+          <div className="flex flex-col justify-center order-2 lg:order-1">
+            <p className="text-primary font-bold uppercase tracking-widest text-sm mb-3">Visit Us</p>
+            <h2 className="text-4xl md:text-5xl font-montagu font-bold mb-6 leading-tight">
+              Welcome To Our <br/>
+              <span className="text-primary">Experience Center</span>
+            </h2>
+            <p className="text-zinc-600 mb-10 text-lg font-medium max-w-md leading-relaxed">
+              Step into a world of architectural brilliance and premium interiors. Let's discuss your dream space over a cup of coffee.
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-10">
-            {contact ? (
-              <>
-                <ContactInfo
-                  icon={<Mail size={24} />}
-                  label="Email:"
-                  value={contact.footercontactemail}
-                />
-                <ContactInfo
-                  icon={<Phone size={24} />}
-                  label="Call:"
-                  value={contact.footercontactnumber1}
-                />
-                <ContactInfo
-                  icon={<MessageCircle size={24} />}
-                  label="WhatsApp:"
-                  value={contact.WhatsAppNumber}
-                />
-              </>
-            ) : (
-              <p className="text-gray-400 italic">No contact details found.</p>
-            )}
+            <div className="space-y-4">
+              {contact ? (
+                <>
+                  <ContactInfo
+                    href={`mailto:${contact.footercontactemail}`}
+                    icon={<Mail size={22} />}
+                    label="Email Us"
+                    value={contact.footercontactemail}
+                  />
+                  <ContactInfo
+                    href={`tel:${contact.footercontactnumber1}`}
+                    icon={<Phone size={22} />}
+                    label="Call Us"
+                    value={contact.footercontactnumber1}
+                  />
+                  <ContactInfo
+                    href={`https://wa.me/${contact.WhatsAppNumber}`}
+                    icon={<MessageCircle size={22} />}
+                    label="WhatsApp"
+                    value={contact.WhatsAppNumber}
+                  />
+                </>
+              ) : (
+                <p className="text-zinc-500 italic">No contact details found.</p>
+              )}
+            </div>
           </div>
 
-          <div className="relative border-4 border-[#3a4f46] rounded-2xl overflow-hidden shadow-2xl aspect-video lg:aspect-auto lg:h-[350px]">
-            <Image
-              src={logo}
-              alt="Experience Center"
-              fill
-              quality={100}
-              className="w-full h-full object-cover"
-            />
+          {/* Right Image Area (Architectural Layout) */}
+          <div className="relative order-1 lg:order-2">
+            {/* Decorative Background Elements */}
+            <div className="absolute -inset-4 border-2 border-primary/20 rounded-[2rem] translate-x-4 translate-y-4 hidden md:block"></div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+            
+            {/* Main Image Container */}
+            <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] group">
+              <Image
+                src={logo}
+                alt="Experience Center"
+                fill
+                quality={100}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              {/* Subtle Overlay */}
+              <div className="absolute inset-0 bg-[#111111]/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
 
+// ---------------- Contact Info Sub-Component ----------------
+
 interface ContactInfoProps {
   icon: React.ReactNode;
   label: string;
   value: string;
+  href: string;
 }
 
-function ContactInfo({ icon, label, value }: ContactInfoProps) {
+function ContactInfo({ icon, label, value, href }: ContactInfoProps) {
   return (
-    <div className="flex items-center gap-6">
-      <div className="p-4 bg-secondary/20 rounded-lg flex items-center justify-center shrink-0">
-        {icon}
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="group flex items-center justify-between p-4 bg-white border border-black/5 rounded-2xl transition-all duration-500 cursor-pointer shadow-sm hover:shadow-xl"
+    >
+      <div className="flex items-center gap-5">
+        {/* Icon Container */}
+        <div className="w-12 h-12 rounded-full bg-[#FAF5E9] text-primary group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-colors duration-500 shrink-0">
+          {icon}
+        </div>
+        
+        {/* Text Details */}
+        <div>
+          <p className="text-xs text-zinc-400 font-bold uppercase tracking-widest mb-1 group-hover:text-zinc-400">{label}</p>
+          <p className="text-lg font-bold text-[#111111]  transition-colors duration-500">{value || "N/A"}</p>
+        </div>
       </div>
-      <div>
-        <p className="text-sm text-gray-300 uppercase tracking-wider mb-1">{label}</p>
-        <p className="text-lg font-medium tracking-wide">{value || "N/A"}</p>
+
+      {/* Hover Arrow */}
+      <div className="w-10 h-10 rounded-full flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-white">
+        <ArrowUpRight size={24} />
       </div>
-    </div>
+    </a>
   );
 }

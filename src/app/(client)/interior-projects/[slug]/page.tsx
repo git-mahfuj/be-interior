@@ -159,7 +159,7 @@ export default function ProjectDetailsPage() {
       {/* --- Hero Section --- */}
       <section className="py-28 px-6">
         <div className="max-w-7xl mx-auto text-center space-y-8">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold capitalize text-[#23352e]">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold capitalize text-secondary">
             {project?.name}
           </h1>
 
@@ -184,40 +184,43 @@ export default function ProjectDetailsPage() {
               )}
             </div>
 
-            <div className="space-y-6 text-sm text-[#23352e]/80 p-6 bg-white/50 backdrop-blur-sm rounded-2xl border border-[#23352e]/10 shadow-sm h-full flex flex-col justify-center lg:justify-start">
-              <p className="font-serif font-semibold text-2xl text-[#23352e]">
+            <div className="p-8 bg-[#FAF5E9]/50 border border-[#111111]/10 rounded-2xl h-full flex flex-col justify-baseline">
+              <h3 className="font-montagu text-2xl font-bold text-[#111111] mb-6">
                 About This Project
-              </p>
+              </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-zinc-500 mb-1">
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                     Total Area
                   </p>
-                  <div className="font-medium text-lg text-[#23352e]">
+                  <p className="font-medium text-lg text-[#111111]">
                     {project?.size || "Not specified"}
-                  </div>
+                  </p>
                 </div>
-                <div className="h-px w-full bg-[#23352e]/10" /> {/* Divider */}
+                <div className="h-px w-full bg-[#111111]/10" /> {/* Divider */}
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-zinc-500 mb-1">
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                     Location
                   </p>
-                  <div className="font-medium text-lg text-[#23352e]">
+                  <p className="font-medium text-lg text-[#111111]">
                     {project?.location || "Not specified"}
-                  </div>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center py-6 mt-4">
-            <button onClick={handleWhatsAppRedirect} className="bg-[#23352e] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#1a2924] hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+            <button
+              onClick={handleWhatsAppRedirect}
+              className="bg-secondary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#1a2924] hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            >
               Talk to Our Designers
             </button>
             <a
               href={`tel:${contactItems?.result[0].footercontactnumber1 as string}`}
-              className="border-2 border-[#23352e] text-[#23352e] px-8 py-3 rounded-full text-sm font-medium hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 transform hover:-translate-y-0.5"
+              className="border-2 border-primary text-primary px-8 py-3 rounded-full text-sm font-medium hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 transform hover:-translate-y-0.5"
             >
               Call Now
             </a>
@@ -228,7 +231,7 @@ export default function ProjectDetailsPage() {
       <section className="py-12 px-6 bg-white rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.03)]">
         <div className="max-w-7xl mx-auto py-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-semibold text-[#23352e] inline-block relative">
+            <h2 className="text-3xl font-serif font-semibold text-secondary inline-block relative">
               Project Gallery
               <span className="absolute -bottom-2 left-1/4 right-1/4 h-1 bg-[#23352e]/20 rounded-full"></span>
             </h2>

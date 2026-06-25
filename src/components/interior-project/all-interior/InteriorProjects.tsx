@@ -60,10 +60,18 @@ const InteriorProjects = () => {
 
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+     window.scrollTo({
+      top: 0,
+      behavior: "smooth", 
+    });
   };
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", 
+    });
   };
 
   if (process.env.NODE_ENV === "development") {
@@ -86,7 +94,7 @@ const InteriorProjects = () => {
 
         {/* Loading Skeleton */}
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-200">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
@@ -103,17 +111,17 @@ const InteriorProjects = () => {
           </div>
         ) : isError ? (
           <div className="text-center py-20 bg-red-50 rounded-[24px] border border-red-100">
-            <p className="text-red-500 font-medium">
+            <p className="text-red-500 font-medium min-h-200">
               Failed to load projects. {error?.message}
             </p>
           </div>
         ) : !isLoading && !isError && currentProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 min-h-200">
             {currentProjects.map((project) => (
               <Link
                 key={project._id}
                 href={`/interior-projects/${project.slug}?type=${project._type}`}
-                className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] transition-all duration-500"
+                className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] transition-all duration-500 h-130"
               >
                 {/* Top Image Container */}
                 <div className="relative h-64 sm:h-72 w-full overflow-hidden block bg-zinc-100">

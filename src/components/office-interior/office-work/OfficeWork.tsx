@@ -61,12 +61,12 @@ const OfficeWork = () => {
 
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-black text-zinc-800 tracking-wide font-montagu uppercase">
-            How Be Interior <span className="text-[#365856]">Works</span>
+            How Be Interior <span className="text-primary">Works</span>
           </h2>
           <p className="text-zinc-500 mt-3 text-sm sm:text-base font-medium max-w-md mx-auto">
             Combining efficiency, quality, and commitment through a seamless execution map.
           </p>
-          <div className="w-20 h-1 bg-[#365856] mx-auto mt-5 rounded-full" />
+          <div className="w-20 h-1 bg-primary mx-auto mt-5 rounded-full" />
         </div>
 
 
@@ -97,7 +97,7 @@ const OfficeWork = () => {
                       </span>
                       <h3 className="text-lg sm:text-xl font-extrabold text-zinc-800 font-poppins">
                         {item.title}{" "}
-                        <span className={item.isOrange ? "text-amber-600" : "text-[#365856]"}>
+                        <span className={item.isOrange ? "text-amber-600" : "text-primary"}>
                           {item.highlight}
                         </span>
                       </h3>
@@ -110,9 +110,9 @@ const OfficeWork = () => {
                   </div>
 
 
-                  <div className="absolute left-0 sm:left-1/2 top-4 sm:top-auto w-12 h-12 rounded-full bg-white border-2 border-[#365856] flex items-center justify-center shadow-md shadow-[#365856]/10 z-20 -translate-x-0 sm:-translate-x-1/2 ring-8 ring-[#fdfaf4] group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute left-0 sm:left-1/2 top-4 sm:top-auto w-12 h-12 rounded-full bg-white border-2 border-primary flex items-center justify-center shadow-md shadow-[#365856]/10 z-20 -translate-x-0 sm:-translate-x-1/2 ring-8 ring-[#fdfaf4] group-hover:scale-110 transition-transform duration-300">
                     <div className={`w-full h-full rounded-full flex items-center justify-center transition-colors duration-300
-                      ${item.isOrange ? "bg-amber-500/10 text-amber-600" : "bg-[#365856]/10 text-[#365856]"}
+                      ${item.isOrange ? "bg-amber-500/10 text-amber-600" : "bg-primary/10 text-primary"}
                     `}>
                       {item.icon}
                     </div>

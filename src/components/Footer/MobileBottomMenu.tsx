@@ -11,14 +11,14 @@ const MobileBottomMenu = () => {
         
         <Link 
           href="/hire-architect"
-          className="flex flex-col items-center justify-center gap-1 w-20 text-gray-400 hover:text-primary transition-colors active:scale-95"
+          className="flex flex-col items-center justify-center gap-1 w-20 text-gray-400 hover:text-primary transition-colors active:scale-95 mt-3"
         >
           <CalendarDays size={22} strokeWidth={2} />
           <span className="text-[10px] font-medium tracking-wide">Booking</span>
         </Link>
 
         
-        <div className="relative -top-4">
+        <div className="relative -top-3">
           <Link 
             href="/services/budget-calculator"
             className="flex flex-col items-center justify-center gap-1.5 group active:scale-95 transition-transform"
@@ -33,7 +33,7 @@ const MobileBottomMenu = () => {
         
         <a 
           href="tel:+8801234567890" 
-          className="flex flex-col items-center justify-center gap-1 w-20 text-gray-400 hover:text-primary transition-colors active:scale-95"
+          className="flex flex-col items-center justify-center gap-1 w-20 text-gray-400 hover:text-primary transition-colors active:scale-95 mt-3"
         >
           <PhoneCall size={22} strokeWidth={2} />
           <span className="text-[10px] font-medium tracking-wide">Call</span>

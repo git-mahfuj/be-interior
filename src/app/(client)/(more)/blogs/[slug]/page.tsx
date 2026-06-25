@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { allBlogApi } from "@/axios/axios";
 import Image from "next/image";
-import { PortableText } from "@portabletext/react"; // এটি ইমপোর্ট করতে হবে
+import { PortableText } from "@portabletext/react"; 
 import { urlFor } from "@/sanity/lib/image";
 
 interface SanityImageReference {
@@ -63,7 +63,9 @@ const fetchSingleBlog = async () => {
     }
     return res.data;
   } catch (error: any) {
-    console.group("singleFetchBlogError", error.message);
+    if(process.env.NODE_ENV === 'development') {
+      console.group("singleFetchBlogError", error.message);
+    }
     throw error;
   }
 };

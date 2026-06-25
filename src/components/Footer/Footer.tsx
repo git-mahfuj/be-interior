@@ -17,7 +17,6 @@ import { HiMapPin } from "react-icons/hi2";
 import { useQuery } from "@tanstack/react-query";
 import { footerContactApi } from "@/axios/axios";
 
-// ... (আপনার ইন্টারফেস এবং fetchFooterLinks একই থাকবে) ...
 interface FooterContactType {
   ms: number;
   query: string;
@@ -59,7 +58,7 @@ const Tooltip = ({ text }: { text: string }) => (
 );
 
 const Footer = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<FooterContactType>({
     queryKey: ["query-key"],
     queryFn: fetchFooterLinks,
   });

@@ -67,7 +67,9 @@ const OfficeForm = () => {
   
       try {
         if (validateForm()) {
-          console.log("Form Submitted Successfully:", formData);
+          if(process.env.NODE_ENV === 'development') {
+            console.log("Form Submitted Successfully:", formData);
+          }
           await createLeadApi(formData);
           setIsSubmitted(true);
   

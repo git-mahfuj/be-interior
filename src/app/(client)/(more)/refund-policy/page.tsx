@@ -11,17 +11,22 @@ export default function CancellationsAndRefunds() {
   ];
 
   return (
-    <section className="bg-ivory mt-23 py-16 px-6 md:px-16 lg:px-24 font-sans text-[#23352e]">
-      <div className="max-w-5xl mx-auto space-y-8">
-        {/* Main Header */}
-        <div className="border-b border-[#23352e]/10 pb-4">
-          <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-wide">
+    <section className="bg-[#FAF5E9] py-16 px-6 md:px-12 lg:px-24 font-sans text-zinc-800 mt-20">
+      <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-[#111111]/5">
+        
+        {/* Page Header */}
+        <div className="border-b border-[#111111]/10 pb-6 mb-8">
+          <h2 className="text-3xl md:text-4xl font-montagu font-bold text-[#111111] tracking-wide">
             Cancellations & Refunds
           </h2>
+          <p className="text-sm text-zinc-500 mt-2">
+            Be Interior Project Guidelines & Policies
+          </p>
         </div>
 
-        {/* Policy Body */}
-        <div className="space-y-6 max-w-4xl text-xs md:text-sm text-gray-600 leading-relaxed font-normal">
+        {/* Content Body */}
+        <div className="space-y-8 text-sm md:text-base text-zinc-600 leading-relaxed font-normal">
+          
           {/* Intro Paragraphs */}
           <div className="space-y-4">
             <p>
@@ -44,7 +49,7 @@ export default function CancellationsAndRefunds() {
               For feedback or grievances, please get in touch with us at{" "}
               <a
                 href="mailto:beinteriorbd@gmail.com"
-                className="text-[#7a8d75] font-medium underline"
+                className="text-[#c35e00] hover:text-[#a34e00] underline font-medium transition-colors"
               >
                 beinteriorbd@gmail.com
               </a>
@@ -54,8 +59,8 @@ export default function CancellationsAndRefunds() {
           </div>
 
           {/* Section: Returns */}
-          <div className="space-y-1 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               Returns
             </h3>
             <p>
@@ -65,8 +70,8 @@ export default function CancellationsAndRefunds() {
           </div>
 
           {/* Section: Price Revisions */}
-          <div className="space-y-1 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               Price Revisions
             </h3>
             <p>
@@ -76,49 +81,49 @@ export default function CancellationsAndRefunds() {
           </div>
 
           {/* Section: Delays */}
-          <div className="space-y-1 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               Delays
             </h3>
-            <p>
-              Delays in payment at any stage of the project may result in delays
-              in project completion. Changes to project requirements may also
-              lead to extended timelines.
-            </p>
-            <p>
-              Be Interior cannot assume liability for delays caused by payment
-              or requirement changes.
-            </p>
+            <div className="space-y-2">
+              <p>
+                Delays in payment at any stage of the project may result in delays
+                in project completion. Changes to project requirements may also
+                lead to extended timelines.
+              </p>
+              <p>
+                Be Interior cannot assume liability for delays caused by payment
+                or requirement changes.
+              </p>
+            </div>
           </div>
 
           {/* Section: Payment Methods */}
-          <div className="space-y-2 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               Payment Methods
             </h3>
-            <p>
+            <p className="mb-3">
               Be Interior accepts the following payment options for full
               interior design solutions:
             </p>
-            <ul className="list-none pl-0 space-y-1 font-medium text-gray-800">
+            <ul className="list-none pl-0 space-y-2 mb-4">
               {paymentMethods.map((method, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-center before:content-[''] before:w-1.5 before:h-1.5 before:bg-[#7a8d75] before:rounded-sm before:mr-2.5"
-                >
-                  {method}
+                <li key={idx} className="flex items-center">
+                  <span className="w-1.5 h-1.5 bg-[#c35e00] rounded-full mr-3 shrink-0"></span>
+                  <span className="font-medium text-zinc-800">{method}</span>
                 </li>
               ))}
             </ul>
-            <p className="pt-1 text-xs text-gray-500 italic">
+            <p className="p-4 bg-[#FAF5E9] rounded-lg border border-[#111111]/5 text-xs text-zinc-500 italic">
               For payment details, please consult your Project Manager. Note
               that VAT will be applicable on all purchases.
             </p>
           </div>
 
           {/* Section: Invoices */}
-          <div className="space-y-1 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               Invoices
             </h3>
             <p>
@@ -129,8 +134,8 @@ export default function CancellationsAndRefunds() {
           </div>
 
           {/* Section: EMIs */}
-          <div className="space-y-1 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               EMIs
             </h3>
             <p>
@@ -140,8 +145,8 @@ export default function CancellationsAndRefunds() {
           </div>
 
           {/* Section: Online Transactions */}
-          <div className="space-y-1 pt-2">
-            <h3 className="font-bold text-gray-900 tracking-wide text-sm md:text-base">
+          <div>
+            <h3 className="font-bold text-[#111111] tracking-wide text-lg mb-2">
               Online Transactions
             </h3>
             <p>
@@ -149,19 +154,20 @@ export default function CancellationsAndRefunds() {
               and ensuring secure transactions. Our online transaction system
               will be introduced shortly.
             </p>
-            <p>
+            <p className="mt-2">
               For further information, please visit our website at{" "}
               <a
                 href="https://beinterior.com.bd/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#7a8d75] font-medium underline"
+                className="text-[#c35e00] hover:text-[#a34e00] underline font-medium transition-colors"
               >
                 beinterior.com.bd
               </a>
               .
             </p>
           </div>
+
         </div>
       </div>
     </section>

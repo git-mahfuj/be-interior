@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { MapPin, Loader2, AlertCircle } from "lucide-react";
+import { MapPin, Loader2, AlertCircle, Navigation } from "lucide-react";
 import { contactLocationApi } from "@/axios/axios";
-import { useQuery } from "@tanstack/react-query"; // 👈 useQuery ইমপোর্ট করা হলো
+import { useQuery } from "@tanstack/react-query";
 
 interface ContactLocationType {
   ms: number;
@@ -19,7 +19,6 @@ const fetchContactItems = async () => {
     if (res.status !== 200) {
       throw new Error(`Error while Fetching`);
     }
-
     return res.data;
   } catch (error: any) {
     if (process.env.NODE_ENV === "development") {
@@ -30,44 +29,36 @@ const fetchContactItems = async () => {
 };
 
 const LocationSection = () => {
-
   const { data, isLoading, isError, error, refetch } = useQuery<ContactLocationType>({
     queryKey: ["contact-location"],
     queryFn: fetchContactItems,
   });
 
-
+  // -------------- Loading State --------------
   if (isLoading) {
     return (
-      <section className="w-full flex flex-col md:flex-row h-auto md:h-96 bg-[#8a9d85]/10 animate-pulse">
-        <div className="w-full md:w-1/3 bg-[#8a9d85] p-8 md:p-16 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-2 text-white">
-            <Loader2 className="w-8 h-8 animate-spin" />
-            <p className="text-xs opacity-80 tracking-wide">Loading Address...</p>
-          </div>
-        </div>
-        <div className="w-full md:w-2/3 h-64 md:h-full bg-zinc-100 flex items-center justify-center text-zinc-400 font-medium text-sm">
-          Loading Live Map...
+      <section className="bg-[#FAF5E9] py-16 px-6 lg:px-20 min-h-[400px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+          <p className="text-sm text-[#111111]/60 font-bold tracking-widest uppercase">Loading Map...</p>
         </div>
       </section>
     );
   }
 
-
+  // -------------- Error State --------------
   if (isError) {
     return (
-      <section className="w-full flex flex-col md:flex-row h-auto md:h-96 border border-rose-100 rounded-xl overflow-hidden">
-        <div className="w-full md:w-1/3 bg-rose-50 p-8 md:p-16 flex flex-col items-center justify-center text-center text-rose-800 gap-2">
-          <AlertCircle className="w-8 h-8 text-rose-500" />
-          <p className="font-semibold text-sm">Failed to load location</p>
-        </div>
-        <div className="w-full md:w-2/3 h-64 md:h-full bg-zinc-50 flex flex-col items-center justify-center p-6 text-center gap-3">
-          <p className="text-xs text-zinc-500 max-w-xs leading-relaxed">
+      <section className="bg-[#FAF5E9] py-16 px-6 lg:px-20 min-h-[400px] flex items-center justify-center">
+        <div className="flex flex-col items-center max-w-md text-center p-8 bg-white border border-black/5 rounded-3xl shadow-xl">
+          <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+          <h3 className="text-xl font-bold mb-2 text-[#111111]">Location Unavailable</h3>
+          <p className="text-sm text-zinc-500 mb-6">
             {error instanceof Error ? error.message : "Something went wrong"}
           </p>
           <button
             onClick={() => refetch()}
-            className="px-5 py-2 bg-[#8a9d85] hover:bg-[#768a71] text-white text-xs font-semibold rounded-full shadow-md transition-all duration-200 active:scale-95"
+            className="px-6 py-2.5 bg-[#111111] hover:bg-primary text-white font-semibold rounded-full shadow-lg transition-all duration-300"
           >
             Try Again
           </button>
@@ -76,43 +67,67 @@ const LocationSection = () => {
     );
   }
 
-
   const contact = data?.result?.[0];
-
+  const address = contact?.footerlocation || "Address not specified";
+  const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+  // -------------- Main Content --------------
   return (
-    <section className="w-full flex flex-col md:flex-row h-auto md:h-96">
-      {/* Left Side: Address Details */}
-      <div className="w-full md:w-1/3 bg-[#8a9d85] p-8 md:p-16 flex items-center">
-        <div className="flex gap-6 items-center">
-          {/* Icon Box */}
-          <div className="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
-            <MapPin className="w-8 h-8 text-white" />
+    <section className="bg-[#FAF5E9] py-16 px-6 lg:px-20">
+      <div className="max-w-7xl mx-auto">
+        
+        <div className="flex flex-col md:flex-row rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] min-h-[450px]">
+          
+          {/* Left Side: Address Details (Dark Theme) */}
+          <div className="w-full md:w-1/3 bg-[#111111] p-10 lg:p-14 flex flex-col justify-center relative">
+            {/* Background Accent */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full pointer-events-none"></div>
+
+            <div className="relative z-10 flex flex-col gap-8">
+              <div>
+                <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Our Office</p>
+                <h3 className="text-3xl font-montagu font-bold text-white">Visit Us</h3>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                  <MapPin className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-lg font-medium text-white leading-relaxed max-w-[200px]">
+                    {address}
+                  </p>
+                </div>
+              </div>
+
+              {/* Get Directions Button */}
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 w-fit mt-4 px-6 py-3 bg-white hover:bg-primary text-[#111111] hover:text-white rounded-full font-bold text-sm transition-all duration-300 shadow-md"
+              >
+                <Navigation className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                Get Directions
+              </a>
+            </div>
+          </div>
+
+          {/* Right Side: Map Embed */}
+          <div className="w-full md:w-2/3 h-80 md:h-auto relative group overflow-hidden">
+            <iframe
+              src={mapUrl}
+              className="absolute inset-0 w-full h-full border-0 filter grayscale hover:grayscale-0 transition-all duration-700"
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Volumetric Designers Location"
+            />
+           
+            <div className="absolute inset-0 bg-primary/10 pointer-events-none group-hover:opacity-0 transition-opacity duration-700"></div>
           </div>
           
-          {/* Address Text */}
-          <div className="text-white border-l-2 border-white/30 pl-6">
-            <h3 className="font-semibold text-lg tracking-wide uppercase mb-1">
-              Location:
-            </h3>
-            <p className="text-lg font-medium leading-relaxed max-w-50">
-              {contact?.footerlocation || "Address not specified"}
-            </p>
-          </div>
         </div>
-      </div>
 
-      {/* Right Side: Map Embed */}
-      <div className="w-full md:w-2/3 h-64 md:h-full">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.09886367355!2d90.4079!3d23.8340!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVolumetric%20Designers!5e0!3m2!1sen!2sbd!4v1612345678901!5m2!1sen!2sbd"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen={true}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Volumetric Designers Location"
-        />
       </div>
     </section>
   );

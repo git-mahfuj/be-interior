@@ -81,11 +81,11 @@ const OfficeProjects = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-[#365856] font-bold text-sm tracking-widest uppercase mb-2">
+            <div className="flex items-center gap-2 text-secondary font-bold text-sm tracking-widest uppercase mb-2">
               <FiCornerDownRight /> Featured Works
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-zinc-800 tracking-wide font-montagu uppercase">
-              Our <span className="text-[#365856]">Projects</span>
+              Our <span className="text-primary">Projects</span>
             </h2>
           </div>
           <p className="text-zinc-500 text-sm max-w-xs font-medium leading-relaxed">
@@ -157,7 +157,7 @@ const OfficeProjects = () => {
                       </h3>
                     </div>
 
-                    <div className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#365856] group-hover:rotate-45 transition-all duration-500 shadow-lg shrink-0 ml-4">
+                    <div className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-primary group-hover:rotate-45 transition-all duration-500 shadow-lg shrink-0 ml-4">
                       <FiArrowUpRight className="text-lg" />
                     </div>
                   </div>

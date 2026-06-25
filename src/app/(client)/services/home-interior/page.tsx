@@ -24,20 +24,16 @@ const HomeInterior = () => {
       </ErrorBoundary>
       <HomeSolution />
       <HomeOurPackage />
-      <ErrorBoundary fallback={''}>
-          <HomeDream />
+      <ErrorBoundary fallback={""}>
+        <HomeDream />
       </ErrorBoundary>
-      <ErrorBoundary fallback={<BeInteriorError/>}>
-        <Suspense fallback={<HomeProjectSuspense />}>
-          <HomeInteriorProjects />
-        </Suspense>
+      <ErrorBoundary fallback={<BeInteriorError />}>
+        <HomeInteriorProjects />
       </ErrorBoundary>
       <HomePromise />
 
-      <ErrorBoundary fallback={<HappyCustomererr/>}>
-
-          <HomeCustomerReview />
-
+      <ErrorBoundary fallback={<HappyCustomererr />}>
+        <HomeCustomerReview />
       </ErrorBoundary>
       <HomeComment />
     </div>

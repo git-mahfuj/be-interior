@@ -68,10 +68,10 @@ const OfficePackage = () => {
 
       <div className="text-center mb-20">
         <h2 className="text-3xl md:text-5xl font-black tracking-wide text-zinc-800 uppercase font-montagu">
-          Our <span className="text-[#365856]">Packages</span>
+          Our <span className="text-primary">Packages</span>
         </h2>
         <p className="text-zinc-500 mt-2 text-sm sm:text-base font-medium">Tailored solutions for every standard</p>
-        <div className="w-24 h-1 bg-[#365856] mx-auto mt-4 rounded-full" />
+        <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full" />
       </div>
 
 
@@ -86,7 +86,7 @@ const OfficePackage = () => {
 
             <div className={`relative bg-gradient-to-r ${pkg.headerBg} pt-8 pb-14 px-8 text-white flex justify-between items-center overflow-hidden`}>
   
-              <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
+              <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_bottom_left,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
               
               <div>
                 <h3 className="text-2xl sm:text-3xl font-black tracking-wide font-montagu mb-1">

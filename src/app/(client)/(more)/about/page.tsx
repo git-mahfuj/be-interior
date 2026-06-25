@@ -11,11 +11,11 @@ const AboutUS = () => {
     <div className="mt-25">
       <AboutFounders />
       <HowitStarted />
-      <ErrorBoundary fallback={<div className="text-black">haker</div>}>
+      {/* <ErrorBoundary fallback={<div className="text-black">haker</div>}>
         <Suspense fallback={<TeamSectionSkeleton/>}>
           <OurTeam />
         </Suspense>
-      </ErrorBoundary>
+      </ErrorBoundary> */}
     </div>
   );
 };

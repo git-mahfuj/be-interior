@@ -8,17 +8,46 @@ import Image from "next/image";
 import slideOne from "@/logo/HomePage/Gemini_Generated_Image_Office1.png";
 import slideTwo from "@/logo/HomePage/Gemini_Generated_Image_Office2.png";
 import { FaWhatsapp } from "react-icons/fa";
+import { whatsAppApi } from "@/axios/axios";
+import { useQuery } from "@tanstack/react-query";
+interface WhatsAppApiType {
+  ms: number;
+  query: string;
+  result: {
+    _id: string;
+    WhatsAppNumber: string;
+  }[];
+  syncTags: string[];
+}
+
+const fetchWhatsAppNumber = async () => {
+  try {
+    const res = await whatsAppApi();
+    if (res.status !== 200) throw new Error("Error fetching");
+    return res.data;
+  } catch (error: any) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("WhatsApp Fetch Error:", error.message);
+    }
+    throw error;
+  }
+};
+
 const OfficeInteriorSlider = () => {
-  const phoneNumber = "8801570264255"; 
-  
+  const { data, isLoading } = useQuery<WhatsAppApiType>({
+    queryKey: ["wp-number"],
+    queryFn: fetchWhatsAppNumber,
+  });
 
-  const defaultMessage = "Hi BE INTERIOR, I want to consult about my space interior design.";
+  const phoneNumber = `88${data?.result[0].WhatsAppNumber}`;
 
+  const defaultMessage =
+    "Hi BE INTERIOR, I want to consult about my space interior design.";
 
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(defaultMessage)}`;
 
   const handleWhatsAppRedirect = () => {
-    window.open(whatsappUrl, "_blank"); 
+    window.open(whatsappUrl, "_blank");
   };
   return (
     <div className="w-full h-screen mx-auto relative overflow-hidden">
@@ -47,19 +76,21 @@ const OfficeInteriorSlider = () => {
           />
           <div className="absolute inset-0 bg-black/30 z-10" />
 
-
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 sm:px-12 md:pl-20 lg:pl-32 xl:pl-40 pt-16 md:pt-24">
             <div className="max-w-2xl flex flex-col items-center md:items-start">
               <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-tight font-montagu text-white">
                 Stress-free
               </h1>
-             
+
               <p className="text-xs sm:text-sm md:text-base font-normal max-w-md mt-4 text-zinc-200 font-poppins capitalize">
                 Relocation To Your New Professional Space
               </p>
-              <button onClick={handleWhatsAppRedirect} className="w-fit sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer flex items-center gap-2">
-               Talk to Our Designer
-               <FaWhatsapp size={30} />
+              <button
+                onClick={handleWhatsAppRedirect}
+                className="w-fit sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer flex items-center gap-2"
+              >
+                Talk to Our Designer
+                <FaWhatsapp size={30} />
               </button>
             </div>
           </div>
@@ -86,7 +117,7 @@ const OfficeInteriorSlider = () => {
                 Office Interior
               </h1>
               <p className="text-xs sm:text-sm md:text-base font-normal max-w-md mt-4 text-zinc-200 font-poppins capitalize tracking-wide">
-               That Your Employee will love
+                That Your Employee will love
               </p>
               <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer">
                 Consult now
@@ -94,10 +125,9 @@ const OfficeInteriorSlider = () => {
             </div>
           </div>
         </SwiperSlide>
-
       </Swiper>
     </div>
-  )
-}
+  );
+};
 
-export default OfficeInteriorSlider
+export default OfficeInteriorSlider;

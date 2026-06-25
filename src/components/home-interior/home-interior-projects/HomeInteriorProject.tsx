@@ -16,7 +16,7 @@ interface HomeProject {
     _id: string;
     name: string;
     slug: string;
-    _type : string
+    _type: string;
     coverImage: string;
   }[];
   syncTags: string[];
@@ -40,7 +40,7 @@ const homeInteriorProjects = async () => {
 };
 
 const HomeInteriorProjects = () => {
-  const { data , isLoading , isError } = useQuery<HomeProject>({
+  const { data, isLoading, isError } = useQuery<HomeProject>({
     queryKey: ["home-interior"],
     queryFn: homeInteriorProjects,
   });
@@ -87,8 +87,7 @@ const HomeInteriorProjects = () => {
               breakpoints={{
                 320: { slidesPerView: 1, spaceBetween: 15 },
                 640: { slidesPerView: 2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 25 },
-                1280: { slidesPerView: 3, spaceBetween: 30 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
               }}
               loop={true}
               modules={[Autoplay]}
@@ -96,28 +95,43 @@ const HomeInteriorProjects = () => {
                 delay: 3000,
                 disableOnInteraction: false,
               }}
-              className="bg-transparent h-full p-4 rounded-xl"
+              className="h-112.5 p-4"
             >
               {result.map((data) => (
-                <SwiperSlide
-                  key={data._id}
-                  className="relative flex flex-col items-center justify-center h-full bg-white rounded-xl shadow-xl hover:shadow-2xl border border-zinc-100 transition-all duration-300 overflow-hidden"
-                >
+                <SwiperSlide key={data._id}>
                   <Link
                     href={`/interior-projects/${data.slug}?type=${data._type}`}
-                    className="w-full h-full block relative"
+                    className="group relative flex flex-col h-100 bg-white rounded-3xl overflow-hidden shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border border-zinc-100"
                   >
-                    <Image
-                      src={data.coverImage}
-                      alt={data.name}
-                      fill
-                      priority
-                      quality={100}
-                      className="object-cover object-center"
-                    />
-                    <h3 className="font-bold font-montagu text-lg absolute z-10 bottom-3 w-full text-white text-center bg-black/40 py-2">
-                      {data.name}
-                    </h3>
+                    {/* Image Container with Overlay */}
+                    <div className="relative w-full h-full overflow-hidden">
+                      <Image
+                        src={data.coverImage}
+                        alt={data.name}
+                        fill
+                        quality={90}
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      />
+                      {/* Gradient Overlay for Text Readability */}
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
+                    </div>
+
+                    {/* Content Box */}
+                    <div className="absolute bottom-0 left-0 w-full p-6 text-white transform transition-transform duration-300">
+                      <span className="text-white font-bold text-xs uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                        {data._type}
+                      </span>
+                      <h3 className="font-montagu text-2xl font-bold mt-3 leading-tight group-hover:text-primary transition-colors">
+                        {data.name}
+                      </h3>
+
+                      {/* Subtle Hover Reveal Arrow */}
+                      <div className="flex items-center gap-2 mt-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                        <span className="text-sm font-medium">
+                          View Projects
+                        </span>
+                      </div>
+                    </div>
                   </Link>
                 </SwiperSlide>
               ))}

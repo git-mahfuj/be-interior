@@ -20,7 +20,7 @@ const fetchInteriorTeam = async () => {
   try {
     const res = await interiorTeamApi();
     if (res.status !== 200) {
-      throw new Error(`Error while Feching`);
+      throw new Error(`Error while Fetching`);
     }
 
     return res.data;
@@ -37,19 +37,26 @@ const OurTeam = () => {
     queryKey: ["interior-team"],
     queryFn: fetchInteriorTeam,
   });
+
   if (process.env.NODE_ENV === "development") {
     console.log("interior-team", data);
   }
+
   const teamMembers = data?.result || [];
+
   return (
-    <section className="w-full py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-24 bg-[#FAF5E9]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-8">
+        
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-black text-[#1b332a] uppercase tracking-wide font-montagu">
+          <p className="text-primary font-bold uppercase tracking-widest text-xs mb-3">
+            Our Experts
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#111111] font-montagu tracking-wide">
             The Minds Behind the Design
           </h2>
-          <p className="mt-4 text-zinc-500 max-w-2xl mx-auto font-poppins">
+          <p className="mt-4 text-zinc-600 max-w-2xl mx-auto text-base">
             Meet the talented architects and designers who turn your vision into
             reality with precision, passion, and creativity.
           </p>
@@ -57,25 +64,38 @@ const OurTeam = () => {
 
         {/* Team Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member, index) => (
+          {teamMembers.map((member) => (
             <div
-              key={index}
-              className="group flex flex-col items-center p-6 bg-[#fafafa] rounded-2xl hover:bg-[#1b332a] transition-all duration-300 border border-zinc-100 hover:border-transparent hover:shadow-xl"
+              key={member._id}
+              className="group flex flex-col bg-white rounded-[2rem] overflow-hidden border border-[#111111]/5 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
             >
-              {/* Photo Placeholder */}
-              <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden bg-zinc-200 border-4 border-white group-hover:border-[#365856]">
-                <Image src={member.memberImage} alt="" fill className="object-cover"/>
+              {/* Photo Section (Editorial Aspect Ratio) */}
+              <div className="relative w-full aspect-[4/5] overflow-hidden bg-zinc-100">
+                {/* Subtle Primary Overlay on Hover */}
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-multiply"></div>
+                
+                <Image 
+                  src={member.memberImage} 
+                  alt={member.name} 
+                  fill 
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
               </div>
 
-              <h3 className="text-lg font-bold text-[#1b332a] group-hover:text-white transition-colors duration-300">
-                {member.name}
-              </h3>
-              <p className="text-sm text-center text-zinc-500 group-hover:text-emerald-200 transition-colors duration-300 font-medium mt-1">
-                {member.designation}
-              </p>
+              {/* Info Section */}
+              <div className="p-6 md:p-8 text-center flex-grow flex flex-col justify-center">
+                <h3 className="text-xl font-bold font-montagu text-[#111111] mb-1 group-hover:text-primary transition-colors duration-300">
+                  {member.name}
+                </h3>
+                <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">
+                  {member.designation}
+                </p>
+              </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

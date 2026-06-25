@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import logo from "@/logo/HomePage/ContactImage.jpg"
+import logo from "@/logo/HomePage/ContactImage.jpg";
 import { createLeadApi } from "@/axios/axios";
+import { User, Mail, Phone, Send, CheckCircle2, Loader2 } from "lucide-react";
 
 interface FormType {
   name: string;
@@ -22,8 +23,10 @@ const ContactForm = () => {
   });
   const [error, setErrors] = useState<FormError>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.currentTarget;
     setFormData((prev) => ({
@@ -37,87 +40,126 @@ const ContactForm = () => {
       }));
     }
   };
+
   const validateForm = (): boolean => {
     let tempErrors: FormError = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-    if (!formData.name.trim()) {
-      tempErrors.name = "Name is required";
-    }
+    
+    if (!formData.name.trim()) tempErrors.name = "Name is required";
+    
     if (!formData.email.trim()) {
       tempErrors.email = "Email is Required";
     } else if (!emailRegex.test(formData.email)) {
       tempErrors.email = "Invalid Email Format";
     }
+    
     if (!formData.phone.trim()) {
       tempErrors.phone = "Phone number is Required";
     } else if (!phoneRegex.test(formData.phone.replace(/[-\s]/g, ""))) {
       tempErrors.phone = "Valid BD phone number required (e.g. 017xxxxxxxx)";
     }
+    
     if (!formData.projectInfo.trim()) {
       tempErrors.projectInfo = "Project Information is Required";
     }
+    
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
 
   const handleSubmit = async (e: FormEvent) => {
-      e.preventDefault();
-  
-      try {
-        if (validateForm()) {
-          console.log("Form Submitted Successfully:", formData);
-          await createLeadApi(formData);
-          setIsSubmitted(true);
-  
-          setFormData({ name: "", email: "", phone: "", projectInfo: "" });
-          setTimeout(() => setIsSubmitted(false), 5000);
-        }
-      } catch (error: any) {
-        if (process.env.NODE_ENV === "development") {
-          console.error("Form Submission Error");
-        }
+    e.preventDefault();
+
+    try {
+      if (validateForm()) {
+        setIsSubmitting(true);
+        console.log("Form Submitted Successfully:", formData);
+        await createLeadApi(formData);
+        
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", phone: "", projectInfo: "" });
+        setTimeout(() => setIsSubmitted(false), 5000);
       }
-    };
+    } catch (error: any) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Form Submission Error");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <section className="bg-[#eef2ed] py-20 px-6">
-      <div className="max-w-5xl mx-auto grid justify-center gap-12 items-center">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-          <h2 className="text-2xl font-bold text-[#283b33] mb-2">
-            Leave Us A Message For Your Project
-          </h2>
-          <p className="text-gray-500 mb-6">
-            Our Expert Team Will Contact With You
-          </p>
+    <section className="bg-[#FAF5E9] py-20 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col lg:flex-row">
+        
+        {/* Left Side: Image & Branding */}
+        <div className="relative w-full lg:w-5/12 h-64 lg:h-auto hidden md:block">
+          <Image
+            src={logo}
+            alt="Interior Design Consultation"
+            fill
+            quality={100}
+            className="object-cover"
+          />
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent opacity-90"></div>
+          
+          <div className="absolute bottom-0 left-0 w-full p-10 text-white">
+            <h3 className="font-montagu text-3xl font-bold mb-3 leading-tight">
+              Let's craft your <br /> <span className="text-primary">dream space</span>
+            </h3>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Share your project details with us, and our expert architects will get back to you with a free consultation and quote.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side: Form */}
+        <div className="w-full lg:w-7/12 p-8 md:p-12 lg:p-16">
+          <div className="mb-10">
+            <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Get in touch</p>
+            <h2 className="text-3xl md:text-4xl font-montagu font-bold text-[#111111]">
+              Leave Us A Message
+            </h2>
+          </div>
+
+          {/* Success Message */}
           {isSubmitted && (
-            <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm rounded-xl font-medium animate-fade-in">
-              Thank you! Your request has been received. Our team will contact you soon.
+            <div className="mb-8 p-4 bg-green-50 border border-green-200 text-green-700 flex items-start gap-3 rounded-xl animate-in fade-in slide-in-from-top-4 duration-300">
+              <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+              <p className="text-sm font-medium">
+                Thank you! Your request has been received. Our team will contact you shortly.
+              </p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             {/* Input fields */}
             {[
-              { name: "name", type: "text", placeholder: "Name" },
-              { name: "email", type: "email", placeholder: "E-mail" },
-              { name: "phone", type: "text", placeholder: "Phone" },
+              { name: "name", type: "text", placeholder: "Your Full Name", icon: User },
+              { name: "email", type: "email", placeholder: "Email Address", icon: Mail },
+              { name: "phone", type: "text", placeholder: "Phone Number (e.g. 017...)", icon: Phone },
             ].map((field) => (
-              <div key={field.name} className="flex flex-col w-full">
-                <input
-                  type={field.type}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={formData[field.name as keyof FormType]}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3.5 bg-white text-zinc-800 rounded-xl outline-none transition-all placeholder:text-zinc-400 font-medium text-sm sm:text-base border-2 ${
-                    error[field.name as keyof FormType]
-                      ? "border-red-500 bg-red-50/5 focus:bg-white"
-                      : "border-secondary focus:border-primary/40"
-                  }`}
-                />
+              <div key={field.name} className="flex flex-col w-full relative">
+                <div className="relative flex items-center group">
+                  <field.icon className={`absolute left-4 w-5 h-5 transition-colors duration-300 ${error[field.name as keyof FormType] ? "text-red-400" : "text-zinc-400 group-focus-within:text-primary"}`} />
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={formData[field.name as keyof FormType]}
+                    onChange={handleChange}
+                    className={`w-full pl-12 pr-4 py-3.5 bg-[#FAF5E9]/50 text-[#111111] rounded-xl outline-none transition-all placeholder:text-zinc-400 font-medium text-sm border-2 ${
+                      error[field.name as keyof FormType]
+                        ? "border-red-300 bg-red-50 focus:border-red-500"
+                        : "border-transparent focus:border-primary/40 focus:bg-white"
+                    }`}
+                  />
+                </div>
                 {error[field.name as keyof FormType] && (
-                  <span className="text-red-400 text-xs mt-1.5 ml-1 font-medium">
+                  <span className="text-red-500 text-xs mt-1.5 ml-2 font-semibold">
                     {error[field.name as keyof FormType]}
                   </span>
                 )}
@@ -129,27 +171,39 @@ const ContactForm = () => {
               <textarea
                 name="projectInfo"
                 rows={4}
-                placeholder="Project information (location, floor area, etc.)"
+                placeholder="Tell us about your project (location, floor area, style preferences, etc.)"
                 value={formData.projectInfo}
                 onChange={handleChange}
-                className={`w-full px-4 py-3.5 bg-white text-zinc-800 rounded-xl outline-none transition-all placeholder:text-zinc-400 font-medium text-sm sm:text-base resize-none border-2 leading-relaxed ${
+                className={`w-full px-5 py-4 bg-[#FAF5E9]/50 text-[#111111] rounded-xl outline-none transition-all placeholder:text-zinc-400 font-medium text-sm resize-none border-2 leading-relaxed ${
                   error.projectInfo
-                    ? "border-red-500 bg-red-50/5 focus:bg-white"
-                    : "border-secondary focus:border-primary/40"
+                    ? "border-red-300 bg-red-50 focus:border-red-500"
+                    : "border-transparent focus:border-primary/40 focus:bg-white"
                 }`}
               />
               {error.projectInfo && (
-                <span className="text-red-400 text-xs mt-1.5 ml-1 font-medium">
+                <span className="text-red-500 text-xs mt-1.5 ml-2 font-semibold">
                   {error.projectInfo}
                 </span>
               )}
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-4 mt-2 bg-white text-[#1b332a] font-extrabold text-sm sm:text-base tracking-wider rounded-xl shadow-md hover:bg-zinc-100 transition-all duration-200 cursor-pointer uppercase"
+              disabled={isSubmitting}
+              className="group w-full py-4 mt-4 bg-[#111111] text-white font-bold text-sm tracking-wider rounded-xl shadow-lg hover:bg-primary transition-all duration-300 cursor-pointer uppercase flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Get Free Quote
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  Get Free Quote
+                  <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </>
+              )}
             </button>
           </form>
         </div>

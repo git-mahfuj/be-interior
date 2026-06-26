@@ -11,11 +11,14 @@ import {
   FaYoutube,
   FaPhoneAlt,
   FaEnvelope,
+  FaFacebook,
 } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 import { HiMapPin } from "react-icons/hi2";
 import { useQuery } from "@tanstack/react-query";
 import { footerContactApi } from "@/axios/axios";
+import Image from "next/image";
+import logo from "@/logo/Gemini_Generated_Image_be-interior.png";
 
 interface FooterContactType {
   ms: number;
@@ -50,13 +53,6 @@ const fetchFooterLinks = async () => {
   }
 };
 
-const Tooltip = ({ text }: { text: string }) => (
-  <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
-    {text}
-    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white"></span>
-  </span>
-);
-
 const Footer = () => {
   const { data, isLoading } = useQuery<FooterContactType>({
     queryKey: ["query-key"],
@@ -64,11 +60,15 @@ const Footer = () => {
   });
 
   const footerItems = data?.result || [];
+  if (process.env.NODE_ENV === "development") {
+    console.log("footer data", footerItems);
+  }
   const footerNumberOne = footerItems[0]?.footercontactnumber1 || "01818383239";
   const footerNumberTwo = footerItems[0]?.footercontactnumber2 || "01818383239";
   const footerEmail =
     footerItems[0]?.footercontactemail || "info@beinterior.com";
   const footerLocation = footerItems[0]?.footerlocation || "Dhaka, Bangladesh";
+  const footerFB = footerItems[0]?.links[0]?.url;
 
   return (
     <footer className="relative w-full bg-secondary/90 text-white pt-20 pb-10 overflow-hidden">
@@ -79,7 +79,7 @@ const Footer = () => {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Column 1: Branding */}
           <div className="flex flex-col gap-6">
             <NavLogo />
@@ -119,11 +119,11 @@ const Footer = () => {
                 },
                 {
                   name: "Building Design",
-                  link: "/",
+                  link: "/interior-projects",
                 },
                 {
                   name: "Furniture Customization",
-                  link: "/",
+                  link: "/blogs",
                 },
               ].map((link) => (
                 <Link key={link.name} href={link.link}>
@@ -154,10 +154,6 @@ const Footer = () => {
                 {
                   name: "About Us",
                   link: "/about",
-                },
-                {
-                  name: "Blogs",
-                  link: "/blogs",
                 },
                 {
                   name: "Contact",
@@ -213,6 +209,55 @@ const Footer = () => {
                 </p>
               </li>
             </ul>
+          </div>
+          {/* Column 4: footer page */}
+          <div className="flex flex-col gap-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary">
+              Our Facebook Page
+            </h4>
+
+            <Link
+              href="https://www.facebook.com/beinteriors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block border relative max-w-3xl w-full h-48 bg-zinc-900 overflow-hidden border-[#111111]/5 shadow-sm rounded-2xl transition-all duration-500 hover:shadow-md hover:-translate-y-0.5"
+            >
+              {isLoading ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-white text-zinc-400 text-sm gap-2">
+                  <div className="w-4 h-4 border-2 border-zinc-300 border-t-primary rounded-full animate-spin"></div>
+                  Loading Page...
+                </div>
+              ) : (
+                <>
+              
+                  <Image
+                    src={logo}
+                    alt="BE INTERIOR Facebook Page"
+                    fill
+                    quality={100}
+                    className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700 mix-blend-overlay"
+                  />
+
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-between  to-transparent z-10">
+                    <div className="flex justify-end">
+                      <span className="p-2.5 bg-white/10 backdrop-blur-md text-white rounded-full group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <FaFacebook className="w-5 h-5" />
+                      </span>
+                    </div>
+
+                    <div>
+                      <p className="text-white text-xl font-montagu font-bold tracking-wide">
+                        BE INTERIOR
+                      </p>
+                      <p className="text-zinc-300 text-xs tracking-wider uppercase mt-1">
+                        Join Our Community on Facebook →
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
+            </Link>
           </div>
         </div>
 

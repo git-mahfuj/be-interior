@@ -6,6 +6,7 @@ export const homeProjectQuery =
   "slug": slug.current,
   "coverImage": coverimage.asset->url,
    "galleryImage" : gallery[].asset->url,
+   videoLink,
    size,
    location
 }`);
@@ -18,6 +19,7 @@ export const officeProjectQuery =
   "slug": slug.current,
   "coverImage": coverimage.asset->url,
    "galleryImage" : gallery[].asset->url,
+   videoLink,
    size,
    location
 }`);

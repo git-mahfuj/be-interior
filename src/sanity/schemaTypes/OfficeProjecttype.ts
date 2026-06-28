@@ -47,20 +47,25 @@ export const OfficeProjectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'gallery',
-      title: 'Project Gallery',
-      type: 'array',
-      of: [{ type: 'image' }], 
-      options: { layout: 'grid' } ,
+      name: "gallery",
+      title: "Project Gallery",
+      type: "array",
+      of: [{ type: "image" }],
+      options: { layout: "grid" },
       validation: (Rule) => Rule.required(),
     }),
-     defineField({
+    defineField({
+      name: "videoLink",
+      title: "Project Video Link (ex : yt)",
+      type: "url",
+    }),
+    defineField({
       name: "size",
       title: "Project Size",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
-     defineField({
+    defineField({
       name: "location",
       title: "Project Location",
       type: "string",

@@ -23,6 +23,7 @@ const HomeCommentForm = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
@@ -68,7 +69,11 @@ const HomeCommentForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return; 
 
+    setLoading(true);
+    setSubmitError("");
+    setIsSubmitted(false);
     try {
       if (validateForm()) {
         if (process.env.NODE_ENV === "development") {
@@ -76,6 +81,7 @@ const HomeCommentForm = () => {
         }
         await createLeadApi(formData);
         setIsSubmitted(true);
+        
 
         setFormData({ name: "", email: "", phone: "", projectInfo: "" });
         setTimeout(() => setIsSubmitted(false), 5000);
@@ -83,7 +89,9 @@ const HomeCommentForm = () => {
     } catch (error: any) {
       if (process.env.NODE_ENV === "development") {
         console.error("Form Submission Error");
-      }
+      } 
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -172,9 +180,15 @@ const HomeCommentForm = () => {
 
             <button
               type="submit"
-              className="w-full py-4 mt-2 bg-white text-secondary font-extrabold text-sm sm:text-base tracking-wider rounded-xl shadow-md hover:bg-zinc-100 transition-all duration-200 cursor-pointer uppercase"
+              disabled={loading} 
+              className="w-full h-14 mt-2 flex items-center justify-center bg-white text-[#111111] font-bold text-sm sm:text-base tracking-widest rounded-xl shadow-sm hover:bg-zinc-50 transition-all duration-300 uppercase disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Get Free Quote
+              {loading ? (
+                
+                <div className="w-6 h-6 border-2 border-zinc-200 border-t-primary rounded-full animate-spin" />
+              ) : (
+                "Get Free Quote"
+              )}
             </button>
           </form>
         </div>

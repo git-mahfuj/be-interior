@@ -36,6 +36,11 @@ export const HomeProjectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name : "videoLink",
+      title: "Project Video Link (ex : yt)",
+      type:'url',
+    }),
+    defineField({
       name: "size",
       title: "Project Size",
       type: "string",

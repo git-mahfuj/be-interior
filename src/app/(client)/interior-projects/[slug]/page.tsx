@@ -17,10 +17,9 @@ interface ProjectResultType {
   slug: string;
   coverImage: string;
   galleryImage: string[];
+  videoLink?: string;
   size: string;
   location: string;
-  videoUrl?: string;
-  description?: string;
 }
 
 interface AllInteriorProjectstype {
@@ -131,6 +130,28 @@ export default function ProjectDetailsPage() {
     window.open(whatsappUrl, "_blank");
   };
 
+  const getYouTubeEmbedUrl = (url: string | undefined) => {
+    if (!url || url === "/") return "";
+    if (url.includes("/embed/")) return url;
+
+    let videoId = "";
+
+    if (url.includes("youtu.be/")) {
+      videoId = url.split("youtu.be/")[1]?.split("?")[0];
+    } else if (url.includes("youtube.com/watch")) {
+      try {
+        const urlObj = new URL(url);
+        videoId = urlObj.searchParams.get("v") || "";
+      } catch (e) {
+        return "";
+      }
+    }
+
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+  };
+
+  const videoUrl = getYouTubeEmbedUrl(project?.videoLink);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-ivory flex flex-col items-center justify-center font-sans">
@@ -165,7 +186,15 @@ export default function ProjectDetailsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <div className="md:col-span-2 aspect-video bg-zinc-200 rounded-2xl overflow-hidden relative group shadow-md">
-              {project?.coverImage ? (
+              {videoUrl ? (
+                <iframe
+                  src={videoUrl}
+                  title={project?.name || "Project Video"}
+                  className="absolute inset-0 w-full h-full border-none"
+                  allowFullScreen
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                />
+              ) : project?.coverImage ? (
                 <Image
                   src={project.coverImage}
                   alt={project?.name || "Project Cover"}
@@ -176,7 +205,7 @@ export default function ProjectDetailsPage() {
                 />
               ) : (
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 space-y-4 bg-zinc-900">
-                  <p className="text-sm text-zinc-400">Image Not Available</p>
+                  <p className="text-sm text-zinc-400">Media Not Available</p>
                   <p className="text-xs text-zinc-500">
                     Provided by Be Interior Design Team
                   </p>

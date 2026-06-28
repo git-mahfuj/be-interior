@@ -5,65 +5,53 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { MdOutlineCamera } from "react-icons/md";
 
 const OfficeService = () => {
-
   const services = [
     {
       title: "New Office Design",
       desc: "Modern, functional office designs tailored for productivity and style.",
-      icon: <HiOutlineLightBulb className="text-5xl text-secondary" />,
-      gradient: "from-[#f0f7f4] to-[#e2ede8]",
+      icon: <HiOutlineLightBulb className="text-3xl text-primary" />,
     },
     {
       title: "Build A Project",
       desc: "We construct inspiring office spaces with the provided designs.",
-      icon: <BiBuildingHouse className="text-5xl text-secondary" />,
-      gradient: "from-[#fbf7f0] to-[#f2eae1]",
+      icon: <BiBuildingHouse className="text-3xl text-primary" />,
     },
     {
       title: "Renovation",
       desc: "Revitalize your office with fresh designs and space optimization.",
-      icon: <MdOutlineCamera className="text-5xl text-secondary" />,
-      gradient: "from-[#f5f5f7] to-[#e6e6eb]",
+      icon: <MdOutlineCamera className="text-3xl text-primary" />,
     },
   ];
 
   return (
-    <div className="w-full bg-white py-20 px-4 sm:px-6 lg:px-8 font-poppins">
+    <section className="w-full bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20">
       <div className="max-w-6xl mx-auto">
         
-
+        {/* Simple & Clean Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-zinc-800 tracking-wide font-montagu uppercase">
-            Service <span className="text-primary">We Offer</span>
+          <h2 className="text-3xl md:text-5xl font-montagu font-bold text-[#111111]">
+            Services <span className="text-primary">We Offer</span>
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mt-4 rounded-full" />
         </div>
 
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        {/* Grid Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className="w-full bg-white rounded-3xl border border-zinc-100 p-6 sm:p-8 flex flex-col items-center text-center shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(54,88,86,0.08)] hover:-translate-y-2 transition-all duration-300 ease-out cursor-pointer group"
+              className="bg-white p-8 md:p-10 rounded-2xl border border-[#111111]/5 flex flex-col items-center text-center transition-colors duration-300 hover:border-primary/20"
             >
-
-              <div className={`w-full aspect-4/3 rounded-2xl bg-linear-to-br ${service.gradient} flex items-center justify-center mb-8 relative overflow-hidden`}>
-                
-
-                <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-white/40 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500" />
-                <div className="absolute -left-6 -top-6 w-20 h-20 bg-white/30 rounded-full blur-lg" />
-                
-
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-zinc-100/50 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                  {service.icon}
-                </div>
+              {/* Icon Container */}
+              <div className="w-16 h-16 bg-[#FAF5E9] rounded-full flex items-center justify-center mb-6">
+                {service.icon}
               </div>
 
-              <h3 className="text-xl font-extrabold text-zinc-800 tracking-wide mb-3 font-poppins">
+              {/* Text Content */}
+              <h3 className="text-lg md:text-xl font-bold text-[#111111] mb-3 font-montagu">
                 {service.title}
               </h3>
               
-              <p className="text-zinc-500 text-sm sm:text-base font-medium leading-relaxed max-w-65 mx-auto">
+              <p className="text-zinc-600 text-sm md:text-base leading-relaxed">
                 {service.desc}
               </p>
             </div>
@@ -71,7 +59,7 @@ const OfficeService = () => {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 

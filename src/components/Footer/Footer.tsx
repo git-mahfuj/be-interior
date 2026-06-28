@@ -68,10 +68,10 @@ const Footer = () => {
   const footerEmail =
     footerItems[0]?.footercontactemail || "info@beinterior.com";
   const footerLocation = footerItems[0]?.footerlocation || "Dhaka, Bangladesh";
-  const footerFB = footerItems[0]?.links[1]?.url;
-  const footerInsta = "/";
+  const footerFB = footerItems[0]?.links[1]?.url || "/";
+  const footerInsta = footerItems[0]?.links[2]?.url || "/";
   const footerLinkdIn = "/";
-  const footerYT = footerItems[0]?.links[0]?.url;
+  const footerYT = footerItems[0]?.links[0]?.url || "/";
 
   return (
     <footer className="relative w-full bg-secondary/90 text-white pt-20 pb-20 overflow-hidden">

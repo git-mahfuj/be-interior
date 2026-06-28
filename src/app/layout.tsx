@@ -43,7 +43,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${montaguSlab.variable} ${poppins.variable} h-full antialiased`}
     >
 
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col custom-scrollbar">{children}</body>
 
     </html>
   );

@@ -68,10 +68,13 @@ const Footer = () => {
   const footerEmail =
     footerItems[0]?.footercontactemail || "info@beinterior.com";
   const footerLocation = footerItems[0]?.footerlocation || "Dhaka, Bangladesh";
-  const footerFB = footerItems[0]?.links[0]?.url;
+  const footerFB = footerItems[0]?.links[1]?.url;
+  const footerInsta = "/";
+  const footerLinkdIn = "/";
+  const footerYT = footerItems[0]?.links[0]?.url;
 
   return (
-    <footer className="relative w-full bg-secondary/90 text-white pt-20 pb-10 overflow-hidden">
+    <footer className="relative w-full bg-secondary/90 text-white pt-20 pb-20 overflow-hidden">
       {/* Abstract Background Decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]"></div>
@@ -81,24 +84,36 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Column 1: Branding */}
-          <div className="flex flex-col gap-6">
-            <NavLogo />
+          <div className="flex flex-col gap-6 -translate-y-17">
+            <NavLogo className="" />
             <p className="text-sm font-medium text-zinc-400 leading-relaxed max-w-xs">
               Transforming your living spaces into masterpieces of comfort and
               style. Your vision is our expertise.
             </p>
             <div className="flex gap-4">
-              {[FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube].map(
-                (Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300"
-                  >
-                    <Icon size={14} />
-                  </a>
-                ),
-              )}
+              {[
+                { icon: <FaFacebookF size={14} />, link: footerFB },
+                {
+                  icon: <FaInstagram size={14} />,
+                  link: footerInsta,
+                },
+                {
+                  icon: <FaLinkedinIn size={14} />,
+                  link: footerLinkdIn,
+                },
+                {
+                  icon: <FaYoutube size={14} />,
+                  link: footerYT,
+                },
+              ].map((Icon, i) => (
+                <Link
+                  key={i}
+                  href={Icon.link || "/"}
+                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300"
+                >
+                  {Icon.icon}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -229,7 +244,6 @@ const Footer = () => {
                 </div>
               ) : (
                 <>
-              
                   <Image
                     src={logo}
                     alt="BE INTERIOR Facebook Page"

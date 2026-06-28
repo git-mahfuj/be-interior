@@ -155,7 +155,7 @@ export default function ProjectDetailsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-ivory font-sans">
+    <main className="min-h-screen bg-ivory font-sans mt-5">
       {/* --- Hero Section --- */}
       <section className="py-28 px-6">
         <div className="max-w-7xl mx-auto text-center space-y-8">
@@ -233,7 +233,7 @@ export default function ProjectDetailsPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-serif font-semibold text-secondary inline-block relative">
               Project Gallery
-              <span className="absolute -bottom-2 left-1/4 right-1/4 h-1 bg-[#23352e]/20 rounded-full"></span>
+              <span className="absolute -bottom-3 left-1/4 right-1/4 h-1 bg-primary rounded-full"></span>
             </h2>
           </div>
 

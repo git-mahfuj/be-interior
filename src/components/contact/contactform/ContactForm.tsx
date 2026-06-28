@@ -12,7 +12,7 @@ interface FormType {
   projectInfo: string;
 }
 
-type FormError = Partial<FormType>;
+type FormErrors = Partial<FormType>;
 
 const ContactForm = () => {
   const [formData, setFormData] = useState<FormType>({
@@ -21,47 +21,47 @@ const ContactForm = () => {
     phone: "",
     projectInfo: "",
   });
-  const [error, setErrors] = useState<FormError>({});
+
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.currentTarget;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    if (error[name as keyof FormType]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name as keyof FormType]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   const validateForm = (): boolean => {
-    let tempErrors: FormError = {};
+    let tempErrors: FormErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
     if (!formData.name.trim()) tempErrors.name = "Name is required";
 
     if (!formData.email.trim()) {
-      tempErrors.email = "Email is Required";
+      tempErrors.email = "Email is required";
     } else if (!emailRegex.test(formData.email)) {
-      tempErrors.email = "Invalid Email Format";
+      tempErrors.email = "Invalid email format";
     }
 
     if (!formData.phone.trim()) {
-      tempErrors.phone = "Phone number is Required";
+      tempErrors.phone = "Phone number is required";
     } else if (!phoneRegex.test(formData.phone.replace(/[-\s]/g, ""))) {
       tempErrors.phone = "Valid BD phone number required (e.g. 017xxxxxxxx)";
+    } else if (formData.phone.length > 11) {
+      tempErrors.phone = "Phone number can't be over 11 charecters";
     }
 
     if (!formData.projectInfo.trim()) {
-      tempErrors.projectInfo = "Project Information is Required";
+      tempErrors.projectInfo = "Project information is required";
     }
 
     setErrors(tempErrors);
@@ -70,16 +70,19 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
+    setLoading(true);
+    setSubmitError("");
+    setIsSubmitted(false);
     try {
       if (validateForm()) {
-        setIsSubmitting(true);
         if (process.env.NODE_ENV === "development") {
           console.log("Form Submitted Successfully:", formData);
         }
         await createLeadApi(formData);
-
         setIsSubmitted(true);
+
         setFormData({ name: "", email: "", phone: "", projectInfo: "" });
         setTimeout(() => setIsSubmitted(false), 5000);
       }
@@ -88,7 +91,7 @@ const ContactForm = () => {
         console.error("Form Submission Error");
       }
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -166,7 +169,7 @@ const ContactForm = () => {
               <div key={field.name} className="flex flex-col w-full relative">
                 <div className="relative flex items-center group">
                   <field.icon
-                    className={`absolute left-4 w-5 h-5 transition-colors duration-300 ${error[field.name as keyof FormType] ? "text-red-400" : "text-zinc-400 group-focus-within:text-primary"}`}
+                    className={`absolute left-4 w-5 h-5 transition-colors duration-300 ${errors[field.name as keyof FormType] ? "text-red-400" : "text-zinc-400 group-focus-within:text-primary"}`}
                   />
                   <input
                     type={field.type}
@@ -175,15 +178,15 @@ const ContactForm = () => {
                     value={formData[field.name as keyof FormType]}
                     onChange={handleChange}
                     className={`w-full pl-12 pr-4 py-3.5 bg-[#FAF5E9]/50 text-[#111111] rounded-xl outline-none transition-all placeholder:text-zinc-400 font-medium text-sm border-2 ${
-                      error[field.name as keyof FormType]
+                      errors[field.name as keyof FormType]
                         ? "border-red-300 bg-red-50 focus:border-red-500"
                         : "border-transparent focus:border-primary/40 focus:bg-white"
                     }`}
                   />
                 </div>
-                {error[field.name as keyof FormType] && (
+                {errors[field.name as keyof FormType] && (
                   <span className="text-red-500 text-xs mt-1.5 ml-2 font-semibold">
-                    {error[field.name as keyof FormType]}
+                    {errors[field.name as keyof FormType]}
                   </span>
                 )}
               </div>
@@ -198,14 +201,14 @@ const ContactForm = () => {
                 value={formData.projectInfo}
                 onChange={handleChange}
                 className={`w-full px-5 py-4 bg-[#FAF5E9]/50 text-[#111111] rounded-xl outline-none transition-all placeholder:text-zinc-400 font-medium text-sm resize-none border-2 leading-relaxed ${
-                  error.projectInfo
+                  errors.projectInfo
                     ? "border-red-300 bg-red-50 focus:border-red-500"
                     : "border-transparent focus:border-primary/40 focus:bg-white"
                 }`}
               />
-              {error.projectInfo && (
+              {errors.projectInfo && (
                 <span className="text-red-500 text-xs mt-1.5 ml-2 font-semibold">
-                  {error.projectInfo}
+                  {errors.projectInfo}
                 </span>
               )}
             </div>
@@ -213,19 +216,13 @@ const ContactForm = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitted}
               className="group w-full py-4 mt-4 bg-[#111111] text-white font-bold text-sm tracking-wider rounded-xl shadow-lg hover:bg-primary transition-all duration-300 cursor-pointer uppercase flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Submitting...
-                </>
+              {loading ? (
+                <div className="w-6 h-6 border-2 border-zinc-200 border-t-primary rounded-full animate-spin" />
               ) : (
-                <>
-                  Get Free Quote
-                  <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </>
+                "Get Free Quote"
               )}
             </button>
           </form>

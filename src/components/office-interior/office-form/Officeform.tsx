@@ -24,8 +24,12 @@ const OfficeForm = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.currentTarget;
 
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -36,7 +40,7 @@ const OfficeForm = () => {
   };
 
   const validateForm = (): boolean => {
-    let tempErrors: FormErrors = {}; 
+    let tempErrors: FormErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
@@ -52,6 +56,8 @@ const OfficeForm = () => {
       tempErrors.phone = "Phone number is required";
     } else if (!phoneRegex.test(formData.phone.replace(/[-\s]/g, ""))) {
       tempErrors.phone = "Valid BD phone number required (e.g. 017xxxxxxxx)";
+    } else if (formData.phone.length > 11) {
+      tempErrors.phone = "Phone number can't be over 11 charecters";
     }
 
     if (!formData.projectInfo.trim()) {
@@ -63,29 +69,36 @@ const OfficeForm = () => {
   };
 
   const handleSubmit = async (e: FormEvent) => {
-      e.preventDefault();
-  
-      try {
-        if (validateForm()) {
-          if(process.env.NODE_ENV === 'development') {
-            console.log("Form Submitted Successfully:", formData);
-          }
-          await createLeadApi(formData);
-          setIsSubmitted(true);
-  
-          setFormData({ name: "", email: "", phone: "", projectInfo: "" });
-          setTimeout(() => setIsSubmitted(false), 5000);
-        }
-      } catch (error: any) {
+    e.preventDefault();
+    if (!validateForm()) return; 
+
+    setLoading(true);
+    setSubmitError("");
+    setIsSubmitted(false);
+    try {
+      if (validateForm()) {
         if (process.env.NODE_ENV === "development") {
-          console.error("Form Submission Error");
+          console.log("Form Submitted Successfully:", formData);
         }
+        await createLeadApi(formData);
+        setIsSubmitted(true);
+        
+
+        setFormData({ name: "", email: "", phone: "", projectInfo: "" });
+        setTimeout(() => setIsSubmitted(false), 5000);
       }
-    };
+    } catch (error: any) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Form Submission Error");
+      } 
+    } finally {
+      setLoading(false)
+    }
+  };
 
   return (
     <div className="w-full max-w-6xl mx-auto my-16 px-4 sm:px-6">
-      <div className="flex flex-col lg:flex-row w-full bg-secondary/90 rounded-3xl overflow-hidden shadow-2xl min-h-[550px]">
+      <div className="flex flex-col lg:flex-row w-full bg-secondary rounded-3xl overflow-hidden shadow-2xl min-h-[550px]">
         {/* Image Section */}
         <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-full bg-zinc-800">
           <Image
@@ -103,16 +116,17 @@ const OfficeForm = () => {
         <div className="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-center font-poppins">
           <div className="mb-8">
             <h2 className="text-2xl sm:text-3xl font-black text-white tracking-wide font-montagu">
-              Let Us Know Your Dream
+              Start Your Design Journey
             </h2>
             <p className="text-xs sm:text-sm text-zinc-300/90 mt-2 font-light leading-relaxed">
-              Get your dream home interior budget today. Let our experts help you.
+              Let our design experts map out the perfect plan for your home.
             </p>
           </div>
 
           {isSubmitted && (
             <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm rounded-xl font-medium animate-fade-in">
-              Thank you! Your request has been received. Our team will contact you soon.
+              Thank you! Your request has been received. Our team will contact
+              you soon.
             </div>
           )}
 
@@ -167,9 +181,15 @@ const OfficeForm = () => {
 
             <button
               type="submit"
-              className="w-full py-4 mt-2 bg-white text-primary font-extrabold text-sm sm:text-base tracking-wider rounded-xl shadow-md hover:bg-zinc-100 transition-all duration-200 cursor-pointer uppercase"
+              disabled={loading} 
+              className="w-full h-14 mt-2 flex items-center justify-center bg-white text-[#111111] font-bold text-sm sm:text-base tracking-widest rounded-xl shadow-sm hover:bg-zinc-50 transition-all duration-300 uppercase disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Get Free Quote
+              {loading ? (
+                
+                <div className="w-6 h-6 border-2 border-zinc-200 border-t-primary rounded-full animate-spin" />
+              ) : (
+                "Get Free Quote"
+              )}
             </button>
           </form>
         </div>

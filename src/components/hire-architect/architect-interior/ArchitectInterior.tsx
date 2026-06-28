@@ -2,7 +2,9 @@
 import { whatsAppApi } from "@/axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { Loader2 } from "lucide-react"; // লোডারের জন্য একটি আইকন ব্যবহার করতে পারেন
+import { Loader2 } from "lucide-react";
+import imgtwo from "@/logo/HomePage/Gemini_Generated_Image_Office2.png";
+import Image from "next/image";
 
 interface WhatsAppApiType {
   ms: number;
@@ -33,7 +35,6 @@ const ArchitectInterior = () => {
     queryFn: fetchWhatsAppNumber,
   });
 
-  // ✅ ১. ক্র্যাশ হওয়া থেকে বাঁচাতে সেফ অপশনাল চেইনিং
   const phoneNumber = data?.result?.[0]?.WhatsAppNumber || "01818383239";
 
   if (process.env.NODE_ENV === "development") {
@@ -46,7 +47,6 @@ const ArchitectInterior = () => {
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(defaultMessage)}`;
 
   const handleWhatsAppRedirect = () => {
-    
     if (isLoading || isError) return;
     window.open(whatsappUrl, "_blank");
   };
@@ -61,12 +61,11 @@ const ArchitectInterior = () => {
         </h2>
 
         <button
-          type="button" 
+          type="button"
           onClick={handleWhatsAppRedirect}
-          disabled={isLoading} 
+          disabled={isLoading}
           className="font-poppins flex items-center justify-center gap-2 mt-6 border w-fit mx-auto py-3 px-6 sm:py-4 sm:px-8 rounded-full bg-primary text-white font-medium hover:bg-opacity-90 transition-all duration-300 shadow-md text-sm sm:text-base cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
         >
-          
           {isError ? (
             <span>Contact on WhatsApp</span>
           ) : isLoading ? (
@@ -81,8 +80,18 @@ const ArchitectInterior = () => {
       </div>
 
       {/* Illustration Placeholder Card */}
-      <div className="w-full sm:w-[85%] md:w-[75%] lg:w-[55%] h-64 sm:h-72 lg:h-80 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-medium text-sm sm:text-base p-4">
-        Illustration Placeholder
+      <div className="w-full h-80 flex items-center justify-center">
+        <div className="w-full h-full relative bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
+          <Image
+            src={imgtwo}
+            alt="img"
+            fill
+            quality={100}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 66vw"
+            priority
+            className="object-cover rounded-lg"
+          />
+        </div>
       </div>
     </section>
   );

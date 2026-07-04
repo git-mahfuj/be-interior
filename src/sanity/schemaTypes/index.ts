@@ -6,11 +6,13 @@ import { WebsiteSettingsType } from "./WebsiteSettings";
 import { InteriorTeamType } from "./interiorTeamType";
 import { LeadType } from "./LeadType";
 import { BlogSchemtype } from "./BlogSchema";
+import { PackageSchema } from "./calculatorSchema";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     HomeProjectType,
     OfficeProjectType,
+    PackageSchema,
     BlogSchemtype,
     ClientType,
     WebsiteSettingsType,

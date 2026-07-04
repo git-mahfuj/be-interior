@@ -60,9 +60,9 @@ const Footer = () => {
   });
 
   const footerItems = data?.result || [];
-  if (process.env.NODE_ENV === "development") {
-    console.log("footer data", footerItems);
-  }
+  // if (process.env.NODE_ENV === "development") {
+  //   console.log("footer data", footerItems);
+  // }
   const footerNumberOne = footerItems[0]?.footercontactnumber1 || "01818383239";
   const footerNumberTwo = footerItems[0]?.footercontactnumber2 || "01818383239";
   const footerEmail =

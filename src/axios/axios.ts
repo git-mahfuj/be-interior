@@ -12,6 +12,7 @@ import {
   interiorTeam,
   officeInteriorPageClientReview,
   officeProjectQuery,
+  packageQuery,
   topFiveOfficeProjects,
   whatsAppNumber,
 } from "./query";
@@ -108,4 +109,8 @@ export const fetchtopFiveOfficeProjects = () => {
 
 export const allBlogApi = () => {
   return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${allBlogQuery}`)
+}
+
+export const packageItemsApi = () => {
+  return api.get(`https://${projectId}.api.sanity.io/v2026-06-03/data/query/production?query=${packageQuery}`)
 }

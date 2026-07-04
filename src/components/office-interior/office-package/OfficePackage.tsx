@@ -7,16 +7,15 @@ import { LuGem } from "react-icons/lu";
 import officeEssential from "@/logo/HomePage/Gemini_Generated_Image_office3.png";
 import officePremium from "@/logo/HomePage/Gemini_Generated_Image_office4.png";
 import officeLuxury from "@/logo/HomePage/Gemini_Generated_Image_office5.png";
+import Link from "next/link";
 
 const OfficePackage = () => {
-
   const packages = [
     {
       name: "Essential",
       price: "1300 - 1400",
       img: officeEssential,
-      icon: <FaRegStar className="text-white text-2xl opacity-90" />,
-      headerBg: "from-[#ff6b8b] to-[#ff8e53]", 
+      icon: <FaRegStar className="text-[#c35e00] text-2xl" />,
       features: [
         "Affordable Pricing",
         "Functional 2D Layout",
@@ -30,8 +29,7 @@ const OfficePackage = () => {
       name: "Premium",
       price: "1750 - 1850",
       img: officePremium,
-      icon: <LuGem className="text-white text-2xl opacity-90" />,
-      headerBg: "from-[#20b2aa] to-[#48d1cc]", 
+      icon: <LuGem className="text-[#c35e00] text-2xl" />,
       features: [
         "Value Driven Pricing",
         "Functional 2D Layout",
@@ -41,14 +39,13 @@ const OfficePackage = () => {
         "Laminate Finish",
         "Execution",
       ],
-      isFeatured: true, 
+      isFeatured: true,
     },
     {
       name: "Luxury",
       price: "2400 - 2600",
       img: officeLuxury,
-      icon: <FaCrown className="text-white text-2xl opacity-90" />,
-      headerBg: "from-[#ff9f43] to-[#ffbe76]", 
+      icon: <FaCrown className="text-[#c35e00] text-2xl" />,
       features: [
         "Exclusive Pricing",
         "Functional 2D Layout",
@@ -63,78 +60,98 @@ const OfficePackage = () => {
   ];
 
   return (
-    <div className="w-full bg-zinc-50 py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center font-poppins">
-      
-
-      <div className="text-center mb-20">
-        <h2 className="text-3xl md:text-5xl font-black tracking-wide text-zinc-800 uppercase font-montagu">
+    <section className="w-full bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20 font-sans">
+      {/* Header */}
+      <div className="text-center mb-20 max-w-2xl mx-auto">
+        <h2 className="text-3xl md:text-5xl font-montagu font-bold text-[#111111]">
           Our <span className="text-primary">Packages</span>
         </h2>
-        <p className="text-zinc-500 mt-2 text-sm sm:text-base font-medium">Tailored solutions for every standard</p>
-        <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full" />
+        <div className="w-20 h-1 bg-primary mt-4 rounded-full mb-14 mx-auto" />
+
+        <p className="text-zinc-600 mt-4 text-sm md:text-base leading-relaxed font-medium">
+          Tailored interior solutions designed to perfectly match your standard,
+          aesthetics, and functional requirements.
+        </p>
       </div>
 
+      {/* Horizontal Zig-Zag Layout */}
+      <div className="flex flex-col gap-12 lg:gap-20 max-w-6xl mx-auto">
+        {packages.map((pkg, index) => {
+          const isEven = index % 2 === 0;
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-4 items-stretch justify-center w-full max-w-6xl px-2 lg:px-0">
-        {packages.map((pkg, index) => (
-          <div
-            key={index}
-            className={`w-full bg-white rounded-[32px] shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-zinc-100 overflow-hidden transition-all duration-500 flex flex-col group relative
-              ${pkg.isFeatured ? "md:-translate-y-6 md:shadow-[0_25px_60px_rgba(54,88,86,0.15)] z-10 border-[#20b2aa]/20" : "hover:-translate-y-2 z-0"}
-            `}
-          >
+          return (
+            <div
+              key={index}
+              className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 bg-white p-6 md:p-8 lg:p-10 rounded-[2.5rem] shadow-sm border border-[#111111]/5 transition-all duration-300 hover:shadow-xl ${
+                pkg.isFeatured ? "ring-2 ring-[#c35e00]/20 relative" : ""
+              }`}
+            >
+              {/* Featured Badge */}
+              {pkg.isFeatured && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#c35e00] text-white px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase shadow-md z-10">
+                  Most Popular
+                </div>
+              )}
 
-            <div className={`relative bg-gradient-to-r ${pkg.headerBg} pt-8 pb-14 px-8 text-white flex justify-between items-center overflow-hidden`}>
-  
-              <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_bottom_left,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-              
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-black tracking-wide font-montagu mb-1">
-                  {pkg.name}
-                </h3>
-                <p className="text-xs font-semibold opacity-90 uppercase tracking-wider">
-                  BDT {pkg.price} / sqft
-                </p>
-              </div>
-              
-    
-              <div className="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
-                {pkg.icon}
-              </div>
-            </div>
-
-
-            <div className="px-6 -mt-8 relative z-20">
-              <div className="w-full aspect-[16/10] relative rounded-2xl overflow-hidden bg-zinc-100 shadow-md border-2 border-white">
-                <Image 
-                  src={pkg.img} 
-                  alt={`${pkg.name} office interior`}
+              {/* Image Section */}
+              <div
+                className={`w-full lg:w-1/2 aspect-[4/3] lg:aspect-[5/4] relative rounded-3xl overflow-hidden bg-zinc-100 ${isEven ? "lg:order-1" : "lg:order-2"}`}
+              >
+                <Image
+                  src={pkg.img}
+                  alt={`${pkg.name} interior design`}
                   fill
-                  sizes="(max-w-768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
                   priority={pkg.isFeatured}
                 />
               </div>
-            </div>
 
+              {/* Content Section */}
+              <div
+                className={`w-full lg:w-1/2 flex flex-col justify-center ${isEven ? "lg:order-2" : "lg:order-1"}`}
+              >
+                {/* Header Info */}
+                <div className="flex items-center gap-5 mb-6">
+                  <div className="w-14 h-14 rounded-full bg-[#FAF5E9] flex items-center justify-center shrink-0">
+                    {pkg.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-3xl lg:text-4xl font-montagu font-bold text-[#111111] mb-1">
+                      {pkg.name}
+                    </h3>
+                    <p className="text-lg font-semibold text-zinc-500">
+                      BDT {pkg.price}{" "}
+                      <span className="text-sm font-normal">/ sqft</span>
+                    </p>
+                  </div>
+                </div>
 
-            <div className="p-8 flex-1 flex flex-col justify-between">
-              <ul className="space-y-3.5">
-                {pkg.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-zinc-600 text-sm font-medium">
-                    <span className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full bg-amber-50 border border-amber-300 flex items-center justify-center text-[10px] text-amber-600 font-bold">
-                      ✓
-                    </span>
-                    <span className="leading-tight">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+                <div className="w-full h-px bg-[#111111]/10 mb-8" />
+
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-10">
+                  {pkg.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className="text-[#c35e00] font-bold mt-0.5">✓</span>
+                      <span className="text-zinc-700 text-sm md:text-base font-medium leading-snug">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link href={"/services/budget-calculator"}>
+                  {" "}
+                  <button className="w-fit mx-auto px-8 py-3.5 bg-[#111111] text-white rounded-xl font-bold tracking-widest text-xs uppercase hover:bg-[#c35e00] transition-colors duration-300">
+                    Select {pkg.name}
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
-
-    </div>
+    </section>
   );
 };
 

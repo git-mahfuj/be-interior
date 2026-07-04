@@ -50,13 +50,15 @@ const OfficeReview = () => {
   }
 
   return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory">
+    <div className="flex flex-col w-full items-center justify-center px-4 p-10 bg-ivory">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary/80 tracking-wide font-bold ">
         Check Some Review
       </h2>
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-primary tracking-wide font-bold ">
         of our customers
       </h2>
+      <div className="w-20 h-1 bg-primary mt-4 rounded-full mb-14" />
+
 
       <div className="flex flex-col  md:flex-row items-center justify-center gap-8 mt-8 w-full max-w-7xl">
         <div className="w-full max-w-8xl mt-10 h-110 rounded-lg">

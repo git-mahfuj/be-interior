@@ -133,3 +133,8 @@ export const allBlogQuery = encodeURIComponent(`*[_type == "blogs"]{
   content,
   publishedDate
 }`);
+
+export const packageQuery = encodeURIComponent(`*[_type == "packageType"]{
+  packagename,
+  packageitems
+}`);

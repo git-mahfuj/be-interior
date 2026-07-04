@@ -26,12 +26,12 @@ const OfficeService = () => {
   return (
     <section className="w-full bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20">
       <div className="max-w-6xl mx-auto">
-        
         {/* Simple & Clean Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-montagu font-bold text-[#111111]">
             Services <span className="text-primary">We Offer</span>
           </h2>
+          <div className="w-20 h-1 bg-primary mt-4 rounded-full mb-14 mx-auto" />
         </div>
 
         {/* Grid Cards */}
@@ -50,14 +50,13 @@ const OfficeService = () => {
               <h3 className="text-lg md:text-xl font-bold text-[#111111] mb-3 font-montagu">
                 {service.title}
               </h3>
-              
+
               <p className="text-zinc-600 text-sm md:text-base leading-relaxed">
                 {service.desc}
               </p>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

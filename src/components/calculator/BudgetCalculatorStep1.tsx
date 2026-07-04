@@ -16,6 +16,8 @@ import { FaCrown, FaRegStar } from "react-icons/fa";
 import { LuGem } from "react-icons/lu";
 import { DivergencesProvider } from "sanity";
 import { preconnect } from "react-dom";
+import { packageItemsApi } from "@/axios/axios";
+import { useQuery } from "@tanstack/react-query";
 
 // --- Data Arrays ---
 const options3BHK = [
@@ -44,6 +46,7 @@ const flatSizes = [
 ];
 
 // Step 2 Data (Categorized for Logic)
+
 const bedroomTypes = ["Master Bedroom", "Child Bedroom", "Guest Bedroom"];
 const otherRooms = [
   "Drawing Room",
@@ -56,865 +59,39 @@ const otherRooms = [
 ];
 const allRoomOptions = [...bedroomTypes, ...otherRooms];
 
-const roomsAccessoryTypes = [
-  {
-    packageType: "essential",
-    packageItems: [
-      {
-        room: "Master Bedroom",
-        furniture: {
-          slogan: "Dream in style with our personalized bedroom essentials",
-          items: [
-            "Dress Cabinet",
-            "False Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish (matte)",
-          "White ceiling (basic designs)",
-          "Wall Paper",
-          "T5 light",
-          "standard mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Child Bedroom",
-        furniture: {
-          slogan:
-            "Where imagination meets functionality: Kid-friendly furniture they will love!",
-          items: [
-            "Dress Cabinet",
-            "False Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Unit",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish (matte)",
-          "White ceiling (basic designs)",
-          "Wall Paper",
-          "T5 light",
-          "standard mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Guest Bedroom",
-        furniture: {
-          slogan: "Stylish and functional: Your guests deserve the best",
-          items: [
-            "Dress Cabinet",
-            "False Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Unit",
-            "Pelmet",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish (matte)",
-          "White ceiling (basic designs)",
-          "T5 light",
-          "standard mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Drawing Room",
-        furniture: {
-          slogan: "The heart of your home, beautifully furnished",
-          items: [
-            "Book Shelves",
-            "Decorative Shelves",
-            "False Ceiling",
-            "TV Unit with Back Panel",
-            "Pelmet",
-            "Shoe Rack",
-            "Wall paper/ Skim/Texture Paint (single wall)",
-            "Decor, Art-work & Painting",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish (matte)",
-          "White ceiling (basic designs)",
-          "T5 light",
-          "metal Channel",
-          "Wall Paper",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Family Living",
-        furniture: {
-          slogan:
-            "Cozy, functional, and stylish: Furniture for unforgettable family moments",
-          items: [
-            "Book Shelves",
-            "False Ceiling",
-            "Wall Panel",
-            "Pelmet",
-            "Wall paper/ Skim/Texture Paint (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish (Matte)",
-          "White ceiling (basic designs)",
-          "White board paneling",
-          "Wall Paper",
-          "T5 light",
-          "SS soft-close hinges",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Dining Room",
-        furniture: {
-          slogan: "Dine in luxury: Furniture that complements every meal",
-          items: [
-            "Dining wagon",
-            "False Ceiling",
-            "Dining Basin",
-            "Basin Cabinet With paneling",
-            "Pelmet",
-            "Fridge Cabinet",
-            "Skim/Texture Paint (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish (Matte)",
-          "White ceiling (basic designs)",
-          "textured Paint",
-          "Glass Door & Shelves",
-          "Marble top",
-          "T5 light",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Kitchen",
-        furniture: {
-          slogan:
-            "Smart designs, smarter kitchens: Organize your culinary haven",
-          items: [
-            "Kitchen Upper Cabinet",
-            "Kitchen Middle Cabinet",
-            "Kitchen Lower Cabinet",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish (glossy)",
-          "PVC board",
-          "Glass Door & Shelves",
-          "profile handle",
-          "profile edging",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Open Kitchen",
-        furniture: {
-          slogan: "Style meets function: Furniture for seamless open kitchens",
-          items: [
-            "Kitchen Upper Cabinet",
-            "Kitchen Middle Cabinet",
-            "Kitchen Lower Cabinet",
-            "Breakfast Table",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish (glossy)",
-          "White ceiling (basic designs)",
-          "Marble top",
-          "Glass Shelves",
-          "profile handle",
-          "profile edging",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Toilet",
-        furniture: {
-          slogan: "Start and end your day in a perfectly furnished retreat",
-          items: ["Shower Encloser", "Basin Cabinet", "Mirror (Basic)"],
-        },
-        accessories: [
-          "HPL Laminate finish (Matte)",
-          "PVC Board",
-          "10mm glass",
-          "standard quality accessories",
-          "SS soft-close hinges",
-          "Sliding /hinged door (tempered)",
-          "Mirror",
-          "standard hardware",
-        ],
-      },
-      {
-        room: "Prayer Space",
-        furniture: {
-          slogan: "Serenity starts here: Furniture for your sacred space",
-          items: [
-            "Wall Panel",
-            "False Ceiling",
-            "Low Height cabinet",
-            "Wall-paper (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish (Matte)",
-          "White ceiling (basic designs)",
-          "White board paneling",
-          "T5 light",
-          "Wall Paper",
-          "SS soft-close hinges",
-          "standard hardware",
-        ],
-      },
-    ],
-  },
-  {
-    packageType: "premium",
-    packageItems: [
-      {
-        room: "Master Bedroom",
-        furniture: {
-          slogan:
-            "Your sanctuary, redefined: Elegant furniture for the ultimate retreat",
-          items: [
-            "Dress Cabinet",
-            "False Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Bed Back",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Polish)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Design ceiling",
-          "Wall Paper",
-          "T5 light",
-          "Spot light",
-          "metal Channel",
-          "mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Child Bedroom",
-        furniture: {
-          slogan: "Crafting spaces for dreams to grow and memories to flourish",
-          items: [
-            "Dress Cabinet",
-            "False Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Bed Back",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Polish)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Design ceiling",
-          "Wall Paper",
-          "T5 light",
-          "Spot light",
-          "metal Channel",
-          "mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Guest Bedroom",
-        furniture: {
-          slogan:
-            "Welcoming comfort: Furniture that makes every guest feel at home",
-          items: [
-            "Dress Cabinet",
-            "False Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Polish)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Design ceiling",
-          "Wall Paper",
-          "T5 light",
-          "Spot light",
-          "mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Drawing Room",
-        furniture: {
-          slogan:
-            "Showcase your style with a drawing room that speaks elegance",
-          items: [
-            "Book Shelves",
-            "Decorative Shelves",
-            "False Ceiling",
-            "Decorative Ceiling",
-            "TV Unit with Back Panel",
-            "Wall Panel",
-            "Pelmet",
-            "Shoe Rack",
-            "Wall paper/ Skim/Texture Paint (single wall)",
-            "Existing Door Color (Polish)",
-            "Decor, Art-work & Painting",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Design ceiling",
-          "T5 light",
-          "Spot light",
-          "metal Channel",
-          "Glass Shelves",
-          "Wall Paper",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Family Living",
-        furniture: {
-          slogan: "Gather, relax, and enjoy in a living room tailored for you",
-          items: [
-            "Book Shelves",
-            "Decorative Shelves",
-            "False Ceiling",
-            "TV Unit with Back Panel",
-            "Wall Panel",
-            "Pelmet",
-            "Wall paper/ Skim/Texture Paint (single wall)",
-            "Existing Door Color (Polish)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Design ceiling",
-          "White board paneling",
-          "Wall Paper",
-          "Glass Shelves",
-          "T5 light",
-          "Spot light",
-          "SS soft-close hinges",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Dining Room",
-        furniture: {
-          slogan:
-            "Set the table for style and comfort with our dining solutions",
-          items: [
-            "Dining wagon",
-            "Decorative Ceiling",
-            "False Ceiling",
-            "Dining Basin",
-            "Basin Cabinet With paneling",
-            "Pelmet",
-            "Fridge Cabinet",
-            "Skim/Texture Paint (single wall)",
-            "Existing Door Color (Polish)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Design ceiling",
-          "White board paneling",
-          "textured Paint",
-          "Glass Door & Shelves",
-          "T5 light",
-          "Spot light",
-          "Marble top",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Kitchen",
-        furniture: {
-          slogan:
-            "Cook, store, and impress with furniture built for modern kitchens",
-          items: [
-            "Kitchen Upper Cabinet",
-            "Kitchen Middle Cabinet",
-            "Kitchen Lower Cabinet",
-            "Modifying Door",
-            "Existing Door Color (Polish)",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "PVC board",
-          "Glass Door & Shelves",
-          "Profile glass",
-          "profile handle",
-          "profile edging",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Open Kitchen",
-        furniture: {
-          slogan: "Where culinary art meets aesthetic design",
-          items: [
-            "Kitchen Upper Cabinet",
-            "Kitchen Middle Cabinet",
-            "Kitchen Lower Cabinet",
-            "Breakfast Table",
-            "False Ceiling",
-            "Indoor Green",
-            "Feature light (Basic)",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Design ceiling",
-          "Marble top",
-          "Glass Shelves",
-          "Profile glass",
-          "profile handle",
-          "profile edging",
-          "T5 light",
-          "Spot light",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Toilet",
-        furniture: {
-          slogan:
-            "Luxury meets utility: Furniture that transforms your bathroom space",
-          items: [
-            "Shower Encloser",
-            "Basin Cabinet",
-            "Mirror",
-            "Basin (Basic)",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "PVC Board",
-          "T5 light",
-          "Spot light",
-          "10mm glass",
-          "standard quality accessories",
-          "SS soft-close hinges",
-          "Sliding /hinged door (tempered)",
-          "Mirror",
-          "Heigh Quality hardware",
-        ],
-      },
-      {
-        room: "Prayer Space",
-        furniture: {
-          slogan: "Create a corner of calm with furniture that inspires peace",
-          items: [
-            "Wall Panel",
-            "False Ceiling",
-            "Low Height Cabinet",
-            "Wall-paper (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Design ceiling",
-          "Islamic theme paneling",
-          "Wall Paper",
-          "Glass Shelves",
-          "SS soft-close hinges",
-          "Heigh Quality hardware",
-        ],
-      },
-    ],
-  },
-  {
-    packageType: "luxury",
-    packageItems: [
-      {
-        room: "Master Bedroom",
-        furniture: {
-          slogan: "Transform your sleep space into a luxurious escape",
-          items: [
-            "Door Cabinetry & Shelves",
-            "False Ceiling",
-            "Decorative Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Bed Back",
-            "Wall Panel",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Lacquer)",
-            "Decor, Art-work & Painting",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Luxury ceiling",
-          "Wall Paper",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "metal Channel",
-          "mirror",
-          "Artificial Leather",
-          "Heigh Quality Foam",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Branded hardware",
-          "moisture-resistant",
-        ],
-      },
-      {
-        room: "Child Bedroom",
-        furniture: {
-          slogan:
-            "Furniture designed to spark creativity and joy for your little ones",
-          items: [
-            "Door Cabinetry & Shelves",
-            "False Ceiling",
-            "Decorative Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Bed Back",
-            "Wall Panel",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Lacquer)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Luxury ceiling",
-          "Wall Paper",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "metal Channel",
-          "mirror",
-          "Artificial Leather",
-          "Heigh Quality Foam",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Branded hardware",
-          "moisture-resistant",
-        ],
-      },
-      {
-        room: "Guest Bedroom",
-        furniture: {
-          slogan: "Create a lasting impression with our guest-ready designs",
-          items: [
-            "Door Cabinetry & Shelves",
-            "False Ceiling",
-            "Decorative Ceiling",
-            "Study Unit",
-            "Bed",
-            "Bed Side Table",
-            "Dressing Table",
-            "Bed Back",
-            "Pelmet",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Lacquer)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "Board with HPL laminate finish",
-          "Luxury ceiling",
-          "Wall Paper",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "metal Channel",
-          "mirror",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Branded hardware",
-          "moisture-resistant",
-        ],
-      },
-      {
-        room: "Drawing Room",
-        furniture: {
-          slogan:
-            "Set the stage for unforgettable gatherings with exquisite designs",
-          items: [
-            "Book Shelves",
-            "Decorative Shelves",
-            "False Ceiling",
-            "Decorative Ceiling",
-            "TV Unit with Back Panel",
-            "Wall Panel",
-            "Pelmet",
-            "Shoe Rack",
-            "Wall-paper (single wall)",
-            "Existing Door Color (Lacquer)",
-            "Decor, Art-work & Painting",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Luxury ceiling",
-          "Design paneling",
-          "Wall Paper",
-          "Glass Shelves",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "metal Channel",
-          "mirror sheet",
-          "SS soft-close hinges",
-          "Branded hardware",
-        ],
-      },
-      {
-        room: "Family Living",
-        furniture: {
-          slogan:
-            "Turn your family space into the perfect hub of comfort and style",
-          items: [
-            "Book Shelves",
-            "Decorative Shelves",
-            "False Ceiling",
-            "TV Unit with Back Panel",
-            "Wall Panel",
-            "Pelmet",
-            "Divan",
-            "Wall paper/ Skim/Texture Paint (single wall)",
-            "Existing Door Color (Lacquer)",
-            "Decor, Art work & Painting",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Luxury ceiling",
-          "Design paneling",
-          "Wall Paper",
-          "Glass Shelves",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "Artificial Leather",
-          "Heigh Quality Foam",
-          "SS soft-close hinges",
-          "Branded hardware",
-        ],
-      },
-      {
-        room: "Dining Room",
-        furniture: {
-          slogan: "Because great conversations deserve great spaces",
-          items: [
-            "Dining wagon",
-            "Consul Table",
-            "Decorative Ceiling",
-            "False Ceiling",
-            "Dining Basin",
-            "Basin Cabinet With paneling",
-            "Pelmet",
-            "Fridge Cabinet",
-            "Skim/Texture Paint (single wall)",
-            "Existing Door Color (Lacquer)",
-            "Decor, Art-work & Painting",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Luxury ceiling",
-          "Design paneling",
-          "textured Paint",
-          "Profile Glass",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "Marble top",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Branded hardware",
-        ],
-      },
-      {
-        room: "Kitchen",
-        furniture: {
-          slogan: "Innovative kitchen solutions to match your lifestyle",
-          items: [
-            "Kitchen Upper Cabinet",
-            "Kitchen Middle Cabinet",
-            "Kitchen Lower Cabinet",
-            "Modifying Door",
-            "Fridge Cabinet",
-            "Existing Door Color (Lacquer)",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "PVC board",
-          "Glass Door & Shelves",
-          "Profile glass",
-          "profile handle",
-          "profile edging",
-          "T5 light",
-          "Profile light",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Branded hardware",
-        ],
-      },
-      {
-        room: "Open Kitchen",
-        furniture: {
-          slogan:
-            "Expand your kitchens charm with thoughtfully crafted furniture",
-          items: [
-            "Kitchen Upper Cabinet",
-            "Kitchen Middle Cabinet",
-            "Kitchen Lower Cabinet",
-            "Breakfast Table",
-            "False Ceiling",
-            "Indoor Green",
-            "Feature light",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Luxury ceiling",
-          "sunstone top",
-          "Glass Shelves",
-          "Profile glass",
-          "profile handle",
-          "profile edging",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "SS soft-close hinges",
-          "SS drawer channel",
-          "Branded hardware",
-        ],
-      },
-      {
-        room: "Toilet",
-        furniture: {
-          slogan: "Elegant storage solutions for a clutter-free washroom",
-          items: ["Shower Encloser", "Basin Cabinet", "Mirror", "Basin"],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "PVC Board",
-          "10mm glass",
-          "Heigh quality accessories",
-          "SS soft-close hinges",
-          "Sliding /hinged door (tempered)",
-          "Mirror",
-          "basin (premium)",
-        ],
-      },
-      {
-        room: "Prayer Space",
-        furniture: {
-          slogan: "Crafted for your moments of devotion and reflection",
-          items: [
-            "Wall Panel",
-            "False Ceiling",
-            "Low Height Cabinet",
-            "Decorative Ceiling",
-            "Wall-paper (single wall)",
-            "Indoor Green",
-          ],
-        },
-        accessories: [
-          "HPL Laminate finish",
-          "Luxury ceiling",
-          "Islamic theme paneling",
-          "Wall Paper",
-          "Glass Shelves",
-          "T5 light",
-          "Spot light",
-          "Profile light",
-          "SS soft-close hinges",
-          "Branded hardware",
-        ],
-      },
-    ],
-  },
-];
+export interface PackageItem {
+  name: string;
+  price: string;
+  slogan: string;
+  furniture: string[];
+  accessories: string[];
+}
+export interface PackageResult {
+  packagename: string;
+  packageitems: PackageItem[];
+}
+
+export interface PackageType {
+  ms: number;
+  query: string;
+  result: PackageResult[];
+  syncTags: string[];
+}
+
+const fetchPackageItems = async () => {
+  try {
+    const res = await packageItemsApi();
+    if (res.status !== 200) {
+      throw new Error("Status Code Error");
+    }
+    return res.data;
+  } catch (error: any) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error Package Api Fetch", error.message);
+    }
+    throw error;
+  }
+};
 
 interface Formtype {
   name: string;
@@ -925,6 +102,42 @@ interface Formtype {
 type FormErrors = Partial<Formtype>;
 
 const BudgetCalculator = () => {
+  const { data, isLoading, isError , error } = useQuery<PackageType>({
+    queryKey: ["package-type"],
+    queryFn: fetchPackageItems,
+  });
+
+  if (process.env.NODE_ENV === "development") {
+    console.log("Package Data", data?.result);
+  }
+
+  const fetchResult = data?.result || [];
+
+  const essentialpackageItems = fetchResult.filter((item) => {
+    if (item.packagename === "essential") {
+      return item.packageitems;
+    }
+  });
+  if (process.env.NODE_ENV === "development") {
+    console.log("essentialpackageItem", essentialpackageItems);
+  }
+  const luxurypackageItems = fetchResult.filter((item) => {
+    if (item.packagename === "luxury") {
+      return item.packageitems;
+    }
+  });
+  if (process.env.NODE_ENV === "development") {
+    console.log("luxurypackageItem", luxurypackageItems);
+  }
+  const premiumPackageItems = fetchResult.filter((item) => {
+    if (item.packagename === "premium") {
+      return item.packageitems;
+    }
+  });
+  if (process.env.NODE_ENV === "development") {
+    console.log("premiumPackageItem", premiumPackageItems);
+  }
+
   const [currentStep, setCurrentStep] = useState(1);
   const [errorModal, setErrorModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -1213,14 +426,13 @@ const BudgetCalculator = () => {
         const isBedroom = bedroomTypes.includes(room);
         const isToilet = room === "Toilet";
 
-        // Show Plus Button if it's a bedroom or a toilet (tolets can go up to 4)
         const canIncrement = isBedroom || isToilet;
 
         return (
           <div
             key={idx}
             onClick={() => toggleRoomCheckbox(room)}
-            className={`flex items-center justify-between px-5 py-4 bg-white rounded-xl cursor-pointer transition-all duration-300 ${isSelected ? "border-[2px] border-[#C87A31] shadow-md" : "border-[2px] border-white/50 hover:border-[#111111]/20"}`}
+            className={`flex items-center justify-between px-5 py-4 bg-white rounded-xl cursor-pointer transition-all duration-300 ${isSelected ? "border-[2px] border-[#C87A31] shadow-md" : "border-2 border-white/50 hover:border-[#111111]/20"}`}
           >
             <div className="flex items-center gap-4">
               <div
@@ -1479,27 +691,27 @@ const BudgetCalculator = () => {
       <div className="overflow-y-auto flex flex-col gap-8 items-center justify-start max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.08)] h-[60vh] min-h-125 border border-[#111111]/5 custom-scrollbar">
         {selectedPackage === "essential" ? (
           <div className="w-full space-y-6">
-            {roomsAccessoryTypes.length > 0 &&
-              roomsAccessoryTypes.map((packageTypes) => {
+            {essentialpackageItems.length > 0 &&
+              essentialpackageItems.map((packageTypes) => {
                 return (
-                  <div key={packageTypes.packageType} className="w-full">
-                    {packageTypes.packageType === "premium" &&
-                      packageTypes.packageItems.map((items) => {
-                        const selectedItems = items.room in selectedRooms;
+                  <div key={packageTypes.packagename} className="w-full">
+                    {packageTypes.packagename === "essential" &&
+                      packageTypes.packageitems.map((items) => {
+                        const selectedItems = items.name in selectedRooms;
                         return (
-                          <div key={items.room} className="w-full">
+                          <div key={items.name} className="w-full">
                             {selectedItems === true && (
                               <div className="bg-[#FAF5E9]/40 border border-[#111111]/10 rounded-2xl p-6 md:p-8 mb-6 transition-all hover:bg-[#FAF5E9]/80 hover:shadow-md">
                                 {/* Room Header */}
                                 <div className="border-b border-[#111111]/10 pb-4 mb-6">
                                   <h3 className="text-2xl md:text-3xl font-montagu font-bold text-[#111111] mb-1">
-                                    {items.room}{" "}
+                                    {items.name}{" "}
                                     <span>
-                                      <span>{`(${selectedRooms[items.room]})`}</span>
+                                      <span>{`(${selectedRooms[items.name]})`}</span>
                                     </span>
                                   </h3>
                                   <p className="text-sm text-zinc-500 italic">
-                                    "{items.furniture.slogan}"
+                                    "{items.slogan}"
                                   </p>
                                 </div>
 
@@ -1510,19 +722,17 @@ const BudgetCalculator = () => {
                                       Furnitures
                                     </p>
                                     <ul className="space-y-2">
-                                      {items.furniture?.items?.map(
-                                        (item, id) => (
-                                          <li
-                                            key={id}
-                                            className="flex items-start gap-2 text-sm text-zinc-700"
-                                          >
-                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0"></span>
-                                            <span className="leading-relaxed">
-                                              {item}
-                                            </span>
-                                          </li>
-                                        ),
-                                      )}
+                                      {items.furniture?.map((item, id) => (
+                                        <li
+                                          key={id}
+                                          className="flex items-start gap-2 text-sm text-zinc-700"
+                                        >
+                                          <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0"></span>
+                                          <span className="leading-relaxed">
+                                            {item}
+                                          </span>
+                                        </li>
+                                      ))}
                                     </ul>
                                   </div>
 
@@ -1547,27 +757,27 @@ const BudgetCalculator = () => {
           </div>
         ) : selectedPackage === "premium" ? (
           <div className="w-full space-y-6">
-            {roomsAccessoryTypes.length > 0 &&
-              roomsAccessoryTypes.map((packageTypes) => {
+            {premiumPackageItems.length > 0 &&
+              premiumPackageItems.map((packageTypes) => {
                 return (
-                  <div key={packageTypes.packageType} className="w-full">
-                    {packageTypes.packageType === "premium" &&
-                      packageTypes.packageItems.map((items) => {
-                        const selectedItems = items.room in selectedRooms;
+                  <div key={packageTypes.packagename} className="w-full">
+                    {packageTypes.packagename === "premium" &&
+                      packageTypes.packageitems.map((items) => {
+                        const selectedItems = items.name in selectedRooms;
                         return (
-                          <div key={items.room} className="w-full">
+                          <div key={items.name} className="w-full">
                             {selectedItems === true && (
                               <div className="bg-[#FAF5E9]/40 border border-[#111111]/10 rounded-2xl p-6 md:p-8 mb-6 transition-all hover:bg-[#FAF5E9]/80 hover:shadow-md">
                                 {/* Room Header */}
                                 <div className="border-b border-[#111111]/10 pb-4 mb-6">
                                   <h3 className="text-2xl md:text-3xl font-montagu font-bold text-[#111111] mb-1">
-                                    {items.room}{" "}
+                                    {items.name}{" "}
                                     <span>
-                                      <span>{`(${selectedRooms[items.room]})`}</span>
+                                      <span>{`(${selectedRooms[items.name]})`}</span>
                                     </span>
                                   </h3>
                                   <p className="text-sm text-zinc-500 italic">
-                                    "{items.furniture.slogan}"
+                                    "{items.slogan}"
                                   </p>
                                 </div>
 
@@ -1578,19 +788,17 @@ const BudgetCalculator = () => {
                                       Furnitures
                                     </p>
                                     <ul className="space-y-2">
-                                      {items.furniture?.items?.map(
-                                        (item, id) => (
-                                          <li
-                                            key={id}
-                                            className="flex items-start gap-2 text-sm text-zinc-700"
-                                          >
-                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0"></span>
-                                            <span className="leading-relaxed">
-                                              {item}
-                                            </span>
-                                          </li>
-                                        ),
-                                      )}
+                                      {items.furniture.map((item, id) => (
+                                        <li
+                                          key={id}
+                                          className="flex items-start gap-2 text-sm text-zinc-700"
+                                        >
+                                          <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0"></span>
+                                          <span className="leading-relaxed">
+                                            {item}
+                                          </span>
+                                        </li>
+                                      ))}
                                     </ul>
                                   </div>
 
@@ -1615,27 +823,27 @@ const BudgetCalculator = () => {
           </div>
         ) : selectedPackage === "luxury" ? (
           <div className="w-full space-y-6">
-            {roomsAccessoryTypes.length > 0 &&
-              roomsAccessoryTypes.map((packageTypes) => {
+            {luxurypackageItems.length > 0 &&
+              luxurypackageItems.map((packageTypes) => {
                 return (
-                  <div key={packageTypes.packageType} className="w-full">
-                    {packageTypes.packageType === "premium" &&
-                      packageTypes.packageItems.map((items) => {
-                        const selectedItems = items.room in selectedRooms;
+                  <div key={packageTypes.packagename} className="w-full">
+                    {packageTypes.packagename === "luxury" &&
+                      packageTypes.packageitems.map((items) => {
+                        const selectedItems = items.name in selectedRooms;
                         return (
-                          <div key={items.room} className="w-full">
+                          <div key={items.name} className="w-full">
                             {selectedItems === true && (
                               <div className="bg-[#FAF5E9]/40 border border-[#111111]/10 rounded-2xl p-6 md:p-8 mb-6 transition-all hover:bg-[#FAF5E9]/80 hover:shadow-md">
                                 {/* Room Header */}
                                 <div className="border-b border-[#111111]/10 pb-4 mb-6">
                                   <h3 className="text-2xl md:text-3xl font-montagu font-bold text-[#111111] mb-1">
-                                    {items.room}{" "}
+                                    {items.name}{" "}
                                     <span>
-                                      <span>{`(${selectedRooms[items.room]})`}</span>
+                                      <span>{`(${selectedRooms[items.name]})`}</span>
                                     </span>
                                   </h3>
                                   <p className="text-sm text-zinc-500 italic">
-                                    "{items.furniture.slogan}"
+                                    "{items.slogan}"
                                   </p>
                                 </div>
 
@@ -1646,19 +854,17 @@ const BudgetCalculator = () => {
                                       Furnitures
                                     </p>
                                     <ul className="space-y-2">
-                                      {items.furniture?.items?.map(
-                                        (item, id) => (
-                                          <li
-                                            key={id}
-                                            className="flex items-start gap-2 text-sm text-zinc-700"
-                                          >
-                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0"></span>
-                                            <span className="leading-relaxed">
-                                              {item}
-                                            </span>
-                                          </li>
-                                        ),
-                                      )}
+                                      {items?.furniture.map((item, id) => (
+                                        <li
+                                          key={id}
+                                          className="flex items-start gap-2 text-sm text-zinc-700"
+                                        >
+                                          <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0"></span>
+                                          <span className="leading-relaxed">
+                                            {item}
+                                          </span>
+                                        </li>
+                                      ))}
                                     </ul>
                                   </div>
 
@@ -1733,6 +939,80 @@ const BudgetCalculator = () => {
       </div>
     );
   };
+
+  let essentialTotalPrice = 0;
+
+  if (
+    essentialpackageItems &&
+    essentialpackageItems.length > 0 &&
+    essentialpackageItems[0].packageitems
+  ) {
+    essentialTotalPrice = essentialpackageItems[0].packageitems.reduce(
+      (total, currentItem) => {
+        const quantity = selectedRooms[currentItem.name] || 0;
+
+        const itemTotalPrice = Number(currentItem.price || 0) * quantity;
+
+        return total + itemTotalPrice;
+      },
+      0,
+    );
+  }
+
+  let premiumTotalPrice = 0;
+  if (
+    premiumPackageItems &&
+    premiumPackageItems.length > 0 &&
+    premiumPackageItems[0].packageitems
+  ) {
+    premiumTotalPrice = premiumPackageItems[0].packageitems.reduce(
+      (total, currentItem) => {
+        const quantity = selectedRooms[currentItem.name] || 0;
+        const itemTotalPrice = Number(currentItem.price || 0) * quantity;
+        return total + itemTotalPrice;
+      },
+      0,
+    );
+  }
+
+  let luxuryTotalPrice = 0;
+  if (
+    luxurypackageItems &&
+    luxurypackageItems.length > 0 &&
+    luxurypackageItems[0].packageitems
+  ) {
+    luxuryTotalPrice = luxurypackageItems[0].packageitems.reduce(
+      (total, currentItem) => {
+        const quantity = selectedRooms[currentItem.name] || 0;
+        const itemTotalPrice = Number(currentItem.price || 0) * quantity;
+        return total + itemTotalPrice;
+      },
+      0,
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-ivory flex flex-col items-center justify-center font-sans">
+        <div className="w-12 h-12 border-4 border-zinc-300 border-t-primary rounded-full animate-spin mb-4"></div>
+        <p className="text-primary font-medium animate-pulse">
+          Loading Calculator...
+        </p>
+      </div>
+    );
+  }
+
+   if (isError) {
+    return (
+      <div className="min-h-screen bg-[#F0F4EC] flex items-center justify-center font-sans">
+        <div className="bg-red-50 border border-red-100 p-8 rounded-2xl max-w-md text-center shadow-sm">
+          <p className="text-red-500 font-medium">
+            Failed to load calculator: {error?.message}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 md:p-6 bg-[#FAF5E9] font-poppins">
@@ -1810,11 +1090,11 @@ const BudgetCalculator = () => {
                     </h2>
                     <p className="text-3xl font-bold text-primary">
                       {selectedPackage === "essential"
-                        ? "2,07,709 Tk"
+                        ? `${essentialTotalPrice.toLocaleString("en-IN")} Tk`
                         : selectedPackage === "premium"
-                          ? "3,45,669 Tk"
+                          ? `${premiumTotalPrice.toLocaleString("en-IN")} Tk`
                           : selectedPackage === "luxury"
-                            ? "5,54,889 Tk"
+                            ? `${luxuryTotalPrice.toLocaleString("en-IN")} Tk`
                             : "Depends on Your requirement"}
                     </p>
                     <p className="text-sm text-zinc-500 mt-2">

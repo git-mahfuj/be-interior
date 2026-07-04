@@ -102,12 +102,14 @@ interface Formtype {
 type FormErrors = Partial<Formtype>;
 
 const BudgetCalculator = () => {
-  const { data, isLoading, isError } = useQuery<PackageType>({
+  const { data, isLoading, isError , error } = useQuery<PackageType>({
     queryKey: ["package-type"],
     queryFn: fetchPackageItems,
   });
 
-  console.log("Package Data", data?.result);
+  if (process.env.NODE_ENV === "development") {
+    console.log("Package Data", data?.result);
+  }
 
   const fetchResult = data?.result || [];
 
@@ -116,19 +118,25 @@ const BudgetCalculator = () => {
       return item.packageitems;
     }
   });
-  console.log("essentialpackageItem", essentialpackageItems);
+  if (process.env.NODE_ENV === "development") {
+    console.log("essentialpackageItem", essentialpackageItems);
+  }
   const luxurypackageItems = fetchResult.filter((item) => {
     if (item.packagename === "luxury") {
       return item.packageitems;
     }
   });
-  console.log("luxurypackageItem", luxurypackageItems);
+  if (process.env.NODE_ENV === "development") {
+    console.log("luxurypackageItem", luxurypackageItems);
+  }
   const premiumPackageItems = fetchResult.filter((item) => {
     if (item.packagename === "premium") {
       return item.packageitems;
     }
   });
-  console.log("premiumPackageItem", premiumPackageItems);
+  if (process.env.NODE_ENV === "development") {
+    console.log("premiumPackageItem", premiumPackageItems);
+  }
 
   const [currentStep, setCurrentStep] = useState(1);
   const [errorModal, setErrorModal] = useState(false);
@@ -980,6 +988,29 @@ const BudgetCalculator = () => {
         return total + itemTotalPrice;
       },
       0,
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-ivory flex flex-col items-center justify-center font-sans">
+        <div className="w-12 h-12 border-4 border-zinc-300 border-t-primary rounded-full animate-spin mb-4"></div>
+        <p className="text-primary font-medium animate-pulse">
+          Loading Calculator...
+        </p>
+      </div>
+    );
+  }
+
+   if (isError) {
+    return (
+      <div className="min-h-screen bg-[#F0F4EC] flex items-center justify-center font-sans">
+        <div className="bg-red-50 border border-red-100 p-8 rounded-2xl max-w-md text-center shadow-sm">
+          <p className="text-red-500 font-medium">
+            Failed to load calculator: {error?.message}
+          </p>
+        </div>
+      </div>
     );
   }
 

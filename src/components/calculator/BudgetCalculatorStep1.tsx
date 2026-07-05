@@ -1015,7 +1015,7 @@ const BudgetCalculator = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-6 bg-[#FAF5E9] font-poppins">
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-6 bg-ivory font-poppins">
       <div className="relative w-full h-auto min-h-150 max-w-6xl bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-[#111111]/10 flex flex-col">
         {/* Error Modal */}
         {errorModal && (

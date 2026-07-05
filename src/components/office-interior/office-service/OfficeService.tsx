@@ -24,7 +24,7 @@ const OfficeService = () => {
   ];
 
   return (
-    <section className="w-full bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20">
+    <section className="w-full bg-ivory py-24 px-6 md:px-12 lg:px-20">
       <div className="max-w-6xl mx-auto">
         {/* Simple & Clean Header */}
         <div className="text-center mb-16">

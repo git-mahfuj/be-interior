@@ -50,7 +50,7 @@ const OfficeReview = () => {
   }
 
   return (
-    <div className="flex flex-col w-full items-center justify-center px-4 p-10 bg-ivory">
+    <div className="flex flex-col w-full items-center justify-center px-4 p-10 bg-white">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary/80 tracking-wide font-bold ">
         Check Some Review
       </h2>

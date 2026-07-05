@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 const BlogDirect = () => {
   return (
-    <div className="py-16 md:py-24 px-4 sm:px-6 md:px-16 w-full max-w-full mx-auto font-poppins bg-ivory">
+    <div className="py-16 md:py-24 px-4 sm:px-6 md:px-16 w-full max-w-full mx-auto font-poppins ">
       
       {/* Main Card Container */}
       <div className="relative overflow-hidden max-w-5xl mx-auto p-10 md:p-16 lg:p-20 rounded-[2.5rem] flex flex-col justify-center items-center text-center gap-6 bg-white border border-zinc-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-500">

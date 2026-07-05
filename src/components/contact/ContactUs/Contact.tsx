@@ -40,7 +40,7 @@ export default function ExperienceCenter() {
 
   if (isLoading) {
     return (
-      <section className="bg-[#FAF5E9] text-[#111111] py-20 px-6 lg:px-20 min-h-[500px] flex items-center justify-center">
+      <section className="bg-ivory text-[#111111] py-20 px-6 lg:px-20 min-h-[500px] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-12 h-12 animate-spin text-primary" />
           <p className="text-sm text-zinc-500 font-medium tracking-widest uppercase">Loading experience center...</p>

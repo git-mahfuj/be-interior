@@ -96,8 +96,8 @@ const HomeCommentForm = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto my-16 px-4 sm:px-6">
-      <div className="flex flex-col lg:flex-row w-full bg-secondary rounded-3xl overflow-hidden shadow-2xl min-h-[550px]">
+    <div className="w-full px-4 md:px-12 py-12 md:py-16 lg:py-20 mx-auto my-16 sm:px-6 bg-ivory">
+      <div className="flex flex-col lg:flex-row w-full bg-secondary rounded-3xl overflow-hidden shadow-2xl min-h-137.5 md:max-w-4xl lg:max-w-6xl mx-auto">
         {/* Image Section */}
         <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-full bg-zinc-800">
           <Image

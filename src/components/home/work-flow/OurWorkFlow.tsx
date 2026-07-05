@@ -9,33 +9,33 @@ const OurWorkFlow = () => {
   const workflowSteps = [
     {
       id: "01",
-      title: "Consultation",
-      desc: "Discussing your dreams and requirements.",
+      title: "Discovery & Consultation",
+      desc: "Understanding your vision, lifestyle, and specific space requirements.",
     },
     {
       id: "02",
-      title: "Concept Design",
-      desc: "Creating initial 2D layouts & space planning.",
+      title: "Concept & Planning",
+      desc: "Drafting functional 2D layouts and architectural space planning.",
     },
     {
       id: "03",
       title: "3D Visualization",
-      desc: "Realistic 3D renders of your future interior.",
+      desc: "Crafting photorealistic renders to give you a clear view of the final outcome.",
     },
     {
       id: "04",
-      title: "Execution",
-      desc: "Bringing the approved design to real life.",
+      title: "Project Execution",
+      desc: "Transforming the approved designs into reality with expert precision.",
     },
     {
       id: "05",
-      title: "Handover",
-      desc: "Final walkthrough and delivering your dream space.",
+      title: "Final Handover",
+      desc: "A thorough walkthrough before delivering your beautifully finished space.",
     },
   ];
   return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 bg-ivory py-16">
-      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide">
+    <div className="flex flex-col w-full items-center justify-center mt-16 px-4  py-16">
+      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide font-medium">
         From Concept <span className="font-bold text-primary">to Creation</span>
       </h2>
 
@@ -58,9 +58,9 @@ const OurWorkFlow = () => {
           {/* ================= Slide 1 ================= */}
           {workflowSteps.map((step, index) => (
             <SwiperSlide key={index} className="h-auto py-4">
-              <div className="group relative w-full h-full bg-white rounded-3xl p-8 border border-zinc-100 hover:border-primary/20 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between min-h-[260px] cursor-pointer">
+              <div className="group relative w-full h-full bg-white rounded-3xl p-8 border border-zinc-100 hover:border-primary/20 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between min-h-75 cursor-pointer">
                 {/* Background Watermark Number */}
-                <div className="absolute -top-8 -right-4 text-[150px] font-black text-zinc-50 group-hover:text-primary/[0.04] transition-colors duration-700 pointer-events-none select-none font-montagu leading-none">
+                <div className="absolute -top-8 -right-4 text-[150px] font-black text-zinc-50 group-hover:text-primary/4 transition-colors duration-700 pointer-events-none select-none font-montagu leading-none">
                   {step.id}
                 </div>
 

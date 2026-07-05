@@ -51,7 +51,7 @@ const JustClick = () => {
   };
 
   return (
-    <section className="bg-[#FAF5E9] py-24 px-6 md:px-12">
+    <section className="bg-ivory py-24 px-6 md:px-12">
       <div className="max-w-5xl mx-auto relative bg-white border border-[#111111]/5 rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] text-center px-6 py-20 md:py-24">
 
         {/* Content Box */}

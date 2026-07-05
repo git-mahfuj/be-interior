@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HowItStarted() {
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-20 bg-[#FAF5E9]">
+    <section className="py-24 px-6 md:px-12 lg:px-20 bg-ivory">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}

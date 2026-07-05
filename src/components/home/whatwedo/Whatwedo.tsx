@@ -1,79 +1,101 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Home, BriefcaseBusiness } from "lucide-react";
 import React from "react";
+
 import whatweOne from "@/logo/HomePage/home-interior.jpg";
 import whatwetwo from "@/logo/HomePage/office-interior.jpg";
-import Link from "next/link";
-import { BriefcaseBusiness, Home } from "lucide-react";
 
 const Whatwedo = () => {
-  return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 py-10">
-      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide text-center">
-        Comprehensive <span className="font-bold">Interior Solutions</span>
-      </h2>
+  const services = [
+    {
+      id: "01",
+      title: "Style Your Sanctuary",
+      subtitle: "Crafting personalized sanctuaries for modern living.",
+      img: whatweOne,
+      href: "/services/home-interior",
+      icon: <Home className="w-6 h-6 text-white" strokeWidth={1.5} />,
+    },
+    {
+      id: "02",
+      title: "Elevate Your Workspace",
+      subtitle: "Designing productive and inspiring corporate spaces.",
+      img: whatwetwo,
+      href: "/services/office-interior",
+      icon: <BriefcaseBusiness className="w-6 h-6 text-white" strokeWidth={1.5} />,
+    },
+  ];
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8 w-full max-w-4xl px-2">
-        {/* Card 1 */}
-        <Link href={"/services/home-interior"} className="w-full sm:w-80 block">
-          <div className="w-full h-96 relative rounded-xl border border-white/10 shadow-lg overflow-hidden group p-1 bg-white/5">
-            <div className="relative w-full h-full rounded-lg overflow-hidden">
+  return (
+    <section className="w-full py-20 px-6 md:px-12 lg:px-20 font-sans bg-[#FAF5E9]">
+      {/* Header Section */}
+      <div className="flex flex-col items-center justify-center mb-16 text-center">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-montagu font-medium text-[#111111]">
+          Comprehensive <span className="font-bold text-primary">Solutions</span>
+        </h2>
+        <p className="text-zinc-500 mt-4 max-w-lg text-sm md:text-base">
+          End-to-end interior styling designed to match your aesthetics and functional requirements.
+        </p>
+      </div>
+
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-7xl mx-auto">
+        {services.map((service) => (
+          <Link href={service.href} key={service.id} className="group block w-full">
+            <div className="relative w-full h-112.5 lg:h-137.5 rounded-3xl overflow-hidden bg-zinc-900 shadow-lg">
+              
+              {/* Background Image with Hover Effect */}
               <Image
-                src={whatweOne}
-                alt="Home Interior"
+                src={service.img}
+                alt={service.title}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-1000 ease-in-out group-hover:scale-110 opacity-90 group-hover:opacity-100"
                 priority
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/90 transition-opacity duration-500 group-hover:to-black/80" />
+
+              {/* Top Section: Number & Icon */}
+              <div className="absolute right-9 top-5 flex justify-between items-start z-10">
+                <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transform transition-transform duration-500 group-hover:scale-110 group-hover:bg-primary/90 group-hover:border-primary">
+                  {service.icon}
+                </div>
+              </div>
+
+              {/* Bottom Section: Text & Call to Action */}
+              <div className="absolute bottom-0 left-0 w-full p-8 lg:p-10 z-10 flex flex-col justify-end transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+                <h3 className="text-3xl lg:text-4xl font-montagu font-bold text-white mb-3">
+                  {service.title}
+                </h3>
+                
+                <p className="text-zinc-300 text-sm md:text-base line-clamp-2 max-w-sm mb-6 lg:opacity-0 transition-opacity duration-500 delay-100 group-hover:opacity-100">
+                  {service.subtitle}
+                </p>
+
+                {/* Elegant Read More Button */}
+                <div className="flex items-center gap-3 text-primary font-bold uppercase tracking-widest text-xs">
+                  <span className="relative overflow-hidden">
+                    <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
+                      Explore Details
+                    </span>
+                    <span className="inline-block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full">
+                      Explore Details
+                    </span>
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                    <ArrowUpRight size={16} strokeWidth={2.5} />
+                  </div>
+                </div>
+              </div>
+
             </div>
-
-            <button className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] h-14 bg-primary text-white font-medium tracking-wider rounded-xl transition-all duration-500 shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-2xl hover:-translate-y-1 text-base md:text-lg cursor-pointer flex items-center justify-center group overflow-hidden z-10">
-              <span className="absolute inset-0 w-0 bg-primary transition-all duration-500 ease-out group-hover:w-full z-0"></span>
-
-              <span className="absolute z-10 left-1/2 top-1/2 -translate-y-1/2 -translate-x-12 opacity-0 scale-50 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2 group-hover:opacity-100 group-hover:scale-110">
-                <Home size={24} strokeWidth={2.5} />
-              </span>
-
-              <p className="relative z-10 transition-all duration-500 ease-in-out group-hover:translate-x-12 group-hover:opacity-0">
-                Home Interior
-              </p>
-            </button>
-          </div>
-        </Link>
-
-        {/* Card 2 */}
-        <Link
-          href={"/services/office-interior"}
-          className="w-full sm:w-80 block"
-        >
-          <div className="w-full h-96 relative rounded-xl border border-white/10 shadow-lg overflow-hidden group p-1 bg-white/5">
-            <div className="relative w-full h-full rounded-lg overflow-hidden">
-              <Image
-                src={whatwetwo}
-                alt="Office Interior"
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            </div>
-
-            <button className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] h-14 bg-primary text-white font-medium tracking-wider rounded-xl transition-all duration-500 shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-2xl hover:-translate-y-1 text-base md:text-lg cursor-pointer flex items-center justify-center group overflow-hidden z-10">
-              <span className="absolute inset-0 w-0 bg-primary transition-all duration-500 ease-out group-hover:w-full z-0"></span>
-
-              <span className="absolute z-10 left-1/2 top-1/2 -translate-y-1/2 -translate-x-12 opacity-0 scale-50 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2 group-hover:opacity-100 group-hover:scale-110">
-                <BriefcaseBusiness size={24} strokeWidth={2.5} />
-              </span>
-
-              <p className="relative z-10 transition-all duration-500 ease-in-out group-hover:translate-x-12 group-hover:opacity-0">
-                Office Interior
-              </p>
-            </button>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 

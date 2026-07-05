@@ -37,7 +37,7 @@ const LocationSection = () => {
   // -------------- Loading State --------------
   if (isLoading) {
     return (
-      <section className="bg-[#FAF5E9] py-16 px-6 lg:px-20 min-h-[400px] flex items-center justify-center">
+      <section className="bg-ivory py-16 px-6 lg:px-20 min-h-[400px] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="w-10 h-10 animate-spin text-primary" />
           <p className="text-sm text-[#111111]/60 font-bold tracking-widest uppercase">Loading Map...</p>

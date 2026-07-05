@@ -57,13 +57,11 @@ const BeinteriorProject = () => {
   }
 
   return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory pb-22 lg:pb-26">
-      <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide font-bold">
-        Be interior{" "}
-        <span className="font-medium text-primary">
-          Home Interior <span className="text-secondary">Projects</span>
-        </span>
-      </h2>
+    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 pb-22 lg:pb-26">
+      <h2 className="text-3xl md:text-5xl font-montagu text-[#111111] tracking-wide font-bold text-center lg:mb-16">
+  Exclusive{" "}
+  <span className="font-medium text-primary">Residential Projects</span>
+</h2>
 
       <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-8 w-full max-w-7xl">
         <div className="w-full max-w-8xl mt-10 h-100 rounded-lg">

@@ -42,15 +42,15 @@ export default function SliderComponent() {
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 sm:px-12 md:pl-20 lg:pl-32 xl:pl-40 pt-16 md:pt-24">
             <div className="max-w-2xl flex flex-col items-center md:items-start">
               <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-tight font-montagu text-white">
-                Make Your Interior Minimalistic & Modern
+                Redefine Your Space with Modern Minimalism
               </h1>
               <p className="text-xs sm:text-sm md:text-base font-normal max-w-md mt-4 text-zinc-200 font-poppins">
-                Turn your room with panto into a lot more minimalist and modern
-                with ease and speed
+                Transform your home into a clutter-free sanctuary. Be Interior
+                brings you sleek, functional designs with effortless execution.
               </p>
               <Link href={"/services/office-interior"}>
-                <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer">
-                  Consult Now
+                <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:-translate-y-1 transition-transform duration-400 rounded-lg md:rounded-md cursor-pointer">
+                  Start Your Transformation
                 </button>
               </Link>
             </div>
@@ -72,16 +72,17 @@ export default function SliderComponent() {
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 sm:px-12 md:pl-20 lg:pl-32 xl:pl-40 pt-16 md:pt-24">
             <div className="max-w-2xl flex flex-col items-center md:items-start">
               <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tight leading-none text-primary font-montagu">
-                100%
+                100% Yours.
               </h1>
               <h1 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-tight font-montagu text-white mt-1">
-                Customized Interior
+                Crafting Your Dream Home
               </h1>
               <p className="text-xs sm:text-sm md:text-base font-normal max-w-md mt-4 text-zinc-200 font-poppins capitalize tracking-wide">
-                Kitchen, Bedroom, Living & Dining
+                From modern kitchens to cozy bedrooms—we design and execute
+                every corner just for you.
               </p>
-              <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer">
-                Price Starting at 9lac
+              <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:-translate-y-1 transition-transform duration-400 rounded-lg md:rounded-md cursor-pointer">
+                Bring it to Life (From 2L)
               </button>
             </div>
           </div>
@@ -102,14 +103,17 @@ export default function SliderComponent() {
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 sm:px-12 md:pl-20 lg:pl-32 xl:pl-40 pt-16 md:pt-24">
             <div className="max-w-2xl flex flex-col items-center md:items-start">
               <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-tight font-montagu text-white">
-                Premium Office Interior
+                Workspaces People Love.
               </h1>
               <p className="text-xs sm:text-sm md:text-base font-normal max-w-md mt-4 text-zinc-200 font-poppins">
-                That your employees will love to work in
+                Smart, ergonomic, and stunning interiors that your employees
+                will genuinely enjoy walking into.
               </p>
-              <Link href={"/services/budget-calculator"}><button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:bg-zinc-900 transition-colors rounded-lg md:rounded-md cursor-pointer">
-                Calculate Now
-              </button></Link>
+              <Link href={"/services/budget-calculator"}>
+                <button className="w-full sm:w-auto mt-6 px-6 py-3 md:px-10 bg-primary text-white font-medium text-base md:text-lg tracking-wider hover:-translate-y-1 transition-transform duration-400 rounded-lg md:rounded-md cursor-pointer">
+                  Get a Free Quote
+                </button>
+              </Link>
             </div>
           </div>
         </SwiperSlide>

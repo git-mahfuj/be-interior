@@ -5,29 +5,29 @@ import { ShieldCheck, Clock, Tag, Headset } from "lucide-react"; // lucide-react
 const Whychooseus = () => {
   const features = [
     {
-      title: "Best Price in Market",
-      desc: "Get premium designs at competitive prices tailored to your budget. No hidden costs.",
+      title: "Unmatched Value",
+      desc: "Top-tier aesthetics that align perfectly with your financial comfort. No surprises, just honest and upfront pricing.",
       icon: <Tag size={32} className="text-primary" />,
     },
     {
-      title: "45-Days Delivery",
-      desc: "We ensure timely project completion without compromising on quality standards.",
+      title: "Express 45-Day Execution",
+      desc: "Watch your dream space come alive in just a month and a half. We deliver speed without compromising on precision.",
       icon: <Clock size={32} className="text-primary" />,
     },
     {
-      title: "2-Years Warranty",
-      desc: "Enjoy complete peace of mind with our flat 2-year warranty on all projects.",
+      title: "24-Month Assurance",
+      desc: "We stand confidently behind our craftsmanship. Every single project is backed by a solid 2-year protection plan.",
       icon: <ShieldCheck size={32} className="text-primary" />,
     },
     {
-      title: "After Sale Service",
-      desc: "Our support continues even after the project is complete, ensuring satisfaction.",
+      title: "Dedicated Post-Handover Support",
+      desc: "Handing over the keys is just the beginning. We remain just a call away for any future assistance or maintenance you might need.",
       icon: <Headset size={32} className="text-primary" />,
     },
   ];
 
   return (
-    <section className="w-full py-20 px-4 bg-[#FAF5E9]">
+    <section className="w-full py-20 px-4 bg-ivory">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Header */}
         <h2 className="text-3xl md:text-5xl font-montagu text-[#111111] tracking-wide font-bold text-center mb-16">

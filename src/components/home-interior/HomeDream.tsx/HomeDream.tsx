@@ -51,7 +51,7 @@ const HomeDream = () => {
   };
 
   return (
-    <div className="flex flex-col w-full items-center justify-center  px-4 py-12 bg-ivory/50  max-w-full h-full mx-auto">
+    <div className="flex flex-col w-full items-center justify-center  px-4 py-12 bg-ivory/50  max-w-full h-full mx-auto max-h-126">
       <h2 className="text-2xl md:text-4xl lg:text-5xl font-montagu text-secondary tracking-wide font-black text-center leading-tight">
         Your Dream Home Is Just a
         <span className="block text-primary mt-2 md:mt-3">Click Away</span>

@@ -5,12 +5,12 @@ import { Quote } from "lucide-react";
 
 const AboutFounders = () => {
   return (
-    <section className="bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="bg-ivory py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <div className="text-center md:text-left mb-16">
-          <p className="text-primary font-bold uppercase tracking-widest text-xs mb-3">
+          <p className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
             Leadership
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-montagu text-[#111111] leading-tight font-bold">

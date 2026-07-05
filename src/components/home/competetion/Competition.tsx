@@ -49,13 +49,13 @@ export default function Competition() {
   ];
 
   return (
-    <section className="bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="bg-ivory py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
         
         {/* Left Side Column - Impactful Typography */}
         <div className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left order-1 lg:order-1">
           <div className="mb-8">
-            <span className="text-primary font-bold uppercase tracking-widest text-xs mb-4 block">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">
               Why Choose Us
             </span>
             <h2 className="text-4xl lg:text-5xl font-montagu text-[#111111] font-bold leading-[1.15]">

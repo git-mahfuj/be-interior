@@ -28,9 +28,6 @@ const HomeSolution = () => {
     <div className="flex flex-col w-full items-center justify-center mt-16 px-4 bg-ivory/50 py-20">
       {/* Header Section */}
       <div className="text-center mb-6">
-        <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">
-          How We Work
-        </span>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-montagu text-secondary tracking-wide font-bold">
           The Complete <span className="text-primary">Interior Journey</span>
         </h2>

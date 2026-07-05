@@ -60,7 +60,7 @@ const OfficePackage = () => {
   ];
 
   return (
-    <section className="w-full bg-[#FAF5E9] py-24 px-6 md:px-12 lg:px-20 font-sans">
+    <section className="w-full bg-ivory py-24 px-6 md:px-12 lg:px-20 font-sans">
       {/* Header */}
       <div className="text-center mb-20 max-w-2xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-montagu font-bold text-[#111111]">

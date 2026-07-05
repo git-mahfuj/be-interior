@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
   ];
 
   return (
-    <section className="bg-[#FAF5E9] py-16 px-6 md:px-12 lg:px-24 font-sans text-zinc-800 mt-20">
+    <section className="bg-ivory py-16 px-6 md:px-12 lg:px-24 font-sans text-zinc-800 mt-20">
       <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-[#111111]/5">
         
         {/* Page Header */}

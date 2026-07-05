@@ -12,7 +12,7 @@ const BeInteriorPromise = () => {
   ];
 
   return (
-    <div className="w-full  py-20 px-6 flex flex-col items-center justify-center font-poppins">
+    <div className="w-full  py-20 px-6 flex flex-col items-center justify-center font-poppins bg-ivory h-full max-h-126">
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-montagu text-zinc-800 tracking-wide text-center">
         Our Commitment{" "}
         <span className="font-black text-primary uppercase">to Excellence</span> 

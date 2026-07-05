@@ -77,7 +77,7 @@ const OfficeProjects = () => {
   console.log("mappedProjects", mappedProjects);
 
   return (
-    <div className="w-full bg-[#fafafa] py-24 px-4 sm:px-6 lg:px-8 font-poppins">
+    <div className="w-full bg-ivory py-24 px-4 sm:px-6 lg:px-8 font-poppins">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>

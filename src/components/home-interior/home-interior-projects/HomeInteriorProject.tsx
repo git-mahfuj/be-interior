@@ -50,7 +50,7 @@ const HomeInteriorProjects = () => {
     console.log("homeinteriropage-home-interior-projects", result);
   }
   return (
-    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 bg-ivory/50">
+    <div className="flex flex-col w-full items-center justify-center mt-16 px-4 p-10 ">
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-montagu text-secondary tracking-wide font-bold">
         Be interior{" "}
         <span className="font-medium text-primary">

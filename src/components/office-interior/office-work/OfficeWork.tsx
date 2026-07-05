@@ -51,7 +51,7 @@ const OfficeWork = () => {
   ];
 
   return (
-    <div className="w-full bg-[#fdfaf4] py-24 px-4 sm:px-6 lg:px-8 font-poppins relative overflow-hidden">
+    <div className="w-full bg-white py-24 px-4 sm:px-6 lg:px-8 font-poppins relative overflow-hidden">
 
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#365856]/5 rounded-full blur-3xl -mr-20 -mt-20" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl -ml-20 -mb-20" />

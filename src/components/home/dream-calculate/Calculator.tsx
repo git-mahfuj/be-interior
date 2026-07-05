@@ -4,7 +4,7 @@ import { Calculator, ArrowRight, Sparkles } from "lucide-react";
 
 const CalculatorSection = () => {
   return (
-    <section className="bg-[#FAF5E9] py-20 px-4 md:px-8">
+    <section className="bg-ivory py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto relative bg-[#111111] rounded-4xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
         
         {/* Architectural Background Grids & Glow */}

@@ -96,7 +96,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="bg-[#FAF5E9] py-20 px-4 md:px-8">
+    <section className="bg-ivory py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col lg:flex-row">
         {/* Left Side: Image & Branding */}
         <div className="relative w-full lg:w-5/12 h-64 lg:h-auto hidden md:block">

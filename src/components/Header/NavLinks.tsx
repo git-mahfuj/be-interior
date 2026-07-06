@@ -100,6 +100,16 @@ const NavLinks = () => {
                   Office Interior
                 </span>
               </Link>
+              <Link
+                href="/interior-projects"
+                onClick={closeAllModals}
+                className={dropdownLinkClass}
+              >
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-primary transition-all duration-300 group-hover:h-3/4 rounded-r-full"></span>
+                <span className="transform translate-x-1 group-hover:translate-x-3 transition-transform duration-300 text-white/70 group-hover:text-primary font-medium text-sm md:text-base">
+                 Portfolio
+                </span>
+              </Link>
             </div>
           </div>
         )}

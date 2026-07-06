@@ -43,6 +43,7 @@ const Navbar = () => {
   const links = [
     { name: "Home Interior", href: "/services/home-interior" },
     { name: "Office Interior", href: "/services/office-interior" },
+    { name: "Portfolio", href: "/interior-projects" },
     { name: "Blogs", href: "/blogs" },
     { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "/contact" },

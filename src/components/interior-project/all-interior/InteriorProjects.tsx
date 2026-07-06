@@ -60,9 +60,9 @@ const InteriorProjects = () => {
 
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
-     window.scrollTo({
+    window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "auto",
     });
   };
 
@@ -70,7 +70,7 @@ const InteriorProjects = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
     window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "auto",
     });
   };
 

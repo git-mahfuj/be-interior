@@ -1145,7 +1145,7 @@ const BudgetCalculator = () => {
               className="flex items-center justify-center gap-2 bg-[#111111] hover:bg-[#C87A31] text-white font-semibold py-3.5 px-14 rounded-full transition-all duration-300 shadow-xl"
             >
               <span>Next</span>
-              <FiChevronDown className="rotate-[-90deg]" />
+              <FiChevronDown className="-rotate-90" />
             </button>
           </div>
         )}
